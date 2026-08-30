@@ -1,0 +1,1839 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Студія 3D-друку — Промислове та серійне виробництво</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Unbounded:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    /* ==========================================================================
+       CSS RESET & BASE CONFIGURATION
+       ========================================================================== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg-dark: #090b10;
+      --bg-card: #12161f;
+      --bg-card-hover: #181d28;
+      
+      --text-main: #f3f4f6;
+      --text-muted: #9ca3af;
+      --text-dim: #6b7280;
+      --border-color: #262c3a;
+
+      /* Segment Theme Colors */
+      --color-miltech-bg: #0f1c14;
+      --color-miltech-accent: #2e573a;
+      --color-miltech-tag: #1c3624;
+      --color-miltech-text: #6ee7b7;
+
+      --color-parts-bg: #1d1208;
+      --color-parts-accent: #d97706;
+      --color-parts-tag: #452203;
+      --color-parts-text: #fbbf24;
+
+      --color-decor-bg: #0a1526;
+      --color-decor-accent: #2563eb;
+      --color-decor-tag: #0f2b5c;
+      --color-decor-text: #60a5fa;
+
+      --color-branding-bg: #170d24;
+      --color-branding-accent: #7e22ce;
+      --color-branding-tag: #3b1560;
+      --color-branding-text: #c084fc;
+
+      --radius: 4px;
+      --font-heading: 'Unbounded', sans-serif;
+      --font-body: 'Space Grotesk', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-body);
+    }
+
+    body {
+      overflow-x: hidden;
+      line-height: 1.5;
+      background-color: var(--bg-dark);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* Uniform SVG Icon Styling */
+    .icon-svg {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      fill: none;
+      display: inline-block;
+      vertical-align: middle;
+      flex-shrink: 0;
+    }
+
+    .icon-lg {
+      width: 24px;
+      height: 24px;
+    }
+
+    /* ==========================================================================
+       HEADER & NAVIGATION
+       ========================================================================== */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: #090b10;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .header-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0.75rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+
+    .brand-mark {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #fff;
+    }
+
+    .brand-mark svg {
+      width: 24px;
+      height: 24px;
+      stroke: #60a5fa;
+      stroke-width: 2;
+      fill: none;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      list-style: none;
+    }
+
+    .nav-item a {
+      font-size: 0.9rem;
+      font-weight: 500;
+      padding: 8px 14px;
+      border-radius: var(--radius);
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-item a:hover {
+      color: #fff;
+      background: #161c28;
+    }
+
+    .nav-item a.active {
+      color: #fff;
+      background: #1e2638;
+    }
+
+    .nav-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: var(--radius);
+      display: inline-block;
+    }
+    .dot-miltech { background: #10b981; }
+    .dot-parts { background: #f59e0b; }
+    .dot-decor { background: #3b82f6; }
+    .dot-branding { background: #a855f7; }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .btn-cta {
+      font-family: var(--font-heading);
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      background: #2563eb;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: var(--radius);
+      border: 1px solid #3b82f6;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .btn-cta:hover {
+      background: #1d4ed8;
+    }
+
+    /* ==========================================================================
+       HERO SECTION / ABOUT / 6-SLOT DASHBOARD
+       ========================================================================== */
+    .hero-section {
+      min-height: 100vh;
+      padding-top: 105px;
+      padding-bottom: 70px;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding-left: 2rem;
+      padding-right: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .hero-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 2.2rem;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .hero-title-group h1 {
+      font-family: var(--font-heading);
+      font-size: 2.7rem;
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: #ffffff;
+      margin-bottom: 0.75rem;
+    }
+
+    .hero-subtitle {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 700px;
+    }
+
+    .live-status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #0f1c14;
+      border: 1px solid #1c3624;
+      padding: 8px 16px;
+      border-radius: var(--radius);
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: #34d399;
+    }
+
+    .indicator-square {
+      width: 8px;
+      height: 8px;
+      background-color: #10b981;
+      border-radius: 2px;
+      display: inline-block;
+    }
+
+    /* 6-Slot Dashboard Grid (3 per row, 2 rows) */
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+    }
+
+    .dashboard-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 1.6rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .dashboard-card:hover {
+      background: var(--bg-card-hover);
+      border-color: #363e52;
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.2rem;
+    }
+
+    .card-slot-id {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      background: #1a202c;
+      padding: 3px 8px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border-color);
+    }
+
+    .card-icon-wrap {
+      color: #9ca3af;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card-number {
+      font-family: var(--font-heading);
+      font-size: 2.1rem;
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+      color: #ffffff;
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+    }
+
+    .card-number .unit {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .card-title {
+      font-family: var(--font-heading);
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+      color: #f3f4f6;
+    }
+
+    .card-desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    /* ==========================================================================
+       SEGMENT SECTIONS (MILTECH, PARTS, DECOR, BRANDING)
+       ========================================================================== */
+    .segment-section {
+      min-height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      padding: 90px 0;
+      border-top: 1px solid var(--border-color);
+    }
+
+    /* Video Background Container Placeholder */
+    .video-bg-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .video-bg-container video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.3;
+    }
+
+    /* Solid Segment Backgrounds */
+    .segment-miltech {
+      background-color: var(--color-miltech-bg);
+    }
+
+    .segment-parts {
+      background-color: var(--color-parts-bg);
+    }
+
+    .segment-decor {
+      background-color: var(--color-decor-bg);
+    }
+
+    .segment-branding {
+      background-color: var(--color-branding-bg);
+    }
+
+    .segment-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(9, 11, 16, 0.7);
+      z-index: 2;
+    }
+
+    .segment-content-wrap {
+      position: relative;
+      z-index: 3;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 1.8rem;
+    }
+
+    /* Segment Header (Top) */
+    .segment-header-block {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      max-width: 850px;
+    }
+
+    .segment-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 6px 12px;
+      border-radius: var(--radius);
+      width: fit-content;
+      border: 1px solid transparent;
+    }
+
+    .tag-miltech {
+      color: var(--color-miltech-text);
+      background: var(--color-miltech-tag);
+      border-color: #24462e;
+    }
+
+    .tag-parts {
+      color: var(--color-parts-text);
+      background: var(--color-parts-tag);
+      border-color: #572c06;
+    }
+
+    .tag-decor {
+      color: var(--color-decor-text);
+      background: var(--color-decor-tag);
+      border-color: #173d7d;
+    }
+
+    .tag-branding {
+      color: var(--color-branding-text);
+      background: var(--color-branding-tag);
+      border-color: #4c1b7d;
+    }
+
+    .segment-title {
+      font-family: var(--font-heading);
+      font-size: 2.3rem;
+      font-weight: 800;
+      line-height: 1.2;
+      color: #fff;
+    }
+
+    .segment-description {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* 2-Column Balanced Grid: Left Column vs Right Column */
+    .segment-main-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 1.5rem;
+      align-items: stretch;
+    }
+
+    /* Left Column: Uniform Gap between ALL 4 Cards AND the Button */
+    .segment-left-col {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      height: 100%;
+    }
+
+    .advantage-cards-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      flex-grow: 1;
+    }
+
+    .advantage-card {
+      background: #11151e;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 1.1rem 1.3rem;
+      display: flex;
+      align-items: center;
+      gap: 1.1rem;
+      flex: 1 1 0; /* All 4 cards have equal height and spacing */
+    }
+
+    .advantage-card:hover {
+      background: #161c28;
+      border-color: #363e52;
+    }
+
+    .adv-icon-wrap {
+      width: 38px;
+      height: 38px;
+      border-radius: var(--radius);
+      background: #19202e;
+      border: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-main);
+      flex-shrink: 0;
+    }
+
+    .adv-content h4 {
+      font-family: var(--font-heading);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.25rem;
+    }
+
+    .adv-content p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    /* Action buttons: Equal 12px gap, 100% full width */
+    .segment-actions {
+      display: flex;
+      width: 100%;
+      margin: 0;
+    }
+
+    .btn-segment {
+      width: 100%;
+      justify-content: center;
+      text-align: center;
+      font-family: var(--font-heading);
+      font-size: 0.88rem;
+      font-weight: 700;
+      padding: 14px 20px;
+      border-radius: var(--radius);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid transparent;
+      white-space: nowrap;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .btn-miltech { background: var(--color-miltech-accent); color: #fff; border-color: #3e734e; }
+    .btn-miltech:hover { background: #3b6e4a; }
+
+    .btn-parts { background: var(--color-parts-accent); color: #fff; border-color: #f59e0b; }
+    .btn-parts:hover { background: #b45309; }
+
+    .btn-decor { background: var(--color-decor-accent); color: #fff; border-color: #3b82f6; }
+    .btn-decor:hover { background: #1d4ed8; }
+
+    .btn-branding { background: var(--color-branding-accent); color: #fff; border-color: #a855f7; }
+    .btn-branding:hover { background: #6b21a8; }
+
+    /* Right Column: Visual Preview Box with Rich Filled Content */
+    .segment-right-col {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .visual-preview-box {
+      background: #111622;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 1.6rem 1.8rem;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 1.2rem;
+    }
+
+    .preview-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 0.8rem;
+    }
+
+    .preview-header h3 {
+      font-family: var(--font-heading);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .video-hint-pill {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      padding: 4px 8px;
+      border-radius: var(--radius);
+      background: #1a202c;
+      color: var(--text-muted);
+      border: 1px solid var(--border-color);
+    }
+
+    .feature-item-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+      flex-grow: 1;
+      justify-content: space-evenly;
+    }
+
+    .feature-item-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.42;
+    }
+
+    .feature-item-list li svg {
+      width: 16px;
+      height: 16px;
+      stroke: #9ca3af;
+      stroke-width: 2.2;
+      fill: none;
+      flex-shrink: 0;
+      margin-top: 3px;
+    }
+
+    .feature-text-block strong {
+      color: #f3f4f6;
+      font-weight: 600;
+      display: inline;
+    }
+
+    .spec-badges-wrap {
+      border-top: 1px solid var(--border-color);
+      padding-top: 1rem;
+    }
+
+    .spec-badges-label {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .spec-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .spec-badge {
+      font-family: var(--font-mono);
+      font-size: 0.73rem;
+      padding: 5px 9px;
+      border-radius: var(--radius);
+      background: #181f2c;
+      border: 1px solid var(--border-color);
+      color: #d1d5db;
+    }
+
+    /* ==========================================================================
+       FOOTER
+       ========================================================================== */
+    .footer {
+      background: #06070a;
+      border-top: 1px solid var(--border-color);
+      padding: 60px 0 30px;
+    }
+
+    .footer-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .footer-top-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr 1.5fr;
+      gap: 2.5rem;
+      margin-bottom: 45px;
+    }
+
+    .footer-brand-col p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-top: 0.8rem;
+      line-height: 1.6;
+      max-width: 320px;
+    }
+
+    .footer-col h5 {
+      font-family: var(--font-heading);
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 1.1rem;
+      letter-spacing: 0.04em;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+
+    .footer-links li a {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .footer-links li a:hover {
+      color: #fff;
+      text-decoration: underline;
+    }
+
+    .contact-badge-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+
+    .contact-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #11151e;
+      border: 1px solid var(--border-color);
+      padding: 9px 12px;
+      border-radius: var(--radius);
+      font-size: 0.85rem;
+      color: #fff;
+      font-weight: 500;
+    }
+
+    .contact-btn:hover {
+      background: #181e2b;
+      border-color: #363e52;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid var(--border-color);
+      padding-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 0.8rem;
+      color: var(--text-dim);
+    }
+
+    .footer-bottom-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .footer-bottom-links a:hover {
+      color: var(--text-muted);
+    }
+
+    /* Modal / Form styling */
+    .lead-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      background: rgba(0, 0, 0, 0.85);
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    .lead-modal.active {
+      display: flex;
+    }
+
+    .lead-modal-content {
+      background: #0e121a;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      max-width: 500px;
+      width: 100%;
+      padding: 2rem;
+      position: relative;
+    }
+
+    .modal-close-btn {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.4rem;
+      cursor: pointer;
+    }
+
+    .modal-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 1.2rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-group label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .form-input, .form-select, .form-textarea {
+      background: #141924;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 10px 12px;
+      color: #fff;
+      font-family: inherit;
+      font-size: 0.92rem;
+      outline: none;
+    }
+
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      border-color: #3b82f6;
+    }
+
+    .form-submit-btn {
+      background: #2563eb;
+      color: #fff;
+      border: 1px solid #3b82f6;
+      padding: 11px;
+      border-radius: var(--radius);
+      font-family: var(--font-heading);
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 0.4rem;
+    }
+
+    .form-submit-btn:hover {
+      background: #1d4ed8;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================================================
+       HEADER & NAVIGATION
+       ========================================================================== -->
+  <header class="header" id="mainHeader">
+    <div class="header-container">
+      <a href="#hero" class="brand-mark" aria-label="Головна">
+        <svg viewBox="0 0 24 24">
+          <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+          <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+          <line x1="12" y1="22.08" x2="12" y2="12"></line>
+        </svg>
+      </a>
+
+      <!-- Navigation in requested order -->
+      <nav>
+        <ul class="nav-links">
+          <li class="nav-item"><a href="#hero">Про нас</a></li>
+          <li class="nav-item">
+            <a href="#miltech">
+              <span class="nav-dot dot-miltech"></span> Miltech
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#parts">
+              <span class="nav-dot dot-parts"></span> Запчастини
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#decor">
+              <span class="nav-dot dot-decor"></span> Декор
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#branding">
+              <span class="nav-dot dot-branding"></span> Брендинг
+            </a>
+          </li>
+          <li class="nav-item"><a href="#contacts">Контакти</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <button class="btn-cta" onclick="openLeadModal('Загальний розрахунок')">Розрахувати друк</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ==========================================================================
+         HERO SECTION / ABOUT / 6-SLOT DASHBOARD
+         ========================================================================== -->
+    <section class="hero-section" id="hero">
+      <div class="hero-header">
+        <div class="hero-title-group">
+          <h1>ПРОМИСЛОВИЙ ТА СЕРІЙНИЙ<br>3D-ДРУК В УКРАЇНІ</h1>
+          <p class="hero-subtitle">Високоточне виробництво повного циклу: від швидкого прототипування до масштабних серій за 24 години.</p>
+        </div>
+        <div class="live-status-pill">
+          <span class="indicator-square"></span>
+          <span id="liveStatusText">ФАБРИКА АКТИВНА: 218/220 В РОБОТІ</span>
+        </div>
+      </div>
+
+      <!-- 6-Slot Dashboard (3 in row, 2 rows) -->
+      <div class="dashboard-grid">
+        <!-- Slot 1 -->
+        <div class="dashboard-card">
+          <div class="card-top">
+            <span class="card-slot-id">SLOT 01 // FLEET</span>
+            <div class="card-icon-wrap">
+              <svg class="icon-svg icon-lg" viewBox="0 0 24 24">
+                <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                <rect x="6" y="14" width="12" height="8"></rect>
+              </svg>
+            </div>
+          </div>
+          <div class="card-number">
+            <span id="slotFleetCount">218</span>
+            <span class="unit">/ 220 принтерів</span>
+          </div>
+          <h3 class="card-title">Потужний парк обладнання</h3>
+          <p class="card-desc">FDM, SLA та SLS промислові комплекси з робочими зонами до 500×500×600 мм.</p>
+        </div>
+
+        <!-- Slot 2 -->
+        <div class="dashboard-card">
+          <div class="card-top">
+            <span class="card-slot-id">SLOT 02 // UPTIME</span>
+            <div class="card-icon-wrap">
+              <svg class="icon-svg icon-lg" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+            </div>
+          </div>
+          <div class="card-number">
+            <span>24/7</span>
+            <span class="unit">безперервно</span>
+          </div>
+          <h3 class="card-title">Цілодобове виробництво</h3>
+          <p class="card-desc">Працюємо позмінно без вихідних для виконання термінових критичних замовлень.</p>
+        </div>
+
+        <!-- Slot 3 -->
+        <div class="dashboard-card">
+          <div class="card-top">
+            <span class="card-slot-id">SLOT 03 // TEST</span>
+            <div class="card-icon-wrap">
+              <svg class="icon-svg icon-lg" viewBox="0 0 24 24">
+                <polyline points="20 12 20 22 4 22 4 12"></polyline>
+                <rect x="2" y="7" width="20" height="5"></rect>
+                <line x1="12" y1="22" x2="12" y2="7"></line>
+                <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path>
+                <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path>
+              </svg>
+            </div>
+          </div>
+          <div class="card-number">
+            <span>0</span>
+            <span class="unit">грн тест</span>
+          </div>
+          <h3 class="card-title">Безкоштовний зразок</h3>
+          <p class="card-desc">Друкуємо тестовий прототип перед запуском оптової партії для перевірки геометрії.</p>
+        </div>
+
+        <!-- Slot 4 -->
+        <div class="dashboard-card">
+          <div class="card-top">
+            <span class="card-slot-id">SLOT 04 // SPEED</span>
+            <div class="card-icon-wrap">
+              <svg class="icon-svg icon-lg" viewBox="0 0 24 24">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+              </svg>
+            </div>
+          </div>
+          <div class="card-number">
+            <span>від 2</span>
+            <span class="unit">годин</span>
+          </div>
+          <h3 class="card-title">Експрес-друк</h3>
+          <p class="card-desc">Запуск у роботу через 15 хвилин після погодження 3D-моделі чи креслення.</p>
+        </div>
+
+        <!-- Slot 5 -->
+        <div class="dashboard-card">
+          <div class="card-top">
+            <span class="card-slot-id">SLOT 05 // PRECISION</span>
+            <div class="card-icon-wrap">
+              <svg class="icon-svg icon-lg" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="22" y1="12" x2="18" y2="12"></line>
+                <line x1="6" y1="12" x2="2" y2="12"></line>
+                <line x1="12" y1="6" x2="12" y2="2"></line>
+                <line x1="12" y1="22" x2="12" y2="18"></line>
+              </svg>
+            </div>
+          </div>
+          <div class="card-number">
+            <span>±0.02</span>
+            <span class="unit">мм</span>
+          </div>
+          <h3 class="card-title">Прецизійна точність</h3>
+          <p class="card-desc">Ідеальна посадка під підшипники, різьби та складні рухомі вузли.</p>
+        </div>
+
+        <!-- Slot 6 -->
+        <div class="dashboard-card">
+          <div class="card-top">
+            <span class="card-slot-id">SLOT 06 // MATERIALS</span>
+            <div class="card-icon-wrap">
+              <svg class="icon-svg icon-lg" viewBox="0 0 24 24">
+                <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                <polyline points="2 17 12 22 22 17"></polyline>
+                <polyline points="2 12 12 17 22 12"></polyline>
+              </svg>
+            </div>
+          </div>
+          <div class="card-number">
+            <span>35+</span>
+            <span class="unit">полімерів</span>
+          </div>
+          <h3 class="card-title">Широкий спектр матеріалів</h3>
+          <p class="card-desc">Nylon CF/GF, Polycarbonate, TPU, ABS, PLA, PETG, високоміцні інженерні смоли.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SEGMENT 1: MILTECH (Хаки / Темно-зеленый)
+         ========================================================================== -->
+    <section class="segment-section segment-miltech" id="miltech">
+      <!-- PLACEHOLDER FOR VIDEO BACKGROUND -->
+      <div class="video-bg-container">
+        <!-- ВІДЕО ФОН ДЛЯ СЕГМЕНТУ MILTECH:
+        <video autoplay loop muted playsinline>
+          <source src="videos/miltech-bg.mp4" type="video/mp4">
+        </video>
+        -->
+      </div>
+      <div class="segment-overlay"></div>
+
+      <div class="segment-content-wrap">
+        <!-- Top Title Block -->
+        <div class="segment-header-block">
+          <span class="segment-tag tag-miltech">СЕГМЕНТ 01 // MILTECH ТА ТАКТИЧНІ РІШЕННЯ</span>
+          <h2 class="segment-title">Оборонні та тактичні рішення підвищеної надійності</h2>
+          <p class="segment-description">
+            Спеціалізований друк виробів тактичного та військового призначення. Виготовляємо деталі, які витримують екстремальні механічні навантаження, перепади температур та польові умови.
+          </p>
+        </div>
+
+        <!-- 2-Column Balanced Grid -->
+        <div class="segment-main-grid">
+          <!-- Left Column: 4 Cards + Button with EXACT EQUAL GAPS (12px) -->
+          <div class="segment-left-col">
+            <div class="advantage-cards-list">
+              <div class="advantage-card">
+                <div class="adv-icon-wrap">
+                  <svg class="icon-svg" viewBox="0 0 24 24">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                  </svg>
+                </div>
+                <div class="adv-content">
+                  <h4>Досвід роботи з оборонними замовленнями</h4>
+                  <p>Понад 50 000 успішно виготовлених виробів: кріплення, системи скиду, корпуси РЕБ/БПЛА, перископи.</p>
+                </div>
+              </div>
+
+              <div class="advantage-card">
+                <div class="adv-icon-wrap">
+                  <svg class="icon-svg" viewBox="0 0 24 24">
+                    <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
+                  </svg>
+                </div>
+                <div class="adv-content">
+                  <h4>Професійні інженери-конструктори</h4>
+                  <p>Швидко доопрацюємо креслення або створимо 3D-модель з нуля за вашим технічним завданням чи зразком.</p>
+                </div>
+              </div>
+
+              <div class="advantage-card">
+                <div class="adv-icon-wrap">
+                  <svg class="icon-svg" viewBox="0 0 24 24">
+                    <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                  </svg>
+                </div>
+                <div class="adv-content">
+                  <h4>Ударостійкі композити (Carbon / Nylon)</h4>
+                  <p>Використовуємо вуглеволоконні та склонаповнені полімери із підвищеною стійкістю до ударів та УФ.</p>
+                </div>
+              </div>
+
+              <div class="advantage-card">
+                <div class="adv-icon-wrap">
+                  <svg class="icon-svg" viewBox="0 0 24 24">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                  </svg>
+                </div>
+                <div class="adv-content">
+                  <h4>Повна конфіденційність та NDA</h4>
+                  <p>Суворе дотримання таємниці розробок. Усі файли зберігаються на закритих локальних серверах.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="segment-actions">
+              <button class="btn-segment btn-miltech" onclick="openLeadModal('MilTech Замовлення')">Замовити розрахунок MilTech</button>
+            </div>
+          </div>
+
+          <!-- Right Column: Rich Detailed Visual Preview Box -->
+          <div class="segment-right-col">
+            <div class="visual-preview-box">
+              <div class="preview-header">
+                <h3>Тактичні характеристики</h3>
+                <span class="video-hint-pill">[ФОН: MILTECH ВІДЕО]</span>
+              </div>
+              <ul class="feature-item-list">
+                <li>
+                  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <div class="feature-text-block">
+                    <strong>Корпуси та кріплення для БПЛА / FPV:</strong> знижена маса конструкції при максимальній жорсткості та стійкості до вібрацій польоту.
+                  </div>
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <div class="feature-text-block">
+                    <strong>Адаптери та планки Picatinny/M-LOK:</strong> прецизійна фіксація прицілів, далекомірів, ПНБ та тепловізійних модулів без люфтів.
+                  </div>
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <div class="feature-text-block">
+                    <strong>Швидкознімні лоадери, скиди та замки:</strong> безвідмовна робота механіки в умовах пилу, бруду, піску та підвищеної вологості.
+                  </div>
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <div class="feature-text-block">
+                    <strong>Температурний діапазон від -40°C до +95°C:</strong> повна стійкість до порохових газів, збройових мастил, спирту та бензину.
+                  </div>
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <div class="feature-text-block">
+                    <strong>Екстрене серійне масштабування:</strong> одночасний запуск на 220 принтерах забезпечує випуск до 1 000 виробів на добу.
+                  </div>
+                </li>
+              </ul>
+              <div class="spec-badges-wrap">
+                <span class="spec-badges-label">Рекомендовані полімери та стандарти:</span>
+                <div class="spec-badges">
+                  <span class="spec-badge">Nylon PA12-CF</span>
+                  <span class="spec-badge">PETG Carbon</span>
+                  <span class="spec-badge">TPU 95A / 85A</span>
+                  <span class="spec-badge">PC-ABS</span>
+                  <span class="spec-badge">100% Infill</span>
+                  <span class="spec-badge">Захист IP65</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SEGMENT 2: ЗАПЧАСТИНИ ТА МЕХАНІЗМИ (Оранжевый)
+         ========================================================================== -->
+    <section class="segment-section segment-parts" id="parts">
+      <!-- PLACEHOLDER FOR VIDEO BACKGROUND -->
+      <div class="video-bg-container">
+        <!-- ВІДЕО ФОН ДЛЯ СЕГМЕНТУ ДЕТАЛЕЙ:
+        <video autoplay loop muted playsinline>
+          <source src="videos/parts-bg.mp4" type="video/mp4">
+        </video>
+        -->
+      </div>
+      <div class="segment-overlay"></div>
+
+      <div class="segment-content-wrap">
+        <!-- Top Title Block -->
+        <div class="segment-header-block">
+          <span class="segment-tag tag-parts">СЕГМЕНТ 02 // ЗАПЧАСТИНИ ТА МЕХАНІЗМИ</span>
+          <h2 class="segment-title">Шестерні, запчастини та промислові компоненти</h2>
+          <p class="segment-description">
+            Виготовлення аналогів імпортних деталей, знятих з виробництва запчастин та високонавантажених вузлів для обладнання, автомобілів та спецтехніки.
+          </p>
+        </div>
+
+        <!-- 2-Column Balanced Grid -->
+        <div class="segment-main-grid">
+          <!-- Left Column: 4 Cards + Button with EXACT EQUAL GAPS (12px) -->
+          <div class="segment-left-col">
+            <div class="advantage-cards-list">
+              <div class="advantage-card">
+                <div class="adv-icon-wrap">
+                  <svg class="icon-svg" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="3"></circle>
+                    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                  </svg>
+                </div>
+                <div class="adv-content">
+                  <h4>Реверс-інжиніринг за зламаним зразком</h4>
+                  <p>Відновлюємо навіть частково зруйновані шестерні, втулки та вали з точним перерахунком кроку зубів.</p>
+                </div>
+              </div>
+
+              <div class="advantage-card">
+                <div class="adv-icon-wrap">
+                  <svg class="icon-svg" viewBox="0 0 24 24">
+                    <line x1="4" y1="21" x2="4" y2="14"></line>
+                    <line x1="4" y1="10" x2="4" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="12"></line>
+                    <line x1="12" y1="8" x2="12" y2="3"></line>
+                    <line x1="20" y1="21" x2="20" y2="16"></line>
+                    <line x1="20" y1="12" x2="20" y2="3"></line>
+                    <line x1="1" y1="14" x2="7" y2="14"></line>
+                    <line x1="9" y1="8" x2="15" y2="8"></line>
+                    <line x1="17" y1="16" x2="23" y2="16"></line>
+                  </svg>
+                </div>
+                <div class="adv-content">
+                  <h4>Стійкість до тертя, хімії та нагріву</h4>
+                  <p>Використовуємо антифрикційні поліаміди (PA6/PA12), полікарбонат, POM та маслостійкі полімери.</p>
+                </div>
+              </div>
+
+              <div class="advantage-card">
+                <div class="adv-icon-wrap">
+                  <svg class="icon-svg" viewBox="0 0 24 24">
+                    <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                    <polyline points="17 6 23 6 23 12"></polyline>
+                  </svg>
+                </div>
+                <div class="adv-content">
+                  <h4>Економія до 80% у порівнянні з оригіналом</h4>
+                  <p>Без очікування доставки з-за кордону тижнями — готова деталь у вас вже через 1-2 дні.</p>
+                </div>
+              </div>
+
+              <div class="advantage-card">
+                <div class="adv-icon-wrap">
+                  <svg class="icon-svg" viewBox="0 0 24 24">
+                    <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                    <polyline points="2 17 12 22 22 17"></polyline>
+                    <polyline points="2 12 12 17 22 12"></polyline>
+                  </svg>
+                </div>
+                <div class="adv-content">
+                  <h4>Партії від 1 штуки до 10 000+ одиниць</h4>
+                  <p>Гнучке масштабування: прототипуємо перший екземпляр та миттєво масштабуємо серію.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="segment-actions">
+              <button class="btn-segment btn-parts" onclick="openLeadModal('Замовлення запчастин')">Розрахувати вартість деталей</button>
+            </div>
+          </div>
+
+          <!-- Right Column: Rich Detailed Visual Preview Box -->
+          <div class="segment-right-col">
+            <div class="visual-preview-box">
+              <div class="preview-header">
+                <h3>Інженерні можливості</h3>
+                <span class="video-hint-pill">[ФОН: ЗАПЧАСТИНИ ВІДЕО]</span>
+              </div>
+              <ul class="feature-item-list">
+                <li>
+                  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <div class="feature-text-block">
+                    <strong>Шестерні та зубчасті передачі:</strong> прямозубі, косозубі, конічні, черв'ячні та планетарні пари з вивіреним модулем зачеплення.
+                  </div>
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <div class="feature-text-block">
+                    <strong>Підшипники ковзання, втулки та муфти:</strong> антифрикційні самозмащувальні матеріали з низьким коефіцієнтом тертя.
+                  </div>
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <div class="feature-text-block">
+                    <strong>Корпуси з інтегрованими різьбами:</strong> монтаж латунних запресованих втулок M2-M10 та пазів під силіконові ущільнювачі.
+                  </div>
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <div class="feature-text-block">
+                    <strong>Термостійкість до 180°C:</strong> збереження геометричної стабільності у гарячих зонах двигунів та станків.
+                  </div>
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <div class="feature-text-block">
+                    <strong>Заміна дефіцитних імпортних деталей:</strong> виготовлення точних дублікатів деталей для виробничих ліній без простоїв.
+                  </div>
+                </li>
+              </ul>
+              <div class="spec-badges-wrap">
+                <span class="spec-badges-label">Інженерні матеріали та допуски:</span>
+                <div class="spec-badges">
+                  <span class="spec-badge">PA6 / PA12 Nylon</span>
+                  <span class="spec-badge">Polycarbonate (PC)</span>
+                  <span class="spec-badge">POM / Polyacetal</span>
+                  <span class="spec-badge">ABS / ASA Pro</span>
+                  <span class="spec-badge">SLA Tough 8K</span>
+                  <span class="spec-badge">Допуск ±0.02 мм</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SEGMENT 3: ДЕКОР ТА ФІГУРКИ (Синий)
+         ========================================================================== -->
+    <section class="segment-section segment-decor" id="decor">
+      <!-- PLACEHOLDER FOR VIDEO BACKGROUND -->
+      <div class="video-bg-container">
+        <!-- ВІДЕО ФОН ДЛЯ СЕГМЕНТУ ДЕКОРУ:
+        <video autoplay loop muted playsinline>
+          <source src="videos/decor-bg.mp4" type="video/mp4">
+        </video>
+        -->
+      </div>
+      <div class="segment-overlay"></div>
+
+      <div class="segment-content-wrap">
+        <!-- Top Title Block -->
+        <div class="segment-header-block">
+          <span class="segment-tag tag-decor">СЕГМЕНТ 03 // ДЕКОР ТА ДИЗАЙН</span>
+          <h2 class="segment-title">Лампи, фігурки, сувеніри та інтер'єрні арт-об'єкти</h2>
+          <p class="segment-description">
+            Втілюємо естетичні концепції: від стильних параметричних світильників та скульптур до деталізованих колекційних мініатюр і сувенірів.
+          </p>
+        </div>
+
+        <!-- 2-Column Balanced Grid -->
+        <div class="segment-main-grid">
+          <!-- Left Column: 4 Cards + Button with EXACT EQUAL GAPS (12px) -->
+          <div class="segment-left-col">
+            <div class="advantage-cards-list">
+              <div class="advantage-card">
+                <div class="adv-icon-wrap">
+                  <svg class="icon-svg" viewBox="0 0 24 24">
+                    <path d="M9 18h6"></path>
+                    <path d="M10 22h4"></path>
+                    <path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"></path>
+                  </svg>
+                </div>
+                <div class="adv-content">
+                  <h4>Дизайнерські світильники та плафони</h4>
+                  <p>Унікальні світлорозсіювальні геометричні форми, які неможливо виготовити традиційним литтям.</p>
+                </div>
+              </div>
+
+              <div class="advantage-card">
+                <div class="adv-icon-wrap">
+                  <svg class="icon-svg" viewBox="0 0 24 24">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                  </svg>
+                </div>
+                <div class="adv-content">
+                  <h4>Ультрадеталізовані фігурки та скульптури</h4>
+                  <p>Гладка поверхня без ліній шарів, ювелірна деталізація облич, текстур та дрібних елементів на SLA-принтерах.</p>
+                </div>
+              </div>
+
+              <div class="advantage-card">
+                <div class="adv-icon-wrap">
+                  <svg class="icon-svg" viewBox="0 0 24 24">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                  </svg>
+                </div>
+                <div class="adv-content">
+                  <h4>Брелоки, іграшки та товари для дому</h4>
+                  <p>Органайзери, кашпо, підставки, рухомі 3D-іграшки Flexi та індивідуальні подарунки під ключ.</p>
+                </div>
+              </div>
+
+              <div class="advantage-card">
+                <div class="adv-icon-wrap">
+                  <svg class="icon-svg" viewBox="0 0 24 24">
+                    <path d="M12 19l7-7 3 3-7 7-3-3z"></path>
+                    <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path>
+                    <path d="M2 2l7.586 7.586"></path>
+                    <circle cx="11" cy="11" r="2"></circle>
+                  </svg>
+                </div>
+                <div class="adv-content">
+                  <h4>Повний цикл постобробки та фарбування</h4>
+                  <p>Шліфування, ґрунтування, ручний та аерографічний розпис, нанесення матового чи глянцевого лаку.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="segment-actions">
+              <button class="btn-segment btn-decor" onclick="openLeadModal('Замовлення декору')">Створити дизайн-замовлення</button>
+            </div>
+          </div>
+
+          <!-- Right Column: Rich Detailed Visual Preview Box -->
+          <div class="segment-right-col">
+            <div class="visual-preview-box">
+              <div class="preview-header">
+                <h3>Асортимент декору</h3>
+                <span class="video-hint-pill">[ФОН: ДЕКОР ВІДЕО]</span>
+              </div>
+              <ul class="feature-item-list">
+                <li>
+                  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <div class="feature-text-block">
+                    <strong>Параметричні світильники та абажури:</strong> складні світлорозсіювальні візерунки та безшовні плафони для створення затишної атмосфери.
+                  </div>
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <div class="feature-text-block">
+                    <strong>Колекційні фігурки та статуетки (8K SLA):</strong> мікротекстура шкіри, волосся, одягу та зброї без слідів шарів друку.
+                  </div>
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <div class="feature-text-block">
+                    <strong>Рухомі Flexi-сувеніри та іграшки:</strong> монолітний друк готових зчленованих виробів (Print-in-Place) без додаткового збирання.
+                  </div>
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <div class="feature-text-block">
+                    <strong>Художнє фарбування та лакування:</strong> нанесення професійних емалей, кракелюру, металіків та софт-тач покриттів.
+                  </div>
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <div class="feature-text-block">
+                    <strong>Екологічно чисті біополімери:</strong> нетоксичний безпечний PLA без запаху, сертифікований для дитячих кімнат та побуту.
+                  </div>
+                </li>
+              </ul>
+              <div class="spec-badges-wrap">
+                <span class="spec-badges-label">Матеріали для декору та фініші:</span>
+                <div class="spec-badges">
+                  <span class="spec-badge">Silk PLA</span>
+                  <span class="spec-badge">8K Water-Wash Resin</span>
+                  <span class="spec-badge">Glow Polymer</span>
+                  <span class="spec-badge">Translucent PETG</span>
+                  <span class="spec-badge">Soft-Touch фініш</span>
+                  <span class="spec-badge">Dual-Color</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SEGMENT 4: БРЕНДИНГ ТА АЙДЕНТИКА ДЛЯ КАФЕ І РЕСТОРАНІВ (Фиолетовый)
+         ========================================================================== -->
+    <section class="segment-section segment-branding" id="branding">
+      <!-- PLACEHOLDER FOR VIDEO BACKGROUND -->
+      <div class="video-bg-container">
+        <!-- ВІДЕО ФОН ДЛЯ СЕГМЕНТУ БРЕНДИНГУ:
+        <video autoplay loop muted playsinline>
+          <source src="videos/branding-bg.mp4" type="video/mp4">
+        </video>
+        -->
+      </div>
+      <div class="segment-overlay"></div>
+
+      <div class="segment-content-wrap">
+        <!-- Top Title Block -->
+        <div class="segment-header-block">
+          <span class="segment-tag tag-branding">СЕГМЕНТ 04 // БРЕНДИНГ ТА HORECA</span>
+          <h2 class="segment-title">Айдентика, вивіски та брендинг для закладів</h2>
+          <p class="segment-description">
+            Створюємо фірмовий стиль для кафе, барів, ресторанів та готелів. Індивідуальні QR-підставки, об'ємні вивіски, номерки та фірмові аксесуари.
+          </p>
+        </div>
+
+        <!-- 2-Column Balanced Grid -->
+        <div class="segment-main-grid">
+          <!-- Left Column: 4 Cards + Button with EXACT EQUAL GAPS (12px) -->
+          <div class="segment-left-col">
+            <div class="advantage-cards-list">
+              <div class="advantage-card">
+                <div class="adv-icon-wrap">
+                  <svg class="icon-svg" viewBox="0 0 24 24">
+                    <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+                    <line x1="12" y1="18" x2="12.01" y2="18"></line>
+                  </svg>
+                </div>
+                <div class="adv-content">
+                  <h4>Стильні QR-меню та тейбл-тенти</h4>
+                  <p>Міцні, монолітні підставки з інтегрованими QR-кодами під вашу колірну гаму та шрифт бренду.</p>
+                </div>
+              </div>
+
+              <div class="advantage-card">
+                <div class="adv-icon-wrap">
+                  <svg class="icon-svg" viewBox="0 0 24 24">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                  </svg>
+                </div>
+                <div class="adv-content">
+                  <h4>Об'ємні вивіски та логотипи на ресепшн</h4>
+                  <p>Легкі, ефектні об'ємні вивіски з можливістю внутрішньої підсвітки для фотозон та вхідних груп.</p>
+                </div>
+              </div>
+
+              <div class="advantage-card">
+                <div class="adv-icon-wrap">
+                  <svg class="icon-svg" viewBox="0 0 24 24">
+                    <path d="M18 8h1a4 4 0 0 1 0 8h-1"></path>
+                    <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path>
+                    <line x1="6" y1="1" x2="6" y2="4"></line>
+                    <line x1="10" y1="1" x2="10" y2="4"></line>
+                    <line x1="14" y1="1" x2="14" y2="4"></line>
+                  </svg>
+                </div>
+                <div class="adv-content">
+                  <h4>Барний інвентар, серветниці та костери</h4>
+                  <p>Органайзери для спецій, холдери для рахунків, фірмові костери з тисненим або двоколірним логотипом.</p>
+                </div>
+              </div>
+
+              <div class="advantage-card">
+                <div class="adv-icon-wrap">
+                  <svg class="icon-svg" viewBox="0 0 24 24">
+                    <line x1="22" y1="2" x2="11" y2="13"></line>
+                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                  </svg>
+                </div>
+                <div class="adv-content">
+                  <h4>Швидке брендування мереж закладів</h4>
+                  <p>Виготовляємо партії від 10 до 2000+ комплектів у єдиній колірній гамі та геометрії.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="segment-actions">
+              <button class="btn-segment btn-branding" onclick="openLeadModal('Брендинг для HoReCa')">Замовити брендинг закладу</button>
+            </div>
+          </div>
+
+          <!-- Right Column: Rich Detailed Visual Preview Box -->
+          <div class="segment-right-col">
+            <div class="visual-preview-box">
+              <div class="preview-header">
+                <h3>Рішення для HoReCa</h3>
+                <span class="video-hint-pill">[ФОН: БРЕНДИНГ ВІДЕО]</span>
+              </div>
+              <ul class="feature-item-list">
+                <li>
+                  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <div class="feature-text-block">
+                    <strong>Підставки для QR-меню та тейбл-тенти:</strong> монолітні вироби з рельєфним брендуванням, які не псуються від води та дезінфекторів.
+                  </div>
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <div class="feature-text-block">
+                    <strong>Брендовані номерки столів та чек-буки:</strong> тактильно приємні фірмові аксесуари в точній відповідності до айдентики закладу.
+                  </div>
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <div class="feature-text-block">
+                    <strong>Об'ємні настінні логотипи з LED-підготовкою:</strong> легкі інтер'єрні вивіски з прихованими каналами під монтаж підсвітки.
+                  </div>
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <div class="feature-text-block">
+                    <strong>Барний інвентар та органайзери:</strong> диспенсери серветок, підставки для трубочок, барні килимки та брендовані костери.
+                  </div>
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <div class="feature-text-block">
+                    <strong>Серійні тиражі для франшиз та мереж:</strong> точне повторення відтінку пластику та геометрії у партіях будь-якого масштабу.
+                  </div>
+                </li>
+              </ul>
+              <div class="spec-badges-wrap">
+                <span class="spec-badges-label">Технічні особливості та матеріали:</span>
+                <div class="spec-badges">
+                  <span class="spec-badge">Харчовий PETG</span>
+                  <span class="spec-badge">Двоколірний друк</span>
+                  <span class="spec-badge">Підготовка під LED</span>
+                  <span class="spec-badge">Матова поверхня</span>
+                  <span class="spec-badge">Стійкість до дезінфекції</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==========================================================================
+       FOOTER
+       ========================================================================== -->
+  <footer class="footer" id="contacts">
+    <div class="footer-container">
+      <div class="footer-top-grid">
+        <!-- Brand Info / About -->
+        <div class="footer-brand-col">
+          <div class="brand-mark" style="font-family: var(--font-heading); font-weight: 700; font-size: 1.1rem;">
+            <svg viewBox="0 0 24 24">
+              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+              <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+              <line x1="12" y1="22.08" x2="12" y2="12"></line>
+            </svg>
+            СТУДІЯ 3D-ДРУКУ
+          </div>
+          <p>
+            Фабрика промислового та серійного 3D-виробництва в Україні. 220 принтерів у роботі, сучасні інженерні полімери та суворий контроль геометрії.
+          </p>
+        </div>
+
+        <!-- Links: Напрямки -->
+        <div class="footer-col">
+          <h5>Напрямки</h5>
+          <ul class="footer-links">
+            <li><a href="#hero">Про нас</a></li>
+            <li><a href="#miltech">Miltech друк</a></li>
+            <li><a href="#parts">Запчастини</a></li>
+            <li><a href="#decor">Декор та дизайн</a></li>
+            <li><a href="#branding">Брендинг & HoReCa</a></li>
+          </ul>
+        </div>
+
+        <!-- Links: Клієнтам -->
+        <div class="footer-col">
+          <h5>Клієнтам</h5>
+          <ul class="footer-links">
+            <li><a href="#" onclick="alert('Вимоги до 3D-моделей: формати .STL, .STEP, .OBJ, .3MF. Товщина стінок від 1.0 мм.')">Вимоги до файлів</a></li>
+            <li><a href="#" onclick="alert('Оплата: Безготівковий розрахунок (ФОП / ТОВ з ПДВ), банківська картка, LiqPay.')">Способи оплати</a></li>
+            <li><a href="#" onclick="alert('Гарантія якості: 100% відповідність кресленням або безкоштовний передрук.')">Гарантії та повернення</a></li>
+            <li><a href="#" onclick="alert('Доставка: Нова Пошта по всій Україні, кур’єрська доставка, самовивіз.')">Доставка</a></li>
+            <li><a href="#" onclick="openLeadModal('Безкоштовний тестовий зразок')">Безкоштовний тест</a></li>
+          </ul>
+        </div>
+
+        <!-- Links: Юридична інформація -->
+        <div class="footer-col">
+          <h5>Юр. інформація</h5>
+          <ul class="footer-links">
+            <li><a href="#" onclick="alert('Політика конфіденційності: Ваші файли та дані надійно захищені та не передаються третім особам.')">Політика конфіденційності</a></li>
+            <li><a href="#" onclick="alert('Договір публічної оферти регулює умови надання послуг 3D-виробництва.')">Публічна оферта</a></li>
+            <li><a href="#" onclick="alert('Підписання угоди про нерозголошення (NDA) для комерційних та оборонних розробок.')">Угода NDA</a></li>
+            <li><a href="#" onclick="alert('Сертифікати відповідності на використовувані полімери.')">Сертифікати матеріалів</a></li>
+          </ul>
+        </div>
+
+        <!-- Contacts -->
+        <div class="footer-col">
+          <h5>Зв'язок</h5>
+          <div class="contact-badge-list">
+            <a href="https://t.me/" target="_blank" class="contact-btn">
+              <svg class="icon-svg" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+              Telegram
+            </a>
+            <a href="tel:+380800330033" class="contact-btn">
+              <svg class="icon-svg" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+              +380 (800) 33-00-33
+            </a>
+            <a href="mailto:order@3dprint.ua" class="contact-btn">
+              <svg class="icon-svg" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+              order@3dprint.ua
+            </a>
+            <div style="font-size: 0.8rem; color: var(--text-dim); margin-top: 4px;">
+              м. Київ, вул. Промислова, 12 (24/7)
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom bar -->
+      <div class="footer-bottom">
+        <div>© 2026 Студія 3D-друку. Всі права захищено.</div>
+        <div class="footer-bottom-links">
+          <a href="#hero">Вгору ↑</a>
+          <a href="#miltech">Miltech</a>
+          <a href="#parts">Запчастини</a>
+          <a href="#decor">Декор</a>
+          <a href="#branding">Брендинг</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       LEAD / REQUEST MODAL
+       ========================================================================== -->
+  <div class="lead-modal" id="leadModal">
+    <div class="lead-modal-content">
+      <button class="modal-close-btn" onclick="closeLeadModal()">×</button>
+      <h3 style="font-family: var(--font-heading); color: #fff; font-size: 1.25rem;" id="modalHeading">Розрахунок вартості друку</h3>
+      <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 4px;">Залиште контакти для швидкого прорахунку кошторису</p>
+      
+      <form class="modal-form" onsubmit="handleFormSubmit(event)">
+        <div class="form-group">
+          <label>Ваше ім'я / Компанія</label>
+          <input type="text" class="form-input" placeholder="Ім'я або назва компанії" required>
+        </div>
+        <div class="form-group">
+          <label>Телефон або Telegram</label>
+          <input type="text" class="form-input" placeholder="+380 (XX) XXX-XX-XX або @username" required>
+        </div>
+        <div class="form-group">
+          <label>Напрямок замовлення</label>
+          <select class="form-select" id="orderTypeSelect">
+            <option value="miltech">Miltech / Тактичний друк</option>
+            <option value="parts">Запчастини та шестерні</option>
+            <option value="decor">Декор та фігурки</option>
+            <option value="branding">Брендинг для HoReCa</option>
+            <option value="general">Консультація / Безкоштовний тест</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Коментар / Посилання на 3D-модель (STL/STEP)</label>
+          <textarea class="form-textarea" rows="3" placeholder="Кількість, бажаний матеріал або посилання на файл..."></textarea>
+        </div>
+        <button type="submit" class="form-submit-btn">Отримати кошторис</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       SCRIPTS: LIVE PRINTER COUNTER (200-220), NAVIGATION, MODAL
+       ========================================================================== -->
+  <script>
+    let activePrinters = 218;
+    const statusTextEl = document.getElementById('liveStatusText');
+    const slotCountEl = document.getElementById('slotFleetCount');
+
+    function updatePrinterCount() {
+      const delta = Math.floor(Math.random() * 7) - 3;
+      activePrinters = Math.min(220, Math.max(200, activePrinters + delta));
+      
+      if (statusTextEl) {
+        statusTextEl.textContent = `ФАБРИКА АКТИВНА: ${activePrinters}/220 В РОБОТІ`;
+      }
+      if (slotCountEl) {
+        slotCountEl.textContent = activePrinters;
+      }
+    }
+
+    setInterval(updatePrinterCount, 4500);
+
+    const sections = document.querySelectorAll('section, footer');
+    const navLinks = document.querySelectorAll('.nav-item a');
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      const scrollPosition = window.pageYOffset + 200;
+
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${current}`) {
+          link.classList.add('active');
+        }
+      });
+    });
+
+    function openLeadModal(title = 'Розрахунок вартості друку') {
+      const modal = document.getElementById('leadModal');
+      const heading = document.getElementById('modalHeading');
+      if (heading) heading.textContent = title;
+      modal.classList.add('active');
+    }
+
+    function closeLeadModal() {
+      const modal = document.getElementById('leadModal');
+      modal.classList.remove('active');
+    }
+
+    window.addEventListener('click', (e) => {
+      const modal = document.getElementById('leadModal');
+      if (e.target === modal) {
+        closeLeadModal();
+      }
+    });
+
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      alert('Дякуємо! Заявку прийнято. Наш спеціаліст зв’яжеться з вами.');
+      closeLeadModal();
+    }
+  </script>
+</body>
+</html>
