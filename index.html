@@ -48,6 +48,11 @@
       --color-branding-tag: #3b1560;
       --color-branding-text: #c084fc;
 
+      --color-custom-bg: #0a1a1a;
+      --color-custom-accent: #0d9488;
+      --color-custom-tag: #134e4a;
+      --color-custom-text: #5eead4;
+
       --radius: 4px;
       --font-heading: 'Unbounded', sans-serif;
       --font-body: 'Space Grotesk', sans-serif;
@@ -180,6 +185,7 @@
     .dot-parts { background: #f59e0b; }
     .dot-decor { background: #3b82f6; }
     .dot-branding { background: #a855f7; }
+    .dot-custom { background: #14b8a6; }
 
     .header-actions {
       display: flex;
@@ -419,7 +425,7 @@
     }
 
     /* ==========================================================================
-       SEGMENT SECTIONS (MILTECH, PARTS, DECOR, BRANDING)
+       SEGMENT SECTIONS (MILTECH, PARTS, DECOR, BRANDING, CUSTOM)
        ========================================================================== */
     .segment-section {
       min-height: 100vh;
@@ -463,6 +469,10 @@
 
     .segment-branding {
       background-color: var(--color-branding-bg);
+    }
+
+    .segment-custom {
+      background-color: var(--color-custom-bg);
     }
 
     .segment-overlay {
@@ -532,6 +542,12 @@
       border-color: #4c1b7d;
     }
 
+    .tag-custom {
+      color: var(--color-custom-text);
+      background: var(--color-custom-tag);
+      border-color: #0f3d3a;
+    }
+
     .segment-title {
       font-family: var(--font-heading);
       font-size: 2.3rem;
@@ -561,6 +577,7 @@
     .segment-parts .segment-main-grid--single { justify-content: flex-end; }
     .segment-decor .segment-main-grid--single { justify-content: flex-start; }
     .segment-branding .segment-main-grid--single { justify-content: flex-end; }
+    .segment-custom .segment-main-grid--single { justify-content: flex-start; }
 
     /* Action buttons: Equal 12px gap, 100% full width */
     .segment-actions {
@@ -601,6 +618,9 @@
 
     .btn-branding { background: var(--color-branding-accent); color: #fff; border-color: #a855f7; }
     .btn-branding:hover { background: #6b21a8; }
+
+    .btn-custom { background: var(--color-custom-accent); color: #fff; border-color: #14b8a6; }
+    .btn-custom:hover { background: #0f766e; }
 
     /* Right Column: Visual Preview Box with Rich Filled Content */
     .segment-right-col {
@@ -805,6 +825,17 @@
     .segment-branding .video-hint-pill,
     .segment-branding .spec-badge {
       border-color: rgba(192, 132, 252, 0.28);
+    }
+
+    .segment-custom .visual-preview-box::after,
+    .segment-custom .video-hint-pill::after,
+    .segment-custom .spec-badge::after {
+      background: rgba(20, 184, 166, 0.13);
+    }
+    .segment-custom .visual-preview-box,
+    .segment-custom .video-hint-pill,
+    .segment-custom .spec-badge {
+      border-color: rgba(94, 234, 212, 0.28);
     }
 
     /* ==========================================================================
@@ -1034,6 +1065,11 @@
               <span class="nav-dot dot-branding"></span> Брендинг
             </a>
           </li>
+          <li class="nav-item">
+            <a href="#custom">
+              <span class="nav-dot dot-custom"></span> Індивідуальний друк
+            </a>
+          </li>
           <li class="nav-item"><a href="#contacts">Контакти</a></li>
         </ul>
       </nav>
@@ -1260,13 +1296,11 @@
          SEGMENT 2: ЗАПЧАСТИНИ ТА МЕХАНІЗМИ (Оранжевый)
          ========================================================================== -->
     <section class="segment-section segment-parts" id="parts">
-      <!-- PLACEHOLDER FOR VIDEO BACKGROUND -->
+      <!-- ФОН ДЛЯ СЕГМЕНТУ ДЕТАЛЕЙ -->
       <div class="video-bg-container">
-        <!-- ВІДЕО ФОН ДЛЯ СЕГМЕНТУ ДЕТАЛЕЙ:
         <video autoplay loop muted playsinline>
-          <source src="videos/parts-bg.mp4" type="video/mp4">
+          <source src="https://raw.githubusercontent.com/CakeBoxDeveloper/3dlanding/main/%D0%B4%D0%B5%D1%82%D0%B0%D0%BB%D0%B8_%D0%B4%D0%B2%D0%B8%D0%B3%D0%B0%D1%82%D0%B5%D0%BB%D1%8F_%D0%B2%D0%B8%D0%B1%D1%80%D0%B8%D1%80%D1%83%D1%8E%D1%82_202608302358.mp4" type="video/mp4">
         </video>
-        -->
       </div>
       <div class="segment-overlay"></div>
 
@@ -1286,7 +1320,7 @@
             <div class="visual-preview-box">
               <div class="preview-header">
                 <h3>Інженерні можливості</h3>
-                <span class="video-hint-pill">[ФОН: ЗАПЧАСТИНИ ВІДЕО]</span>
+                <span class="video-hint-pill">LIVE FEED</span>
               </div>
               <ul class="feature-item-list">
                 <li>
@@ -1333,13 +1367,11 @@
          SEGMENT 3: ДЕКОР ТА ФІГУРКИ (Синий)
          ========================================================================== -->
     <section class="segment-section segment-decor" id="decor">
-      <!-- PLACEHOLDER FOR VIDEO BACKGROUND -->
+      <!-- ФОН ДЛЯ СЕГМЕНТУ ДЕКОРУ -->
       <div class="video-bg-container">
-        <!-- ВІДЕО ФОН ДЛЯ СЕГМЕНТУ ДЕКОРУ:
         <video autoplay loop muted playsinline>
-          <source src="videos/decor-bg.mp4" type="video/mp4">
+          <source src="https://raw.githubusercontent.com/CakeBoxDeveloper/3dlanding/main/%D1%84%D1%96%D0%B3%D1%83%D1%80%D0%BA%D0%B8_%D0%B4%D0%B5%D0%BB%D0%B0%D1%8E%D1%82_idle-%D0%B0%D0%BD%D1%96%D0%BC%D0%B0%D1%86%D1%96%D1%8E_202608310008.mp4" type="video/mp4">
         </video>
-        -->
       </div>
       <div class="segment-overlay"></div>
 
@@ -1359,7 +1391,7 @@
             <div class="visual-preview-box">
               <div class="preview-header">
                 <h3>Асортимент декору</h3>
-                <span class="video-hint-pill">[ФОН: ДЕКОР ВІДЕО]</span>
+                <span class="video-hint-pill">LIVE FEED</span>
               </div>
               <ul class="feature-item-list">
                 <li>
@@ -1406,13 +1438,11 @@
          SEGMENT 4: БРЕНДИНГ ТА АЙДЕНТИКА ДЛЯ КАФЕ І РЕСТОРАНІВ (Фиолетовый)
          ========================================================================== -->
     <section class="segment-section segment-branding" id="branding">
-      <!-- PLACEHOLDER FOR VIDEO BACKGROUND -->
+      <!-- ФОН ДЛЯ СЕГМЕНТУ БРЕНДИНГУ -->
       <div class="video-bg-container">
-        <!-- ВІДЕО ФОН ДЛЯ СЕГМЕНТУ БРЕНДИНГУ:
         <video autoplay loop muted playsinline>
-          <source src="videos/branding-bg.mp4" type="video/mp4">
+          <source src="https://raw.githubusercontent.com/CakeBoxDeveloper/3dlanding/main/Rain_falling%2C_sign_glowing_202608310028.mp4" type="video/mp4">
         </video>
-        -->
       </div>
       <div class="segment-overlay"></div>
 
@@ -1432,7 +1462,7 @@
             <div class="visual-preview-box">
               <div class="preview-header">
                 <h3>Рішення для HoReCa</h3>
-                <span class="video-hint-pill">[ФОН: БРЕНДИНГ ВІДЕО]</span>
+                <span class="video-hint-pill">LIVE FEED</span>
               </div>
               <ul class="feature-item-list">
                 <li>
@@ -1474,6 +1504,79 @@
         </div>
       </div>
     </section>
+
+    <!-- ==========================================================================
+         SEGMENT 5: ІНДИВІДУАЛЬНИЙ ДРУК (Бирюзовый)
+         ========================================================================== -->
+    <section class="segment-section segment-custom" id="custom">
+      <!-- PLACEHOLDER FOR VIDEO BACKGROUND -->
+      <div class="video-bg-container">
+        <!-- ВІДЕО ФОН ДЛЯ СЕГМЕНТУ ІНДИВІДУАЛЬНОГО ДРУКУ:
+        <video autoplay loop muted playsinline>
+          <source src="videos/custom-bg.mp4" type="video/mp4">
+        </video>
+        -->
+      </div>
+      <div class="segment-overlay"></div>
+
+      <div class="segment-content-wrap">
+        <!-- Top Title Block -->
+        <div class="segment-header-block">
+          <span class="segment-tag tag-custom">СЕГМЕНТ 05 // ІНДИВІДУАЛЬНИЙ ДРУК</span>
+          <h2 class="segment-title">Друк одиничних виробів під конкретне замовлення</h2>
+          <p class="segment-description">
+            Втілюємо особисті ідеї та нестандартні запити без мінімальної партії: від подарунків та реквізиту до заміни втраченої деталі за фото чи ескізом.
+          </p>
+        </div>
+
+        <!-- Full-width Visual Preview -->
+        <div class="segment-main-grid segment-main-grid--single">
+          <div class="segment-right-col">
+            <div class="visual-preview-box">
+              <div class="preview-header">
+                <h3>Персональний сервіс</h3>
+                <span class="video-hint-pill">[ФОН: ІНДИВІДУАЛЬНИЙ ДРУК ВІДЕО]</span>
+              </div>
+              <ul class="feature-item-list">
+                <li>
+                  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <div class="feature-text-block">
+                    <strong>Друк від 1 одиниці без мінімальної партії:</strong> подарунки, реквізит, косплей-деталі та колекційні одиничні вироби.
+                  </div>
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <div class="feature-text-block">
+                    <strong>Консультація інженера-конструктора:</strong> допомога з доопрацюванням моделі, вибором матеріалу та товщини стінок під ваше завдання.
+                  </div>
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <div class="feature-text-block">
+                    <strong>Відновлення деталей за фото чи зразком:</strong> 3D-сканування або ручне моделювання втраченої чи зламаної частини.
+                  </div>
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <div class="feature-text-block">
+                    <strong>Персональні хобі-проєкти:</strong> деталі для RC-моделей, настільних ігор, авторських гаджетів та DIY-конструкцій.
+                  </div>
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <div class="feature-text-block">
+                    <strong>Швидке узгодження та невеликі тиражі:</strong> прозорий розрахунок вартості одного виробу вже за кілька годин.
+                  </div>
+                </li>
+              </ul>
+              <div class="segment-actions">
+                <button class="btn-segment btn-custom" onclick="openLeadModal('Індивідуальне замовлення')">Замовити індивідуальний друк</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
   <!-- ==========================================================================
@@ -1506,6 +1609,7 @@
             <li><a href="#parts">Запчастини</a></li>
             <li><a href="#decor">Декор та дизайн</a></li>
             <li><a href="#branding">Брендинг & HoReCa</a></li>
+            <li><a href="#custom">Індивідуальний друк</a></li>
           </ul>
         </div>
 
@@ -1564,6 +1668,7 @@
           <a href="#parts">Запчастини</a>
           <a href="#decor">Декор</a>
           <a href="#branding">Брендинг</a>
+          <a href="#custom">Індивідуальний друк</a>
         </div>
       </div>
     </div>
@@ -1594,6 +1699,7 @@
             <option value="parts">Запчастини та шестерні</option>
             <option value="decor">Декор та фігурки</option>
             <option value="branding">Брендинг для HoReCa</option>
+            <option value="custom">Індивідуальний друк</option>
             <option value="general">Консультація / Безкоштовний тест</option>
           </select>
         </div>
