@@ -28,30 +28,30 @@
       --border-color: #262c3a;
 
       /* Segment Theme Colors */
-      --color-miltech-bg: #0f1c14;
-      --color-miltech-accent: #2e573a;
-      --color-miltech-tag: #1c3624;
-      --color-miltech-text: #6ee7b7;
+      --color-miltech-bg: #1e0b0b;
+      --color-miltech-accent: #7f1d1d;
+      --color-miltech-tag: #450a0a;
+      --color-miltech-text: #fca5a5;
 
       --color-parts-bg: #1d1208;
       --color-parts-accent: #d97706;
       --color-parts-tag: #452203;
       --color-parts-text: #fbbf24;
 
-      --color-decor-bg: #0a1526;
-      --color-decor-accent: #2563eb;
-      --color-decor-tag: #0f2b5c;
-      --color-decor-text: #60a5fa;
+      --color-decor-bg: #0a1f14;
+      --color-decor-accent: #16a34a;
+      --color-decor-tag: #052e1c;
+      --color-decor-text: #4ade80;
 
       --color-branding-bg: #170d24;
       --color-branding-accent: #7e22ce;
       --color-branding-tag: #3b1560;
       --color-branding-text: #c084fc;
 
-      --color-custom-bg: #0a1a1a;
-      --color-custom-accent: #0d9488;
-      --color-custom-tag: #134e4a;
-      --color-custom-text: #5eead4;
+      --color-custom-bg: #0a1526;
+      --color-custom-accent: #2563eb;
+      --color-custom-tag: #0f2b5c;
+      --color-custom-text: #60a5fa;
 
       --radius: 4px;
       --font-heading: 'Unbounded', sans-serif;
@@ -64,8 +64,6 @@
       background-color: var(--bg-dark);
       color: var(--text-main);
       font-family: var(--font-body);
-      /* SNAP SCROLL */
-      scroll-snap-type: y proximity;
     }
 
     body {
@@ -116,12 +114,13 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 1rem;
+      gap: 1.5rem;
+      padding: 0.55rem 0.6rem 0.55rem 1.6rem;
     }
 
     .header-block {
       border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      border: 3px solid rgba(255, 255, 255, 0.12);
       box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.08);
       position: relative;
       z-index: 0;
@@ -136,19 +135,12 @@
       border-radius: inherit;
       pointer-events: none;
       background: rgba(255, 255, 255, 0.08);
-      backdrop-filter: blur(15px);
-      -webkit-backdrop-filter: blur(15px);
     }
 
-    .header-block-nav {
+    .header-left {
       display: flex;
       align-items: center;
       gap: 2rem;
-      padding: 0.55rem 1.5rem;
-    }
-
-    .header-block-cta {
-      padding: 4px;
       flex-shrink: 0;
     }
 
@@ -200,11 +192,11 @@
     .nav-branding a { color: var(--color-branding-text); }
     .nav-custom a { color: var(--color-custom-text); }
 
-    .nav-miltech a:hover, .nav-miltech a.active { background: rgba(110, 231, 183, 0.12); }
+    .nav-miltech a:hover, .nav-miltech a.active { background: rgba(252, 165, 165, 0.12); }
     .nav-parts a:hover, .nav-parts a.active { background: rgba(251, 191, 36, 0.12); }
-    .nav-decor a:hover, .nav-decor a.active { background: rgba(96, 165, 250, 0.12); }
+    .nav-decor a:hover, .nav-decor a.active { background: rgba(74, 222, 128, 0.12); }
     .nav-branding a:hover, .nav-branding a.active { background: rgba(192, 132, 252, 0.12); }
-    .nav-custom a:hover, .nav-custom a.active { background: rgba(94, 234, 212, 0.12); }
+    .nav-custom a:hover, .nav-custom a.active { background: rgba(96, 165, 250, 0.12); }
 
     .header-actions {
       display: flex;
@@ -218,39 +210,21 @@
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.04em;
-      background: transparent;
+      background: rgba(37, 99, 235, 0.4);
       color: #fff;
       padding: 10px 20px;
       border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.28);
-      /* glow removed — inset highlight only */
+      border: 3px solid rgba(255, 255, 255, 0.28);
       box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35);
       cursor: pointer;
       white-space: nowrap;
       transition: background 0.2s ease, box-shadow 0.2s ease;
-      position: relative;
-      z-index: 0;
-      isolation: isolate;
-    }
-
-    .btn-cta::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      z-index: -1;
-      border-radius: inherit;
-      pointer-events: none;
-      background: rgba(37, 99, 235, 0.14);
-      backdrop-filter: blur(15px);
-      -webkit-backdrop-filter: blur(15px);
+      flex-shrink: 0;
     }
 
     .btn-cta:hover {
+      background: rgba(37, 99, 235, 0.6);
       box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4);
-    }
-
-    .btn-cta:hover::after {
-      background: rgba(37, 99, 235, 0.24);
     }
 
     /* ==========================================================================
@@ -267,7 +241,31 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      scroll-snap-align: start;
+      position: relative;
+    }
+
+    .hero-video-bg {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100vw;
+      height: 100%;
+      z-index: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .hero-video-bg video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero-header,
+    .dashboard-ticker {
+      position: relative;
+      z-index: 1;
     }
 
     .hero-header {
@@ -293,55 +291,17 @@
     .hero-subtitle-full {
       font-size: 1.05rem;
       color: var(--text-muted);
-      max-width: 700px;
+      max-width: 100%;
       width: 100%;
     }
 
-    .live-status-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      background: transparent;
-      border: 1px solid rgba(52, 211, 153, 0.35);
-      padding: 8px 16px;
-      border-radius: var(--radius);
-      font-family: var(--font-mono);
-      font-size: 0.85rem;
-      color: #34d399;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
-      position: relative;
-      z-index: 0;
-      isolation: isolate;
-    }
-
-    .live-status-pill::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      z-index: -1;
-      border-radius: inherit;
-      pointer-events: none;
-      background: rgba(16, 185, 129, 0.13);
-      backdrop-filter: blur(15px);
-      -webkit-backdrop-filter: blur(15px);
-    }
-
-    .indicator-square {
-      width: 8px;
-      height: 8px;
-      background-color: #10b981;
-      border-radius: 2px;
-      display: inline-block;
-    }
-
-    /* Dashboard as an infinite vertical "drum" ticker */
+    /* Dashboard as an infinite vertical "drum" ticker, centered, wide + slim cards */
     .dashboard-ticker {
-      position: relative;
+      width: 60%;
+      min-width: 420px;
+      margin: 0 auto;
       height: 420px;
       overflow: hidden;
-      border-radius: var(--radius);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.08);
       -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 8%, black 92%, transparent 100%);
       mask-image: linear-gradient(to bottom, transparent 0%, black 8%, black 92%, transparent 100%);
     }
@@ -349,6 +309,7 @@
     .dashboard-track {
       display: flex;
       flex-direction: column;
+      gap: 12px;
       animation: dashboardScroll 26s linear infinite;
     }
 
@@ -362,12 +323,32 @@
     }
 
     .dashboard-row {
-      display: grid;
-      grid-template-columns: 40px 150px 200px 1fr;
+      display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 1.5rem;
-      padding: 1.15rem 1.7rem;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      justify-content: center;
+      text-align: center;
+      gap: 0.5rem;
+      padding: 1rem 1.7rem;
+      border: 3px solid rgba(255, 255, 255, 0.12);
+      border-radius: var(--radius);
+      background: transparent;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      position: relative;
+      z-index: 0;
+      isolation: isolate;
+    }
+
+    .dashboard-row::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      border-radius: inherit;
+      pointer-events: none;
+      background: rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(10px) saturate(140%);
+      -webkit-backdrop-filter: blur(10px) saturate(140%);
     }
 
     .row-icon {
@@ -377,33 +358,11 @@
       justify-content: center;
     }
 
-    .row-slot {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      color: var(--text-dim);
-      white-space: nowrap;
-    }
-
-    .row-number {
-      font-family: var(--font-heading);
-      font-weight: 800;
-      font-size: 1.6rem;
-      color: #ffffff;
-      display: flex;
-      align-items: baseline;
-      gap: 6px;
-      white-space: nowrap;
-    }
-
-    .row-number .unit {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      font-weight: 500;
-    }
-
     .row-text {
       display: flex;
       flex-direction: column;
+      align-items: center;
+      text-align: center;
       gap: 2px;
       min-width: 0;
     }
@@ -431,7 +390,6 @@
       align-items: center;
       padding: 90px 0;
       border-top: 1px solid var(--border-color);
-      scroll-snap-align: start;
     }
 
     .video-bg-container {
@@ -481,7 +439,8 @@
       display: flex;
       flex-direction: column;
       gap: 0.75rem;
-      max-width: 850px;
+      max-width: 720px;
+      width: 100%;
     }
 
     .segment-title {
@@ -496,23 +455,31 @@
       font-size: 1.05rem;
       color: var(--text-muted);
       line-height: 1.6;
+      max-width: 100%;
     }
 
-    /* Title & description tinted to each segment's accent color */
-    .segment-miltech .segment-title { color: var(--color-miltech-text); }
-    .segment-miltech .segment-description { color: var(--color-miltech-text); opacity: 0.8; }
+    /* Title & description match the segment's button (accent) color */
+    .segment-miltech .segment-title { color: var(--color-miltech-accent); }
+    .segment-miltech .segment-description { color: var(--color-miltech-accent); opacity: 0.85; }
 
-    .segment-parts .segment-title { color: var(--color-parts-text); }
-    .segment-parts .segment-description { color: var(--color-parts-text); opacity: 0.8; }
+    .segment-parts .segment-title { color: var(--color-parts-accent); }
+    .segment-parts .segment-description { color: var(--color-parts-accent); opacity: 0.85; }
 
-    .segment-decor .segment-title { color: var(--color-decor-text); }
-    .segment-decor .segment-description { color: var(--color-decor-text); opacity: 0.8; }
+    .segment-decor .segment-title { color: var(--color-decor-accent); }
+    .segment-decor .segment-description { color: var(--color-decor-accent); opacity: 0.85; }
 
-    .segment-branding .segment-title { color: var(--color-branding-text); }
-    .segment-branding .segment-description { color: var(--color-branding-text); opacity: 0.8; }
+    .segment-branding .segment-title { color: var(--color-branding-accent); }
+    .segment-branding .segment-description { color: var(--color-branding-accent); opacity: 0.85; }
 
-    .segment-custom .segment-title { color: var(--color-custom-text); }
-    .segment-custom .segment-description { color: var(--color-custom-text); opacity: 0.8; }
+    .segment-custom .segment-title { color: var(--color-custom-accent); }
+    .segment-custom .segment-description { color: var(--color-custom-accent); opacity: 0.85; }
+
+    /* Заголовки этих секций смещены к правому краю */
+    .segment-parts .segment-header-block,
+    .segment-branding .segment-header-block {
+      align-self: flex-end;
+      text-align: right;
+    }
 
     .segment-main-grid {
       display: flex;
@@ -556,20 +523,20 @@
       transition: background 0.2s ease;
     }
 
-    .btn-miltech { background: var(--color-miltech-accent); color: #fff; border-color: #3e734e; }
-    .btn-miltech:hover { background: #3b6e4a; }
+    .btn-miltech { background: var(--color-miltech-accent); color: #fff; border-color: #b91c1c; }
+    .btn-miltech:hover { background: #991b1b; }
 
     .btn-parts { background: var(--color-parts-accent); color: #fff; border-color: #f59e0b; }
     .btn-parts:hover { background: #b45309; }
 
-    .btn-decor { background: var(--color-decor-accent); color: #fff; border-color: #3b82f6; }
-    .btn-decor:hover { background: #1d4ed8; }
+    .btn-decor { background: var(--color-decor-accent); color: #fff; border-color: #22c55e; }
+    .btn-decor:hover { background: #15803d; }
 
     .btn-branding { background: var(--color-branding-accent); color: #fff; border-color: #a855f7; }
     .btn-branding:hover { background: #6b21a8; }
 
-    .btn-custom { background: var(--color-custom-accent); color: #fff; border-color: #14b8a6; }
-    .btn-custom:hover { background: #0f766e; }
+    .btn-custom { background: var(--color-custom-accent); color: #fff; border-color: #3b82f6; }
+    .btn-custom:hover { background: #1d4ed8; }
 
     .segment-right-col {
       display: flex;
@@ -580,7 +547,7 @@
 
     .visual-preview-box {
       background: transparent;
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      border: 3px solid rgba(255, 255, 255, 0.12);
       border-radius: var(--radius);
       padding: 1.6rem 1.8rem;
       height: 100%;
@@ -602,8 +569,6 @@
       border-radius: inherit;
       pointer-events: none;
       background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(15px);
-      -webkit-backdrop-filter: blur(15px);
     }
 
     .preview-header {
@@ -619,31 +584,6 @@
       font-size: 1.05rem;
       font-weight: 700;
       color: #fff;
-    }
-
-    .video-hint-pill {
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      padding: 4px 8px;
-      border-radius: var(--radius);
-      background: transparent;
-      color: var(--text-muted);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      position: relative;
-      z-index: 0;
-      isolation: isolate;
-    }
-
-    .video-hint-pill::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      z-index: -1;
-      border-radius: inherit;
-      pointer-events: none;
-      background: rgba(255, 255, 255, 0.12);
-      backdrop-filter: blur(15px);
-      -webkit-backdrop-filter: blur(15px);
     }
 
     .feature-item-list {
@@ -707,7 +647,7 @@
       padding: 5px 9px;
       border-radius: var(--radius);
       background: transparent;
-      border: 1px solid rgba(255, 255, 255, 0.15);
+      border: 3px solid rgba(255, 255, 255, 0.15);
       color: #d1d5db;
       position: relative;
       z-index: 0;
@@ -722,66 +662,56 @@
       border-radius: inherit;
       pointer-events: none;
       background: rgba(255, 255, 255, 0.12);
-      backdrop-filter: blur(15px);
-      -webkit-backdrop-filter: blur(15px);
+      backdrop-filter: blur(10px) saturate(140%);
+      -webkit-backdrop-filter: blur(10px) saturate(140%);
     }
 
     /* ==========================================================================
        ОТТЕНОК СТЕКЛА ПОД ЦВЕТ КАЖДОГО СЕГМЕНТА
        ========================================================================== */
     .segment-miltech .visual-preview-box::after,
-    .segment-miltech .video-hint-pill::after,
     .segment-miltech .spec-badge::after {
-      background: rgba(16, 185, 129, 0.13);
+      background: rgba(239, 68, 68, 0.14);
     }
     .segment-miltech .visual-preview-box,
-    .segment-miltech .video-hint-pill,
     .segment-miltech .spec-badge {
-      border-color: rgba(110, 231, 183, 0.25);
+      border-color: rgba(252, 165, 165, 0.28);
     }
 
     .segment-parts .visual-preview-box::after,
-    .segment-parts .video-hint-pill::after,
     .segment-parts .spec-badge::after {
       background: rgba(245, 158, 11, 0.13);
     }
     .segment-parts .visual-preview-box,
-    .segment-parts .video-hint-pill,
     .segment-parts .spec-badge {
       border-color: rgba(251, 191, 36, 0.28);
     }
 
     .segment-decor .visual-preview-box::after,
-    .segment-decor .video-hint-pill::after,
     .segment-decor .spec-badge::after {
-      background: rgba(59, 130, 246, 0.13);
+      background: rgba(34, 197, 94, 0.13);
     }
     .segment-decor .visual-preview-box,
-    .segment-decor .video-hint-pill,
     .segment-decor .spec-badge {
-      border-color: rgba(96, 165, 250, 0.28);
+      border-color: rgba(74, 222, 128, 0.28);
     }
 
     .segment-branding .visual-preview-box::after,
-    .segment-branding .video-hint-pill::after,
     .segment-branding .spec-badge::after {
       background: rgba(168, 85, 247, 0.14);
     }
     .segment-branding .visual-preview-box,
-    .segment-branding .video-hint-pill,
     .segment-branding .spec-badge {
       border-color: rgba(192, 132, 252, 0.28);
     }
 
     .segment-custom .visual-preview-box::after,
-    .segment-custom .video-hint-pill::after,
     .segment-custom .spec-badge::after {
-      background: rgba(20, 184, 166, 0.13);
+      background: rgba(37, 99, 235, 0.13);
     }
     .segment-custom .visual-preview-box,
-    .segment-custom .video-hint-pill,
     .segment-custom .spec-badge {
-      border-color: rgba(94, 234, 212, 0.28);
+      border-color: rgba(96, 165, 250, 0.28);
     }
 
     /* ==========================================================================
@@ -974,12 +904,13 @@
   </style>
 </head>
 <body>
+
   <!-- ==========================================================================
        HEADER & NAVIGATION (two floating blocks)
        ========================================================================== -->
   <header class="header" id="mainHeader">
-    <div class="header-container">
-      <div class="header-block header-block-nav">
+    <div class="header-container header-block">
+      <div class="header-left">
         <a href="#hero" class="brand-mark" aria-label="Головна">
           <svg viewBox="0 0 24 24">
             <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
@@ -1001,9 +932,7 @@
         </nav>
       </div>
 
-      <div class="header-block header-block-cta">
-        <button class="btn-cta" onclick="openLeadModal('Загальний розрахунок')">Розрахувати друк</button>
-      </div>
+      <button class="btn-cta" onclick="openLeadModal('Загальний розрахунок')">Розрахувати друк</button>
     </div>
   </header>
 
@@ -1011,17 +940,19 @@
     <!-- ==========================================================================
          HERO SECTION / ABOUT / DASHBOARD TICKER
          ========================================================================== -->
-    <section class="hero-section" id="hero">
+    <section class="hero-section snap-section" id="hero">
+      <div class="hero-video-bg">
+        <video autoplay loop muted playsinline crossorigin="anonymous">
+          <source src="https://raw.githubusercontent.com/CakeBoxDeveloper/3dlanding/main/Printers_printing_parts_asynchro%E2%80%A6_202608310148.mp4" type="video/mp4">
+        </video>
+      </div>
+
       <div class="hero-header">
-        <div class="live-status-pill">
-          <span class="indicator-square"></span>
-          <span id="liveStatusText">ФАБРИКА АКТИВНА: 218/220 В РОБОТІ</span>
-        </div>
         <h1 class="hero-title-full">ПРОМИСЛОВИЙ ТА СЕРІЙНИЙ 3D-ДРУК В УКРАЇНІ</h1>
         <p class="hero-subtitle-full">Високоточне виробництво повного циклу: від швидкого прототипування до масштабних серій за 24 години.</p>
       </div>
 
-      <!-- Infinite vertical "drum" ticker (row list duplicated ×2 for seamless loop) -->
+      <!-- Infinite vertical "drum" ticker of advantages (row list duplicated ×2 for seamless loop) -->
       <div class="dashboard-ticker">
         <div class="dashboard-track">
 
@@ -1034,11 +965,9 @@
                 <rect x="6" y="14" width="12" height="8"></rect>
               </svg>
             </div>
-            <span class="row-slot">SLOT 01 // FLEET</span>
-            <div class="row-number"><span class="js-fleet-value">218</span><span class="unit">/ 220 принтерів</span></div>
             <div class="row-text">
-              <span class="row-title">Потужний парк обладнання</span>
-              <span class="row-desc">FDM, SLA та SLS промислові комплекси з робочими зонами до 500×500×600 мм.</span>
+              <span class="row-title">Власний парк 220 принтерів</span>
+              <span class="row-desc">Потужностей вистачає навіть на термінові замовлення без черг.</span>
             </div>
           </div>
 
@@ -1049,11 +978,9 @@
                 <polyline points="12 6 12 12 16 14"></polyline>
               </svg>
             </div>
-            <span class="row-slot">SLOT 02 // UPTIME</span>
-            <div class="row-number"><span>24/7</span><span class="unit">безперервно</span></div>
             <div class="row-text">
               <span class="row-title">Цілодобове виробництво</span>
-              <span class="row-desc">Працюємо позмінно без вихідних для виконання термінових критичних замовлень.</span>
+              <span class="row-desc">Приймаємо та друкуємо замовлення 24/7, без вихідних.</span>
             </div>
           </div>
 
@@ -1067,11 +994,9 @@
                 <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path>
               </svg>
             </div>
-            <span class="row-slot">SLOT 03 // TEST</span>
-            <div class="row-number"><span>0</span><span class="unit">грн тест</span></div>
             <div class="row-text">
-              <span class="row-title">Безкоштовний зразок</span>
-              <span class="row-desc">Друкуємо тестовий прототип перед запуском оптової партії для перевірки геометрії.</span>
+              <span class="row-title">Безкоштовний тестовий зразок</span>
+              <span class="row-desc">Перевіряємо геометрію перед запуском повної партії.</span>
             </div>
           </div>
 
@@ -1081,11 +1006,9 @@
                 <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
               </svg>
             </div>
-            <span class="row-slot">SLOT 04 // SPEED</span>
-            <div class="row-number"><span>від 2</span><span class="unit">годин</span></div>
             <div class="row-text">
-              <span class="row-title">Експрес-друк</span>
-              <span class="row-desc">Запуск у роботу через 15 хвилин після погодження 3D-моделі чи креслення.</span>
+              <span class="row-title">Запуск за 15 хвилин</span>
+              <span class="row-desc">Починаємо друк одразу після узгодження моделі.</span>
             </div>
           </div>
 
@@ -1099,11 +1022,9 @@
                 <line x1="12" y1="22" x2="12" y2="18"></line>
               </svg>
             </div>
-            <span class="row-slot">SLOT 05 // PRECISION</span>
-            <div class="row-number"><span>±0.02</span><span class="unit">мм</span></div>
             <div class="row-text">
-              <span class="row-title">Прецизійна точність</span>
-              <span class="row-desc">Ідеальна посадка під підшипники, різьби та складні рухомі вузли.</span>
+              <span class="row-title">Точність ±0.02 мм</span>
+              <span class="row-desc">Ідеальна посадка для складних рухомих вузлів.</span>
             </div>
           </div>
 
@@ -1115,11 +1036,9 @@
                 <polyline points="2 12 12 17 22 12"></polyline>
               </svg>
             </div>
-            <span class="row-slot">SLOT 06 // MATERIALS</span>
-            <div class="row-number"><span>35+</span><span class="unit">полімерів</span></div>
             <div class="row-text">
-              <span class="row-title">Широкий спектр матеріалів</span>
-              <span class="row-desc">Nylon CF/GF, Polycarbonate, TPU, ABS, PLA, PETG, високоміцні інженерні смоли.</span>
+              <span class="row-title">35+ інженерних матеріалів</span>
+              <span class="row-desc">Nylon CF/GF, Polycarbonate, TPU та інші полімери.</span>
             </div>
           </div>
 
@@ -1132,11 +1051,9 @@
                 <rect x="6" y="14" width="12" height="8"></rect>
               </svg>
             </div>
-            <span class="row-slot">SLOT 01 // FLEET</span>
-            <div class="row-number"><span class="js-fleet-value">218</span><span class="unit">/ 220 принтерів</span></div>
             <div class="row-text">
-              <span class="row-title">Потужний парк обладнання</span>
-              <span class="row-desc">FDM, SLA та SLS промислові комплекси з робочими зонами до 500×500×600 мм.</span>
+              <span class="row-title">Власний парк 220 принтерів</span>
+              <span class="row-desc">Потужностей вистачає навіть на термінові замовлення без черг.</span>
             </div>
           </div>
 
@@ -1147,11 +1064,9 @@
                 <polyline points="12 6 12 12 16 14"></polyline>
               </svg>
             </div>
-            <span class="row-slot">SLOT 02 // UPTIME</span>
-            <div class="row-number"><span>24/7</span><span class="unit">безперервно</span></div>
             <div class="row-text">
               <span class="row-title">Цілодобове виробництво</span>
-              <span class="row-desc">Працюємо позмінно без вихідних для виконання термінових критичних замовлень.</span>
+              <span class="row-desc">Приймаємо та друкуємо замовлення 24/7, без вихідних.</span>
             </div>
           </div>
 
@@ -1165,11 +1080,9 @@
                 <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path>
               </svg>
             </div>
-            <span class="row-slot">SLOT 03 // TEST</span>
-            <div class="row-number"><span>0</span><span class="unit">грн тест</span></div>
             <div class="row-text">
-              <span class="row-title">Безкоштовний зразок</span>
-              <span class="row-desc">Друкуємо тестовий прототип перед запуском оптової партії для перевірки геометрії.</span>
+              <span class="row-title">Безкоштовний тестовий зразок</span>
+              <span class="row-desc">Перевіряємо геометрію перед запуском повної партії.</span>
             </div>
           </div>
 
@@ -1179,11 +1092,9 @@
                 <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
               </svg>
             </div>
-            <span class="row-slot">SLOT 04 // SPEED</span>
-            <div class="row-number"><span>від 2</span><span class="unit">годин</span></div>
             <div class="row-text">
-              <span class="row-title">Експрес-друк</span>
-              <span class="row-desc">Запуск у роботу через 15 хвилин після погодження 3D-моделі чи креслення.</span>
+              <span class="row-title">Запуск за 15 хвилин</span>
+              <span class="row-desc">Починаємо друк одразу після узгодження моделі.</span>
             </div>
           </div>
 
@@ -1197,11 +1108,9 @@
                 <line x1="12" y1="22" x2="12" y2="18"></line>
               </svg>
             </div>
-            <span class="row-slot">SLOT 05 // PRECISION</span>
-            <div class="row-number"><span>±0.02</span><span class="unit">мм</span></div>
             <div class="row-text">
-              <span class="row-title">Прецизійна точність</span>
-              <span class="row-desc">Ідеальна посадка під підшипники, різьби та складні рухомі вузли.</span>
+              <span class="row-title">Точність ±0.02 мм</span>
+              <span class="row-desc">Ідеальна посадка для складних рухомих вузлів.</span>
             </div>
           </div>
 
@@ -1213,11 +1122,9 @@
                 <polyline points="2 12 12 17 22 12"></polyline>
               </svg>
             </div>
-            <span class="row-slot">SLOT 06 // MATERIALS</span>
-            <div class="row-number"><span>35+</span><span class="unit">полімерів</span></div>
             <div class="row-text">
-              <span class="row-title">Широкий спектр матеріалів</span>
-              <span class="row-desc">Nylon CF/GF, Polycarbonate, TPU, ABS, PLA, PETG, високоміцні інженерні смоли.</span>
+              <span class="row-title">35+ інженерних матеріалів</span>
+              <span class="row-desc">Nylon CF/GF, Polycarbonate, TPU та інші полімери.</span>
             </div>
           </div>
 
@@ -1228,9 +1135,9 @@
     <!-- ==========================================================================
          SEGMENT 1: MILTECH
          ========================================================================== -->
-    <section class="segment-section segment-miltech" id="miltech">
+    <section class="segment-section segment-miltech snap-section" id="miltech">
       <div class="video-bg-container">
-        <video autoplay loop muted playsinline>
+        <video autoplay loop muted playsinline crossorigin="anonymous">
           <source src="https://raw.githubusercontent.com/CakeBoxDeveloper/3dlanding/main/%D0%94%D1%80%D0%BE%D0%BD_%D0%BB%D0%B5%D1%82%D0%B8%D1%82_%D0%BD%D0%B0_%D0%BC%D0%B5%D1%81%D1%82%D0%B5_202608302242.mp4" type="video/mp4">
         </video>
       </div>
@@ -1238,9 +1145,9 @@
 
       <div class="segment-content-wrap">
         <div class="segment-header-block">
-          <h2 class="segment-title">Оборонні та тактичні рішення підвищеної надійності</h2>
+          <h2 class="segment-title">Miltech та Deftech</h2>
           <p class="segment-description">
-            Спеціалізований друк виробів тактичного та військового призначення. Виготовляємо деталі, які витримують екстремальні механічні навантаження, перепади температур та польові умови.
+            Друк деталей, що витримують удари, вологу та екстремальні температури.
           </p>
         </div>
 
@@ -1249,7 +1156,6 @@
             <div class="visual-preview-box">
               <div class="preview-header">
                 <h3>Тактичні характеристики</h3>
-                <span class="video-hint-pill">LIVE FEED</span>
               </div>
               <ul class="feature-item-list">
                 <li>
@@ -1295,9 +1201,9 @@
     <!-- ==========================================================================
          SEGMENT 2: ЗАПЧАСТИНИ ТА МЕХАНІЗМИ
          ========================================================================== -->
-    <section class="segment-section segment-parts" id="parts">
+    <section class="segment-section segment-parts snap-section" id="parts">
       <div class="video-bg-container">
-        <video autoplay loop muted playsinline>
+        <video autoplay loop muted playsinline crossorigin="anonymous">
           <source src="https://raw.githubusercontent.com/CakeBoxDeveloper/3dlanding/main/%D0%B4%D0%B5%D1%82%D0%B0%D0%BB%D0%B8_%D0%B4%D0%B2%D0%B8%D0%B3%D0%B0%D1%82%D0%B5%D0%BB%D1%8F_%D0%B2%D0%B8%D0%B1%D1%80%D0%B8%D1%80%D1%83%D1%8E%D1%82_202608302358.mp4" type="video/mp4">
         </video>
       </div>
@@ -1305,9 +1211,9 @@
 
       <div class="segment-content-wrap">
         <div class="segment-header-block">
-          <h2 class="segment-title">Шестерні, запчастини та промислові компоненти</h2>
+          <h2 class="segment-title">Запчастини</h2>
           <p class="segment-description">
-            Виготовлення аналогів імпортних деталей, знятих з виробництва запчастин та високонавантажених вузлів для обладнання, автомобілів та спецтехніки.
+            Аналоги дефіцитних запчастин з точністю до 0.02 мм.
           </p>
         </div>
 
@@ -1316,7 +1222,6 @@
             <div class="visual-preview-box">
               <div class="preview-header">
                 <h3>Інженерні можливості</h3>
-                <span class="video-hint-pill">LIVE FEED</span>
               </div>
               <ul class="feature-item-list">
                 <li>
@@ -1362,19 +1267,19 @@
     <!-- ==========================================================================
          SEGMENT 3: ДЕКОР ТА ФІГУРКИ
          ========================================================================== -->
-    <section class="segment-section segment-decor" id="decor">
+    <section class="segment-section segment-decor snap-section" id="decor">
       <div class="video-bg-container">
-        <video autoplay loop muted playsinline>
-          <source src="https://raw.githubusercontent.com/CakeBoxDeveloper/3dlanding/main/%D1%84%D1%96%D0%B3%D1%83%D1%80%D0%BA%D0%B8_%D0%B4%D0%B5%D0%BB%D0%B0%D1%8E%D1%82_idle-%D0%B0%D0%BD%D1%96%D0%BC%D0%B0%D1%86%D1%96%D1%8E_202608310008.mp4" type="video/mp4">
+        <video autoplay loop muted playsinline crossorigin="anonymous">
+          <source src="https://raw.githubusercontent.com/CakeBoxDeveloper/3dlanding/main/%D1%84%D0%B8%D0%B3%D1%83%D1%80%D0%BA%D0%B8_%D0%B4%D0%B5%D0%BB%D0%B0%D1%8E%D1%82_idle-%D0%B0%D0%BD%D0%B8%D0%BC%D0%B0%D1%86%D0%B8%D1%8E_202608310008.mp4" type="video/mp4">
         </video>
       </div>
       <div class="segment-overlay"></div>
 
       <div class="segment-content-wrap">
         <div class="segment-header-block">
-          <h2 class="segment-title">Лампи, фігурки, сувеніри та інтер'єрні арт-об'єкти</h2>
+          <h2 class="segment-title">Декор</h2>
           <p class="segment-description">
-            Втілюємо естетичні концепції: від стильних параметричних світильників та скульптур до деталізованих колекційних мініатюр і сувенірів.
+            Від параметричного декору до колекційних мініатюр.
           </p>
         </div>
 
@@ -1383,7 +1288,6 @@
             <div class="visual-preview-box">
               <div class="preview-header">
                 <h3>Асортимент декору</h3>
-                <span class="video-hint-pill">LIVE FEED</span>
               </div>
               <ul class="feature-item-list">
                 <li>
@@ -1429,9 +1333,9 @@
     <!-- ==========================================================================
          SEGMENT 4: БРЕНДИНГ ТА АЙДЕНТИКА ДЛЯ HORECA
          ========================================================================== -->
-    <section class="segment-section segment-branding" id="branding">
+    <section class="segment-section segment-branding snap-section" id="branding">
       <div class="video-bg-container">
-        <video autoplay loop muted playsinline>
+        <video autoplay loop muted playsinline crossorigin="anonymous">
           <source src="https://raw.githubusercontent.com/CakeBoxDeveloper/3dlanding/main/Rain_falling%2C_sign_glowing_202608310028.mp4" type="video/mp4">
         </video>
       </div>
@@ -1439,9 +1343,9 @@
 
       <div class="segment-content-wrap">
         <div class="segment-header-block">
-          <h2 class="segment-title">Айдентика, вивіски та брендинг для закладів</h2>
+          <h2 class="segment-title">Фірмовий стиль</h2>
           <p class="segment-description">
-            Створюємо фірмовий стиль для кафе, барів, ресторанів та готелів. Індивідуальні QR-підставки, об'ємні вивіски, номерки та фірмові аксесуари.
+            Брендовані аксесуари й вивіски для кафе та ресторанів.
           </p>
         </div>
 
@@ -1450,7 +1354,6 @@
             <div class="visual-preview-box">
               <div class="preview-header">
                 <h3>Рішення для HoReCa</h3>
-                <span class="video-hint-pill">LIVE FEED</span>
               </div>
               <ul class="feature-item-list">
                 <li>
@@ -1496,21 +1399,19 @@
     <!-- ==========================================================================
          SEGMENT 5: ІНДИВІДУАЛЬНИЙ ДРУК
          ========================================================================== -->
-    <section class="segment-section segment-custom" id="custom">
+    <section class="segment-section segment-custom snap-section" id="custom">
       <div class="video-bg-container">
-        <!-- ВІДЕО ФОН ДЛЯ СЕГМЕНТУ ІНДИВІДУАЛЬНОГО ДРУКУ:
-        <video autoplay loop muted playsinline>
-          <source src="videos/custom-bg.mp4" type="video/mp4">
+        <video autoplay loop muted playsinline crossorigin="anonymous">
+          <source src="https://raw.githubusercontent.com/CakeBoxDeveloper/3dlanding/main/Painted_lightbulb_turns_on_202608310452.mp4" type="video/mp4">
         </video>
-        -->
       </div>
       <div class="segment-overlay"></div>
 
       <div class="segment-content-wrap">
         <div class="segment-header-block">
-          <h2 class="segment-title">Друк одиничних виробів під конкретне замовлення</h2>
+          <h2 class="segment-title">На замовлення</h2>
           <p class="segment-description">
-            Втілюємо особисті ідеї та нестандартні запити без мінімальної партії: від подарунків та реквізиту до заміни втраченої деталі за фото чи ескізом.
+            Втілимо вашу ідею — від одного виробу до дрібної серії.
           </p>
         </div>
 
@@ -1519,7 +1420,6 @@
             <div class="visual-preview-box">
               <div class="preview-header">
                 <h3>Персональний сервіс</h3>
-                <span class="video-hint-pill">[ФОН: ІНДИВІДУАЛЬНИЙ ДРУК ВІДЕО]</span>
               </div>
               <ul class="feature-item-list">
                 <li>
@@ -1566,7 +1466,7 @@
   <!-- ==========================================================================
        FOOTER
        ========================================================================== -->
-  <footer class="footer" id="contacts">
+  <footer class="footer snap-section" id="contacts">
     <div class="footer-container">
       <div class="footer-top-grid">
         <div class="footer-brand-col">
@@ -1691,27 +1591,9 @@
   </div>
 
   <!-- ==========================================================================
-       SCRIPTS: LIVE PRINTER COUNTER, NAVIGATION, MODAL
+       SCRIPTS: SNAP SCROLL (SLOWED ×2, WITH PEAK-THEN-FADE BLUR), NAVIGATION, MODAL
        ========================================================================== -->
   <script>
-    let activePrinters = 218;
-    const statusTextEl = document.getElementById('liveStatusText');
-    const fleetValueEls = document.querySelectorAll('.js-fleet-value');
-
-    function updatePrinterCount() {
-      const delta = Math.floor(Math.random() * 7) - 3;
-      activePrinters = Math.min(220, Math.max(200, activePrinters + delta));
-
-      if (statusTextEl) {
-        statusTextEl.textContent = `ФАБРИКА АКТИВНА: ${activePrinters}/220 В РОБОТІ`;
-      }
-      fleetValueEls.forEach(el => {
-        el.textContent = activePrinters;
-      });
-    }
-
-    setInterval(updatePrinterCount, 4500);
-
     const sections = document.querySelectorAll('section, footer');
     const navLinks = document.querySelectorAll('.nav-item a');
 
@@ -1759,6 +1641,247 @@
       alert('Дякуємо! Заявку прийнято. Наш спеціаліст зв’яжеться з вами.');
       closeLeadModal();
     }
+
+    /* ==========================================================================
+       LIQUID GLASS — WebGL shader-based glass panels
+       Each panel gets its own small WebGL canvas (inserted as the panel's
+       first child, sitting behind the text via z-index:-1) that samples the
+       actual <video> playing behind it, then bends/refracts that sample
+       (lens bulge + animated ripple + chromatic aberration + a cheap
+       multi-tap blur + a soft top-edge specular highlight) — instead of a
+       flat backdrop-filter blur. Falls back to a plain tinted panel if WebGL
+       isn't available or there's no video behind the panel.
+       ========================================================================== */
+    (function () {
+      function getContainerAndVideo(sectionOrWrapEl) {
+        if (!sectionOrWrapEl) return null;
+        const wrap = sectionOrWrapEl.matches('.hero-video-bg, .video-bg-container')
+          ? sectionOrWrapEl
+          : sectionOrWrapEl.querySelector('.hero-video-bg, .video-bg-container');
+        if (!wrap) return null;
+        const video = wrap.querySelector('video');
+        if (!video) return null;
+        return { video, containerEl: wrap };
+      }
+
+      function getActiveSnapSection() {
+        const scrollCenter = window.pageYOffset + window.innerHeight / 2;
+        let active = null;
+        document.querySelectorAll('.snap-section').forEach((sec) => {
+          const top = sec.offsetTop;
+          const height = sec.offsetHeight;
+          if (scrollCenter >= top && scrollCenter < top + height) active = sec;
+        });
+        return active || document.querySelector('.snap-section');
+      }
+
+      const VS_SOURCE = `
+        attribute vec2 position;
+        varying vec2 vUv;
+        void main() {
+          vUv = position * 0.5 + 0.5;
+          gl_Position = vec4(position, 0.0, 1.0);
+        }
+      `;
+
+      const FS_SOURCE = `
+        precision mediump float;
+        varying vec2 vUv;
+        uniform sampler2D uTexture;
+        uniform vec4 uUvRect;
+        uniform float uTime;
+        uniform bool uHasTexture;
+
+        void main() {
+          vec2 uv = vec2(vUv.x, 1.0 - vUv.y);
+          vec2 centered = uv - 0.5;
+          float dist = length(centered);
+          vec2 dir = centered / (dist + 0.0001);
+
+          /* liquid-glass lens bulge toward the center + a slow animated ripple */
+          float bulge = smoothstep(0.55, 0.0, dist) * 0.002;
+          vec2 distortedUv = uv - dir * bulge;
+          float ripple = sin(dist * 16.0 - uTime * 1.1) * 0.00012 * (1.0 - dist);
+          distortedUv += dir * ripple;
+
+          vec2 sampleUv = mix(uUvRect.xy, uUvRect.zw, clamp(distortedUv, 0.0, 1.0));
+
+          vec3 color;
+          if (uHasTexture) {
+            float aberration = 0.00015;
+            vec2 texel = vec2(0.0006, 0.0006);
+            vec3 accum = vec3(0.0);
+            float total = 0.0;
+            for (int x = -2; x <= 2; x++) {
+              for (int y = -2; y <= 2; y++) {
+                vec2 offset = vec2(float(x), float(y)) * texel;
+                float r = texture2D(uTexture, sampleUv + offset + vec2(aberration, 0.0)).r;
+                float g = texture2D(uTexture, sampleUv + offset).g;
+                float b = texture2D(uTexture, sampleUv + offset - vec2(aberration, 0.0)).b;
+                accum += vec3(r, g, b);
+                total += 1.0;
+              }
+            }
+            color = accum / total;
+          } else {
+            color = vec3(0.08, 0.09, 0.11);
+          }
+
+          /* frosted tint + soft specular highlight along the top edge */
+          color = mix(color, vec3(1.0), 0.07);
+          float highlight = smoothstep(0.0, 0.18, uv.y) * smoothstep(1.0, 0.75, uv.y) * 0.14;
+          color += highlight;
+
+          gl_FragColor = vec4(color, 1.0);
+        }
+      `;
+
+      function compileShader(gl, type, src) {
+        const s = gl.createShader(type);
+        gl.shaderSource(s, src);
+        gl.compileShader(s);
+        if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) {
+          console.warn('Liquid glass shader error:', gl.getShaderInfoLog(s));
+        }
+        return s;
+      }
+
+      class LiquidGlassPanel {
+        constructor(el, videoResolver) {
+          this.el = el;
+          this.videoResolver = videoResolver;
+
+          this.canvas = document.createElement('canvas');
+          Object.assign(this.canvas.style, {
+            position: 'absolute',
+            inset: '0',
+            width: '100%',
+            height: '100%',
+            zIndex: '-1',
+            borderRadius: 'inherit',
+            pointerEvents: 'none',
+          });
+          el.insertBefore(this.canvas, el.firstChild);
+
+          this.gl = this.canvas.getContext('webgl', { premultipliedAlpha: false });
+          if (!this.gl) return;
+
+          this._initGL();
+          this.startTime = performance.now();
+          this._raf = this._raf.bind(this);
+          requestAnimationFrame(this._raf);
+        }
+
+        _initGL() {
+          const gl = this.gl;
+          const vs = compileShader(gl, gl.VERTEX_SHADER, VS_SOURCE);
+          const fs = compileShader(gl, gl.FRAGMENT_SHADER, FS_SOURCE);
+          const program = gl.createProgram();
+          gl.attachShader(program, vs);
+          gl.attachShader(program, fs);
+          gl.linkProgram(program);
+          gl.useProgram(program);
+          this.program = program;
+
+          const buffer = gl.createBuffer();
+          gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+          gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
+          const posLoc = gl.getAttribLocation(program, 'position');
+          gl.enableVertexAttribArray(posLoc);
+          gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 0, 0);
+
+          this.uniforms = {
+            texture: gl.getUniformLocation(program, 'uTexture'),
+            uvRect: gl.getUniformLocation(program, 'uUvRect'),
+            time: gl.getUniformLocation(program, 'uTime'),
+            hasTexture: gl.getUniformLocation(program, 'uHasTexture'),
+          };
+
+          this.texture = gl.createTexture();
+          gl.bindTexture(gl.TEXTURE_2D, this.texture);
+          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+        }
+
+        _computeUvRect(video, containerEl) {
+          const elRect = this.el.getBoundingClientRect();
+          const contRect = containerEl.getBoundingClientRect();
+          const vw = video.videoWidth || 16;
+          const vh = video.videoHeight || 9;
+          const cw = contRect.width || 1;
+          const ch = contRect.height || 1;
+          const scale = Math.max(cw / vw, ch / vh);
+          const renderedW = vw * scale;
+          const renderedH = vh * scale;
+          const offsetX = (cw - renderedW) / 2;
+          const offsetY = (ch - renderedH) / 2;
+
+          const relLeft = (elRect.left - contRect.left - offsetX) / renderedW;
+          const relTop = (elRect.top - contRect.top - offsetY) / renderedH;
+          const relRight = relLeft + elRect.width / renderedW;
+          const relBottom = relTop + elRect.height / renderedH;
+
+          return [relLeft, 1 - relBottom, relRight, 1 - relTop];
+        }
+
+        _raf() {
+          requestAnimationFrame(this._raf);
+          const gl = this.gl;
+          if (!gl) return;
+
+          const rect = this.el.getBoundingClientRect();
+          if (rect.width < 1 || rect.height < 1) return;
+
+          const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+          const w = Math.max(1, Math.round(rect.width * dpr));
+          const h = Math.max(1, Math.round(rect.height * dpr));
+          if (this.canvas.width !== w || this.canvas.height !== h) {
+            this.canvas.width = w;
+            this.canvas.height = h;
+          }
+          gl.viewport(0, 0, w, h);
+
+          const info = this.videoResolver();
+          let hasTexture = false;
+          let uvRect = [0, 0, 1, 1];
+
+          if (info && info.video && info.video.readyState >= 2) {
+            gl.bindTexture(gl.TEXTURE_2D, this.texture);
+            try {
+              gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, info.video);
+              hasTexture = true;
+              uvRect = this._computeUvRect(info.video, info.containerEl);
+            } catch (e) {
+              hasTexture = false;
+            }
+          }
+
+          gl.useProgram(this.program);
+          gl.activeTexture(gl.TEXTURE0);
+          gl.bindTexture(gl.TEXTURE_2D, this.texture);
+          gl.uniform1i(this.uniforms.texture, 0);
+          gl.uniform4f(this.uniforms.uvRect, uvRect[0], uvRect[1], uvRect[2], uvRect[3]);
+          gl.uniform1f(this.uniforms.time, (performance.now() - this.startTime) / 1000);
+          gl.uniform1i(this.uniforms.hasTexture, hasTexture ? 1 : 0);
+          gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+        }
+      }
+
+      // Header: always reflects whichever section is currently active.
+      const headerBlock = document.querySelector('.header-block');
+      if (headerBlock) {
+        new LiquidGlassPanel(headerBlock, () => getContainerAndVideo(getActiveSnapSection()));
+      }
+
+      // Each segment's visual-preview-box reflects its own section's video.
+      document.querySelectorAll('.segment-section').forEach((sec) => {
+        const box = sec.querySelector('.visual-preview-box');
+        if (!box) return;
+        new LiquidGlassPanel(box, () => getContainerAndVideo(sec));
+      });
+    })();
   </script>
 </body>
 </html>
