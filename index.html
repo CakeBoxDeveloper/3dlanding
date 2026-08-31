@@ -106,6 +106,14 @@
       --color-custom-tag: #0f2b5c;
       --color-custom-text: #60a5fa;
 
+      /* Border/accent colors used to keep button border, title and
+         description in sync per segment */
+      --color-miltech-border: #b91c1c;
+      --color-parts-border: #f59e0b;
+      --color-decor-border: #22c55e;
+      --color-branding-border: #a855f7;
+      --color-custom-border: #3b82f6;
+
       --radius: 4px;
       --font-heading: 'e-UkraineHead', 'Unbounded', sans-serif;
       --font-body: 'e-Ukraine', 'Space Grotesk', sans-serif;
@@ -188,8 +196,8 @@
       border-radius: inherit;
       pointer-events: none;
       background: rgba(255, 255, 255, 0.08);
-      backdrop-filter: blur(20px) saturate(160%);
-      -webkit-backdrop-filter: blur(20px) saturate(160%);
+      backdrop-filter: blur(4px) saturate(140%);
+      -webkit-backdrop-filter: blur(4px) saturate(140%);
     }
 
     .header-left {
@@ -402,8 +410,8 @@
       border-radius: inherit;
       pointer-events: none;
       background: rgba(255, 255, 255, 0.06);
-      backdrop-filter: blur(10px) saturate(140%);
-      -webkit-backdrop-filter: blur(10px) saturate(140%);
+      backdrop-filter: blur(5px) saturate(140%);
+      -webkit-backdrop-filter: blur(5px) saturate(140%);
     }
 
     .row-icon {
@@ -443,8 +451,7 @@
       position: relative;
       display: flex;
       align-items: center;
-      padding: 90px 0;
-      border-top: 1px solid var(--border-color);
+      padding: 0;
     }
 
     .video-bg-container {
@@ -494,7 +501,7 @@
       display: flex;
       flex-direction: column;
       gap: 0.75rem;
-      max-width: 720px;
+      max-width: 560px;
       width: 100%;
     }
 
@@ -508,26 +515,32 @@
 
     .segment-description {
       font-size: 1.05rem;
-      color: var(--text-muted);
       line-height: 1.6;
       max-width: 100%;
+      width: 100%;
+      padding: 0.9rem 1.1rem;
+      border-radius: var(--radius);
+      border: 1px solid transparent;
+      position: relative;
+      z-index: 0;
     }
 
-    /* Title & description match the segment's button (accent) color */
-    .segment-miltech .segment-title { color: var(--color-miltech-accent); }
-    .segment-miltech .segment-description { color: var(--color-miltech-accent); opacity: 0.85; }
+    /* Title, description text and description's border/fill all match
+       the segment's button color (solid translucent fill, no blur) */
+    .segment-miltech .segment-title { color: var(--color-miltech-border); }
+    .segment-miltech .segment-description { color: var(--color-miltech-border); border-color: var(--color-miltech-border); background: rgba(127, 29, 29, 0.55); }
 
-    .segment-parts .segment-title { color: var(--color-parts-accent); }
-    .segment-parts .segment-description { color: var(--color-parts-accent); opacity: 0.85; }
+    .segment-parts .segment-title { color: var(--color-parts-border); }
+    .segment-parts .segment-description { color: var(--color-parts-border); border-color: var(--color-parts-border); background: rgba(217, 119, 6, 0.45); }
 
-    .segment-decor .segment-title { color: var(--color-decor-accent); }
-    .segment-decor .segment-description { color: var(--color-decor-accent); opacity: 0.85; }
+    .segment-decor .segment-title { color: var(--color-decor-border); }
+    .segment-decor .segment-description { color: var(--color-decor-border); border-color: var(--color-decor-border); background: rgba(22, 163, 74, 0.4); }
 
-    .segment-branding .segment-title { color: var(--color-branding-accent); }
-    .segment-branding .segment-description { color: var(--color-branding-accent); opacity: 0.85; }
+    .segment-branding .segment-title { color: var(--color-branding-border); }
+    .segment-branding .segment-description { color: var(--color-branding-border); border-color: var(--color-branding-border); background: rgba(126, 34, 206, 0.45); }
 
-    .segment-custom .segment-title { color: var(--color-custom-accent); }
-    .segment-custom .segment-description { color: var(--color-custom-accent); opacity: 0.85; }
+    .segment-custom .segment-title { color: var(--color-custom-border); }
+    .segment-custom .segment-description { color: var(--color-custom-border); border-color: var(--color-custom-border); background: rgba(37, 99, 235, 0.45); }
 
     /* Заголовки этих секций смещены к правому краю */
     .segment-parts .segment-header-block,
@@ -578,19 +591,19 @@
       transition: background 0.2s ease;
     }
 
-    .btn-miltech { background: var(--color-miltech-accent); color: #fff; border-color: #b91c1c; }
+    .btn-miltech { background: var(--color-miltech-accent); color: var(--color-miltech-border); border-color: var(--color-miltech-border); }
     .btn-miltech:hover { background: #991b1b; }
 
-    .btn-parts { background: var(--color-parts-accent); color: #fff; border-color: #f59e0b; }
+    .btn-parts { background: var(--color-parts-accent); color: var(--color-parts-border); border-color: var(--color-parts-border); }
     .btn-parts:hover { background: #b45309; }
 
-    .btn-decor { background: var(--color-decor-accent); color: #fff; border-color: #22c55e; }
+    .btn-decor { background: var(--color-decor-accent); color: var(--color-decor-border); border-color: var(--color-decor-border); }
     .btn-decor:hover { background: #15803d; }
 
-    .btn-branding { background: var(--color-branding-accent); color: #fff; border-color: #a855f7; }
+    .btn-branding { background: var(--color-branding-accent); color: var(--color-branding-border); border-color: var(--color-branding-border); }
     .btn-branding:hover { background: #6b21a8; }
 
-    .btn-custom { background: var(--color-custom-accent); color: #fff; border-color: #3b82f6; }
+    .btn-custom { background: var(--color-custom-accent); color: var(--color-custom-border); border-color: var(--color-custom-border); }
     .btn-custom:hover { background: #1d4ed8; }
 
     .segment-right-col {
@@ -624,8 +637,8 @@
       border-radius: inherit;
       pointer-events: none;
       background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(20px) saturate(160%);
-      -webkit-backdrop-filter: blur(20px) saturate(160%);
+      backdrop-filter: blur(4px) saturate(140%);
+      -webkit-backdrop-filter: blur(4px) saturate(140%);
     }
 
     .preview-header {
@@ -719,8 +732,8 @@
       border-radius: inherit;
       pointer-events: none;
       background: rgba(255, 255, 255, 0.12);
-      backdrop-filter: blur(10px) saturate(140%);
-      -webkit-backdrop-filter: blur(10px) saturate(140%);
+      backdrop-filter: blur(5px) saturate(140%);
+      -webkit-backdrop-filter: blur(5px) saturate(140%);
     }
 
     /* ==========================================================================
@@ -892,21 +905,85 @@
       background: #0e121a;
       border: 1px solid var(--border-color);
       border-radius: var(--radius);
-      max-width: 500px;
+      max-width: 780px;
       width: 100%;
-      padding: 2rem;
+      padding: 0;
       position: relative;
+      display: flex;
+      overflow: hidden;
+      max-height: 90vh;
     }
 
     .modal-close-btn {
       position: absolute;
       top: 14px;
       right: 14px;
-      background: transparent;
+      background: rgba(0, 0, 0, 0.35);
       border: none;
-      color: var(--text-muted);
-      font-size: 1.4rem;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      color: #fff;
+      font-size: 1.3rem;
+      line-height: 1;
       cursor: pointer;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lead-modal-visual {
+      flex: 0 0 40%;
+      position: relative;
+      background: linear-gradient(160deg, #141b2b 0%, #0a0e16 100%);
+      border-right: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1.5rem;
+    }
+
+    .promo-code-box {
+      width: 100%;
+      text-align: center;
+      border: 1px dashed rgba(96, 165, 250, 0.5);
+      border-radius: var(--radius);
+      padding: 1.6rem 1.2rem;
+      background: rgba(37, 99, 235, 0.08);
+    }
+
+    .promo-code-label {
+      display: block;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 10px;
+    }
+
+    .promo-code-value {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #60a5fa;
+      letter-spacing: 0.06em;
+      margin-bottom: 10px;
+      word-break: break-all;
+    }
+
+    .promo-code-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    .lead-modal-form-col {
+      flex: 1;
+      min-width: 0;
+      padding: 2rem;
+      overflow-y: auto;
     }
 
     .modal-form {
@@ -914,6 +991,41 @@
       flex-direction: column;
       gap: 1rem;
       margin-top: 1.2rem;
+    }
+
+    .nda-note {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      background: rgba(59, 130, 246, 0.1);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      border-radius: var(--radius);
+      padding: 0.75rem 0.9rem;
+      color: #93c5fd;
+      font-size: 0.8rem;
+      line-height: 1.45;
+    }
+
+    .nda-note svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      margin-top: 1px;
+      stroke: #60a5fa;
+    }
+
+    @media (max-width: 640px) {
+      .lead-modal-content {
+        flex-direction: column;
+        max-height: 92vh;
+        overflow-y: auto;
+      }
+      .lead-modal-visual {
+        flex: 0 0 auto;
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+        padding: 1.5rem;
+      }
     }
 
     .form-group {
@@ -1618,35 +1730,46 @@
   <div class="lead-modal" id="leadModal">
     <div class="lead-modal-content">
       <button class="modal-close-btn" onclick="closeLeadModal()">×</button>
-      <h3 style="font-family: var(--font-heading); color: #fff; font-size: 1.25rem;" id="modalHeading">Розрахунок вартості друку</h3>
-      <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 4px;">Залиште контакти для швидкого прорахунку кошторису</p>
 
-      <form class="modal-form" onsubmit="handleFormSubmit(event)">
-        <div class="form-group">
-          <label>Ваше ім'я / Компанія</label>
-          <input type="text" class="form-input" placeholder="Ім'я або назва компанії" required>
+      <div class="lead-modal-visual">
+        <div class="promo-code-box">
+          <span class="promo-code-label">Ваш промокод</span>
+          <span class="promo-code-value">PRINT2026</span>
+          <span class="promo-code-desc">Знижка 10% на перше замовлення для нових клієнтів</span>
         </div>
-        <div class="form-group">
-          <label>Телефон або Telegram</label>
-          <input type="text" class="form-input" placeholder="+380 (XX) XXX-XX-XX або @username" required>
-        </div>
-        <div class="form-group">
-          <label>Напрямок замовлення</label>
-          <select class="form-select" id="orderTypeSelect">
-            <option value="miltech">Miltech / Тактичний друк</option>
-            <option value="parts">Запчастини та шестерні</option>
-            <option value="decor">Декор та фігурки</option>
-            <option value="branding">Брендинг для HoReCa</option>
-            <option value="custom">Індивідуальний друк</option>
-            <option value="general">Консультація / Безкоштовний тест</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Коментар / Посилання на 3D-модель (STL/STEP)</label>
-          <textarea class="form-textarea" rows="3" placeholder="Кількість, бажаний матеріал або посилання на файл..."></textarea>
-        </div>
-        <button type="submit" class="form-submit-btn">Отримати кошторис</button>
-      </form>
+      </div>
+
+      <div class="lead-modal-form-col">
+        <h3 style="font-family: var(--font-heading); color: #fff; font-size: 1.25rem;" id="modalHeading">Розрахунок вартості друку</h3>
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 4px;">Залиште контакти для швидкого прорахунку кошторису</p>
+
+        <form class="modal-form" onsubmit="handleFormSubmit(event)">
+          <div class="form-group">
+            <label>Ваше ім'я / Компанія</label>
+            <input type="text" class="form-input" placeholder="Ім'я або назва компанії" required>
+          </div>
+          <div class="form-group">
+            <label>Телефон або Telegram</label>
+            <input type="text" class="form-input" placeholder="+380 (XX) XXX-XX-XX або @username" required>
+          </div>
+          <div class="form-group">
+            <label>Напрямок замовлення</label>
+            <select class="form-select" id="orderTypeSelect">
+              <option value="miltech">Miltech / Тактичний друк</option>
+              <option value="parts">Запчастини та шестерні</option>
+              <option value="decor">Декор та фігурки</option>
+              <option value="branding">Брендинг для HoReCa</option>
+              <option value="custom">Індивідуальний друк</option>
+              <option value="general">Консультація / Безкоштовний тест</option>
+            </select>
+          </div>
+          <div class="nda-note">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+            <span>Усі дані конфіденційні та захищені NDA. Ваше замовлення і матеріали в повній безпеці.</span>
+          </div>
+          <button type="submit" class="form-submit-btn">Відправити заявку</button>
+        </form>
+      </div>
     </div>
   </div>
 
