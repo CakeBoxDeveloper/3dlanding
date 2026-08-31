@@ -11,6 +11,59 @@
     /* ==========================================================================
        CSS RESET & BASE CONFIGURATION
        ========================================================================== */
+    /* e-Ukraine — official Ukrainian government typeface, mirrored at
+       github.com/bennetfabian/e-Ukraine (CC BY 4.0). Head variant for
+       headings, regular variant for body text. */
+    @font-face {
+      font-family: 'e-UkraineHead';
+      src: url('https://raw.githubusercontent.com/bennetfabian/e-Ukraine/main/e-UkraineHead-Regular.otf') format('opentype');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'e-UkraineHead';
+      src: url('https://raw.githubusercontent.com/bennetfabian/e-Ukraine/main/e-UkraineHead-Medium.otf') format('opentype');
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'e-UkraineHead';
+      src: url('https://raw.githubusercontent.com/bennetfabian/e-Ukraine/main/e-UkraineHead-Bold.otf') format('opentype');
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'e-Ukraine';
+      src: url('https://raw.githubusercontent.com/bennetfabian/e-Ukraine/main/e-Ukraine-Light.otf') format('opentype');
+      font-weight: 300;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'e-Ukraine';
+      src: url('https://raw.githubusercontent.com/bennetfabian/e-Ukraine/main/e-Ukraine-Regular.otf') format('opentype');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'e-Ukraine';
+      src: url('https://raw.githubusercontent.com/bennetfabian/e-Ukraine/main/e-Ukraine-Medium.otf') format('opentype');
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'e-Ukraine';
+      src: url('https://raw.githubusercontent.com/bennetfabian/e-Ukraine/main/e-Ukraine-Bold.otf') format('opentype');
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+
     *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
@@ -54,8 +107,8 @@
       --color-custom-text: #60a5fa;
 
       --radius: 4px;
-      --font-heading: 'Unbounded', sans-serif;
-      --font-body: 'Space Grotesk', sans-serif;
+      --font-heading: 'e-UkraineHead', 'Unbounded', sans-serif;
+      --font-body: 'e-Ukraine', 'Space Grotesk', sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
     }
 
@@ -135,6 +188,8 @@
       border-radius: inherit;
       pointer-events: none;
       background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(20px) saturate(160%);
+      -webkit-backdrop-filter: blur(20px) saturate(160%);
     }
 
     .header-left {
@@ -569,6 +624,8 @@
       border-radius: inherit;
       pointer-events: none;
       background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(20px) saturate(160%);
+      -webkit-backdrop-filter: blur(20px) saturate(160%);
     }
 
     .preview-header {
@@ -908,6 +965,7 @@
   <!-- ==========================================================================
        HEADER & NAVIGATION (two floating blocks)
        ========================================================================== -->
+  <!--
   <header class="header" id="mainHeader">
     <div class="header-container header-block">
       <div class="header-left">
@@ -935,6 +993,8 @@
       <button class="btn-cta" onclick="openLeadModal('Загальний розрахунок')">Розрахувати друк</button>
     </div>
   </header>
+  -->
+
 
   <main>
     <!-- ==========================================================================
@@ -1651,8 +1711,11 @@
        multi-tap blur + a soft top-edge specular highlight) — instead of a
        flat backdrop-filter blur. Falls back to a plain tinted panel if WebGL
        isn't available or there's no video behind the panel.
+       Temporarily disabled — see the `if (false)` guard below. Plain
+       backdrop-filter blur on .header-block::after / .visual-preview-box::after
+       is used instead for now.
        ========================================================================== */
-    (function () {
+    if (false) (function () {
       function getContainerAndVideo(sectionOrWrapEl) {
         if (!sectionOrWrapEl) return null;
         const wrap = sectionOrWrapEl.matches('.hero-video-bg, .video-bg-container')
