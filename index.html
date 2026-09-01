@@ -196,8 +196,8 @@
       border-radius: inherit;
       pointer-events: none;
       background: rgba(255, 255, 255, 0.08);
-      backdrop-filter: blur(4px) saturate(140%);
-      -webkit-backdrop-filter: blur(4px) saturate(140%);
+      backdrop-filter: blur(4px) saturate(70%);
+      -webkit-backdrop-filter: blur(4px) saturate(70%);
     }
 
     .header-left {
@@ -338,6 +338,23 @@
       text-align: center;
       gap: 1.1rem;
       margin-bottom: 2.4rem;
+      position: relative;
+      transform: translateY(-70px);
+      z-index: 1;
+    }
+
+    /* Soft frosted patch behind the hero title + subtitle that fades
+       smoothly into the video instead of a hard-edged blur box */
+    .hero-header::before {
+      content: '';
+      position: absolute;
+      inset: -2.4rem -3rem;
+      z-index: -1;
+      pointer-events: none;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      -webkit-mask-image: radial-gradient(ellipse 70% 80% at center, black 35%, transparent 75%);
+      mask-image: radial-gradient(ellipse 70% 80% at center, black 35%, transparent 75%);
     }
 
     .hero-title-full {
@@ -410,8 +427,8 @@
       border-radius: inherit;
       pointer-events: none;
       background: rgba(255, 255, 255, 0.06);
-      backdrop-filter: blur(5px) saturate(140%);
-      -webkit-backdrop-filter: blur(5px) saturate(140%);
+      backdrop-filter: blur(5px) saturate(70%);
+      -webkit-backdrop-filter: blur(5px) saturate(70%);
     }
 
     .row-icon {
@@ -452,6 +469,27 @@
       display: flex;
       align-items: center;
       padding: 0;
+      margin-top: -70px;
+      clip-path: polygon(
+        0% 70px, 0.6% 68px, 1.2% 63px, 1.8% 56px, 2.4% 46px, 3% 35px, 3.6% 24px, 4.2% 14px, 4.8% 7px, 5.4% 2px, 6% 0px,
+        42% 0px, 42.6% 2px, 43.2% 7px, 43.8% 14px, 44.4% 24px, 45% 35px, 45.6% 46px, 46.2% 56px, 46.8% 63px, 47.4% 68px, 48% 70px,
+        100% 70px,
+        100% 100%,
+        0% 100%
+      );
+    }
+
+    /* Tab position mirrors the title alignment of each segment:
+       right-aligned segments get the tab on the right side. */
+    .segment-section.segment-parts,
+    .segment-section.segment-branding {
+      clip-path: polygon(
+        100% 70px, 99.4% 68px, 98.8% 63px, 98.2% 56px, 97.6% 46px, 97% 35px, 96.4% 24px, 95.8% 14px, 95.2% 7px, 94.6% 2px, 94% 0px,
+        58% 0px, 57.4% 2px, 56.8% 7px, 56.2% 14px, 55.6% 24px, 55% 35px, 54.4% 46px, 53.8% 56px, 53.2% 63px, 52.6% 68px, 52% 70px,
+        0% 70px,
+        0% 100%,
+        100% 100%
+      );
     }
 
     .video-bg-container {
@@ -476,6 +514,7 @@
     .segment-decor { background-color: var(--color-decor-bg); }
     .segment-branding { background-color: var(--color-branding-bg); }
     .segment-custom { background-color: var(--color-custom-bg); }
+    .segment-custom .video-bg-container video { filter: saturate(20%); }
 
     .segment-overlay {
       position: absolute;
@@ -503,8 +542,13 @@
       gap: 0.75rem;
       max-width: 560px;
       width: 100%;
+      position: relative;
+      z-index: 1;
+      transform: translateY(-18px);
     }
 
+    /* Soft frosted patch behind the title + descriptor that fades smoothly
+       into the video instead of a hard-edged blur box */
     .segment-title {
       font-family: var(--font-heading);
       font-size: 2.3rem;
@@ -514,39 +558,47 @@
     }
 
     .segment-description {
-      font-size: 1.05rem;
-      line-height: 1.6;
+      font-size: 0.72rem;
+      line-height: 1.4;
       max-width: 100%;
       width: 100%;
-      padding: 0.9rem 1.1rem;
+      padding: 0.65rem 0.8rem;
       border-radius: var(--radius);
       border: 1px solid transparent;
       position: relative;
       z-index: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     /* Title, description text and description's border/fill all match
        the segment's button color (solid translucent fill, no blur) */
     .segment-miltech .segment-title { color: var(--color-miltech-border); }
-    .segment-miltech .segment-description { color: var(--color-miltech-border); border-color: var(--color-miltech-border); background: rgba(127, 29, 29, 0.55); }
+    .segment-miltech .segment-description { color: var(--color-miltech-border); border-color: var(--color-miltech-border); background: rgba(76, 17, 17, 0.65); }
 
     .segment-parts .segment-title { color: var(--color-parts-border); }
-    .segment-parts .segment-description { color: var(--color-parts-border); border-color: var(--color-parts-border); background: rgba(217, 119, 6, 0.45); }
+    .segment-parts .segment-description { color: var(--color-parts-border); border-color: var(--color-parts-border); background: rgba(130, 71, 4, 0.55); }
 
     .segment-decor .segment-title { color: var(--color-decor-border); }
-    .segment-decor .segment-description { color: var(--color-decor-border); border-color: var(--color-decor-border); background: rgba(22, 163, 74, 0.4); }
+    .segment-decor .segment-description { color: var(--color-decor-border); border-color: var(--color-decor-border); background: rgba(13, 98, 44, 0.5); }
 
     .segment-branding .segment-title { color: var(--color-branding-border); }
-    .segment-branding .segment-description { color: var(--color-branding-border); border-color: var(--color-branding-border); background: rgba(126, 34, 206, 0.45); }
+    .segment-branding .segment-description { color: var(--color-branding-border); border-color: var(--color-branding-border); background: rgba(76, 20, 124, 0.55); }
 
     .segment-custom .segment-title { color: var(--color-custom-border); }
-    .segment-custom .segment-description { color: var(--color-custom-border); border-color: var(--color-custom-border); background: rgba(37, 99, 235, 0.45); }
+    .segment-custom .segment-description { color: var(--color-custom-border); border-color: var(--color-custom-border); background: rgba(22, 59, 141, 0.55); }
 
     /* Заголовки этих секций смещены к правому краю */
-    .segment-parts .segment-header-block,
-    .segment-branding .segment-header-block {
+    .segment-parts .segment-header-block {
       align-self: flex-end;
       text-align: right;
+    }
+
+    /* Фірмовий стиль: блок залишається праворуч, але текст рівняється по лівому краю */
+    .segment-branding .segment-header-block {
+      align-self: flex-end;
+      text-align: left;
     }
 
     .segment-main-grid {
@@ -591,20 +643,20 @@
       transition: background 0.2s ease;
     }
 
-    .btn-miltech { background: var(--color-miltech-accent); color: var(--color-miltech-border); border-color: var(--color-miltech-border); }
-    .btn-miltech:hover { background: #991b1b; }
+    .btn-miltech { background: #5f1616; color: var(--color-miltech-border); border-color: var(--color-miltech-border); }
+    .btn-miltech:hover { background: #7a1c1c; }
 
-    .btn-parts { background: var(--color-parts-accent); color: var(--color-parts-border); border-color: var(--color-parts-border); }
-    .btn-parts:hover { background: #b45309; }
+    .btn-parts { background: #a35905; color: var(--color-parts-border); border-color: var(--color-parts-border); }
+    .btn-parts:hover { background: #8a4b04; }
 
-    .btn-decor { background: var(--color-decor-accent); color: var(--color-decor-border); border-color: var(--color-decor-border); }
-    .btn-decor:hover { background: #15803d; }
+    .btn-decor { background: #117a38; color: var(--color-decor-border); border-color: var(--color-decor-border); }
+    .btn-decor:hover { background: #0d612c; }
 
-    .btn-branding { background: var(--color-branding-accent); color: var(--color-branding-border); border-color: var(--color-branding-border); }
-    .btn-branding:hover { background: #6b21a8; }
+    .btn-branding { background: #5f1a9b; color: var(--color-branding-border); border-color: var(--color-branding-border); }
+    .btn-branding:hover { background: #4e1580; }
 
-    .btn-custom { background: var(--color-custom-accent); color: var(--color-custom-border); border-color: var(--color-custom-border); }
-    .btn-custom:hover { background: #1d4ed8; }
+    .btn-custom { background: #1c4ab0; color: var(--color-custom-border); border-color: var(--color-custom-border); }
+    .btn-custom:hover { background: #163c8f; }
 
     .segment-right-col {
       display: flex;
@@ -637,8 +689,8 @@
       border-radius: inherit;
       pointer-events: none;
       background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(4px) saturate(140%);
-      -webkit-backdrop-filter: blur(4px) saturate(140%);
+      backdrop-filter: blur(2px) saturate(35%);
+      -webkit-backdrop-filter: blur(2px) saturate(35%);
     }
 
     .preview-header {
@@ -732,8 +784,8 @@
       border-radius: inherit;
       pointer-events: none;
       background: rgba(255, 255, 255, 0.12);
-      backdrop-filter: blur(5px) saturate(140%);
-      -webkit-backdrop-filter: blur(5px) saturate(140%);
+      backdrop-filter: blur(5px) saturate(70%);
+      -webkit-backdrop-filter: blur(5px) saturate(70%);
     }
 
     /* ==========================================================================
@@ -743,7 +795,9 @@
     .segment-miltech .spec-badge::after {
       background: rgba(239, 68, 68, 0.14);
     }
-    .segment-miltech .visual-preview-box,
+    .segment-miltech .visual-preview-box {
+      border-color: var(--color-miltech-border);
+    }
     .segment-miltech .spec-badge {
       border-color: rgba(252, 165, 165, 0.28);
     }
@@ -752,7 +806,9 @@
     .segment-parts .spec-badge::after {
       background: rgba(245, 158, 11, 0.13);
     }
-    .segment-parts .visual-preview-box,
+    .segment-parts .visual-preview-box {
+      border-color: var(--color-parts-border);
+    }
     .segment-parts .spec-badge {
       border-color: rgba(251, 191, 36, 0.28);
     }
@@ -761,7 +817,9 @@
     .segment-decor .spec-badge::after {
       background: rgba(34, 197, 94, 0.13);
     }
-    .segment-decor .visual-preview-box,
+    .segment-decor .visual-preview-box {
+      border-color: var(--color-decor-border);
+    }
     .segment-decor .spec-badge {
       border-color: rgba(74, 222, 128, 0.28);
     }
@@ -770,7 +828,9 @@
     .segment-branding .spec-badge::after {
       background: rgba(168, 85, 247, 0.14);
     }
-    .segment-branding .visual-preview-box,
+    .segment-branding .visual-preview-box {
+      border-color: var(--color-branding-border);
+    }
     .segment-branding .spec-badge {
       border-color: rgba(192, 132, 252, 0.28);
     }
@@ -779,7 +839,9 @@
     .segment-custom .spec-badge::after {
       background: rgba(37, 99, 235, 0.13);
     }
-    .segment-custom .visual-preview-box,
+    .segment-custom .visual-preview-box {
+      border-color: var(--color-custom-border);
+    }
     .segment-custom .spec-badge {
       border-color: rgba(96, 165, 250, 0.28);
     }
@@ -895,7 +957,16 @@
       align-items: center;
       justify-content: center;
       padding: 1rem;
+      --modal-accent: #3b82f6;
+      --modal-accent-soft: rgba(37, 99, 235, 0.13);
     }
+
+    /* Modal color scheme matches the section that opened it */
+    .lead-modal[data-theme="miltech"]  { --modal-accent: #b91c1c; --modal-accent-soft: rgba(239, 68, 68, 0.14); }
+    .lead-modal[data-theme="parts"]    { --modal-accent: #f59e0b; --modal-accent-soft: rgba(245, 158, 11, 0.13); }
+    .lead-modal[data-theme="decor"]    { --modal-accent: #22c55e; --modal-accent-soft: rgba(34, 197, 94, 0.13); }
+    .lead-modal[data-theme="branding"] { --modal-accent: #a855f7; --modal-accent-soft: rgba(168, 85, 247, 0.14); }
+    .lead-modal[data-theme="custom"]   { --modal-accent: #3b82f6; --modal-accent-soft: rgba(37, 99, 235, 0.13); }
 
     .lead-modal.active {
       display: flex;
@@ -903,7 +974,7 @@
 
     .lead-modal-content {
       background: #0e121a;
-      border: 1px solid var(--border-color);
+      border: 1px solid var(--modal-accent);
       border-radius: var(--radius);
       max-width: 780px;
       width: 100%;
@@ -947,10 +1018,10 @@
     .promo-code-box {
       width: 100%;
       text-align: center;
-      border: 1px dashed rgba(96, 165, 250, 0.5);
+      border: 1px dashed var(--modal-accent);
       border-radius: var(--radius);
       padding: 1.6rem 1.2rem;
-      background: rgba(37, 99, 235, 0.08);
+      background: var(--modal-accent-soft);
     }
 
     .promo-code-label {
@@ -967,7 +1038,7 @@
       font-family: var(--font-mono);
       font-size: 1.5rem;
       font-weight: 700;
-      color: #60a5fa;
+      color: var(--modal-accent);
       letter-spacing: 0.06em;
       margin-bottom: 10px;
       word-break: break-all;
@@ -997,11 +1068,11 @@
       display: flex;
       align-items: flex-start;
       gap: 10px;
-      background: rgba(59, 130, 246, 0.1);
-      border: 1px solid rgba(59, 130, 246, 0.3);
+      background: var(--modal-accent-soft);
+      border: 1px solid var(--modal-accent);
       border-radius: var(--radius);
       padding: 0.75rem 0.9rem;
-      color: #93c5fd;
+      color: #e5e7eb;
       font-size: 0.8rem;
       line-height: 1.45;
     }
@@ -1011,7 +1082,7 @@
       height: 18px;
       flex-shrink: 0;
       margin-top: 1px;
-      stroke: #60a5fa;
+      stroke: var(--modal-accent);
     }
 
     @media (max-width: 640px) {
@@ -1052,23 +1123,24 @@
     }
 
     .form-input:focus, .form-select:focus, .form-textarea:focus {
-      border-color: #3b82f6;
+      border-color: var(--modal-accent);
     }
 
     .form-submit-btn {
-      background: #2563eb;
+      background: var(--modal-accent);
       color: #fff;
-      border: 1px solid #3b82f6;
+      border: 1px solid var(--modal-accent);
       padding: 11px;
       border-radius: var(--radius);
       font-family: var(--font-heading);
       font-weight: 700;
       cursor: pointer;
       margin-top: 0.4rem;
+      transition: filter 0.2s ease;
     }
 
     .form-submit-btn:hover {
-      background: #1d4ed8;
+      filter: brightness(0.85);
     }
   </style>
 </head>
@@ -1115,7 +1187,7 @@
     <section class="hero-section snap-section" id="hero">
       <div class="hero-video-bg">
         <video autoplay loop muted playsinline crossorigin="anonymous">
-          <source src="https://raw.githubusercontent.com/CakeBoxDeveloper/3dlanding/main/Printers_printing_parts_asynchro%E2%80%A6_202608310148.mp4" type="video/mp4">
+          <source src="https://raw.githubusercontent.com/CakeBoxDeveloper/3dlanding/main/VP8Printers.webm" type="video/webm">
         </video>
       </div>
 
@@ -1310,7 +1382,7 @@
     <section class="segment-section segment-miltech snap-section" id="miltech">
       <div class="video-bg-container">
         <video autoplay loop muted playsinline crossorigin="anonymous">
-          <source src="https://raw.githubusercontent.com/CakeBoxDeveloper/3dlanding/main/%D0%94%D1%80%D0%BE%D0%BD_%D0%BB%D0%B5%D1%82%D0%B8%D1%82_%D0%BD%D0%B0_%D0%BC%D0%B5%D1%81%D1%82%D0%B5_202608302242.mp4" type="video/mp4">
+          <source src="https://raw.githubusercontent.com/CakeBoxDeveloper/3dlanding/main/VP8Miltech.webm" type="video/webm">
         </video>
       </div>
       <div class="segment-overlay"></div>
@@ -1362,7 +1434,7 @@
                 </li>
               </ul>
               <div class="segment-actions">
-                <button class="btn-segment btn-miltech" onclick="openLeadModal('MilTech Замовлення')">Замовити розрахунок MilTech</button>
+                <button class="btn-segment btn-miltech" onclick="openLeadModal('MilTech Замовлення', 'miltech')">Замовити розрахунок MilTech</button>
               </div>
             </div>
           </div>
@@ -1376,7 +1448,7 @@
     <section class="segment-section segment-parts snap-section" id="parts">
       <div class="video-bg-container">
         <video autoplay loop muted playsinline crossorigin="anonymous">
-          <source src="https://raw.githubusercontent.com/CakeBoxDeveloper/3dlanding/main/%D0%B4%D0%B5%D1%82%D0%B0%D0%BB%D0%B8_%D0%B4%D0%B2%D0%B8%D0%B3%D0%B0%D1%82%D0%B5%D0%BB%D1%8F_%D0%B2%D0%B8%D0%B1%D1%80%D0%B8%D1%80%D1%83%D1%8E%D1%82_202608302358.mp4" type="video/mp4">
+          <source src="https://raw.githubusercontent.com/CakeBoxDeveloper/3dlanding/main/VP8Details.webm" type="video/webm">
         </video>
       </div>
       <div class="segment-overlay"></div>
@@ -1428,7 +1500,7 @@
                 </li>
               </ul>
               <div class="segment-actions">
-                <button class="btn-segment btn-parts" onclick="openLeadModal('Замовлення запчастин')">Розрахувати вартість деталей</button>
+                <button class="btn-segment btn-parts" onclick="openLeadModal('Замовлення запчастин', 'parts')">Розрахувати вартість деталей</button>
               </div>
             </div>
           </div>
@@ -1442,7 +1514,7 @@
     <section class="segment-section segment-decor snap-section" id="decor">
       <div class="video-bg-container">
         <video autoplay loop muted playsinline crossorigin="anonymous">
-          <source src="https://raw.githubusercontent.com/CakeBoxDeveloper/3dlanding/main/%D1%84%D0%B8%D0%B3%D1%83%D1%80%D0%BA%D0%B8_%D0%B4%D0%B5%D0%BB%D0%B0%D1%8E%D1%82_idle-%D0%B0%D0%BD%D0%B8%D0%BC%D0%B0%D1%86%D0%B8%D1%8E_202608310008.mp4" type="video/mp4">
+          <source src="https://raw.githubusercontent.com/CakeBoxDeveloper/3dlanding/main/VP8Decor.webm" type="video/webm">
         </video>
       </div>
       <div class="segment-overlay"></div>
@@ -1494,7 +1566,7 @@
                 </li>
               </ul>
               <div class="segment-actions">
-                <button class="btn-segment btn-decor" onclick="openLeadModal('Замовлення декору')">Створити дизайн-замовлення</button>
+                <button class="btn-segment btn-decor" onclick="openLeadModal('Замовлення декору', 'decor')">Створити дизайн-замовлення</button>
               </div>
             </div>
           </div>
@@ -1508,7 +1580,7 @@
     <section class="segment-section segment-branding snap-section" id="branding">
       <div class="video-bg-container">
         <video autoplay loop muted playsinline crossorigin="anonymous">
-          <source src="https://raw.githubusercontent.com/CakeBoxDeveloper/3dlanding/main/Rain_falling%2C_sign_glowing_202608310028.mp4" type="video/mp4">
+          <source src="https://raw.githubusercontent.com/CakeBoxDeveloper/3dlanding/main/VP8Individual.webm" type="video/webm">
         </video>
       </div>
       <div class="segment-overlay"></div>
@@ -1560,7 +1632,7 @@
                 </li>
               </ul>
               <div class="segment-actions">
-                <button class="btn-segment btn-branding" onclick="openLeadModal('Брендинг для HoReCa')">Замовити брендинг закладу</button>
+                <button class="btn-segment btn-branding" onclick="openLeadModal('Брендинг для HoReCa', 'branding')">Замовити брендинг закладу</button>
               </div>
             </div>
           </div>
@@ -1574,7 +1646,7 @@
     <section class="segment-section segment-custom snap-section" id="custom">
       <div class="video-bg-container">
         <video autoplay loop muted playsinline crossorigin="anonymous">
-          <source src="https://raw.githubusercontent.com/CakeBoxDeveloper/3dlanding/main/Painted_lightbulb_turns_on_202608312327.mp4" type="video/mp4">
+          <source src="https://raw.githubusercontent.com/CakeBoxDeveloper/3dlanding/main/VP8Bulb.webm" type="video/webm">
         </video>
       </div>
       <div class="segment-overlay"></div>
@@ -1626,7 +1698,7 @@
                 </li>
               </ul>
               <div class="segment-actions">
-                <button class="btn-segment btn-custom" onclick="openLeadModal('Індивідуальне замовлення')">Замовити індивідуальний друк</button>
+                <button class="btn-segment btn-custom" onclick="openLeadModal('Індивідуальне замовлення', 'custom')">Замовити індивідуальний друк</button>
               </div>
             </div>
           </div>
@@ -1800,10 +1872,11 @@
       });
     });
 
-    function openLeadModal(title = 'Розрахунок вартості друку') {
+    function openLeadModal(title = 'Розрахунок вартості друку', theme = 'general') {
       const modal = document.getElementById('leadModal');
       const heading = document.getElementById('modalHeading');
       if (heading) heading.textContent = title;
+      modal.setAttribute('data-theme', theme);
       modal.classList.add('active');
     }
 
