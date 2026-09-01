@@ -2126,10 +2126,42 @@
       }
     });
 
-    function handleFormSubmit(e) {
+    async function handleFormSubmit(e) {
       e.preventDefault();
-      alert('Дякуємо! Заявку прийнято. Наш спеціаліст зв’яжеться з вами.');
-      closeLeadModal();
+
+      const form = e.target;
+      const inputs = form.querySelectorAll('input[type="text"]');
+      const name = inputs[0].value;
+      const contact = inputs[1].value;
+      const orderType = form.querySelector('#orderTypeSelect').selectedOptions[0].text;
+
+      const submitBtn = form.querySelector('.form-submit-btn');
+      const originalText = submitBtn.textContent;
+      submitBtn.textContent = 'Надсилаємо...';
+      submitBtn.disabled = true;
+
+      try {
+        const response = await fetch('/api/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, contact, orderType })
+        });
+
+        const data = await response.json();
+
+        if (response.ok && data.success) {
+          
+          closeLeadModal();
+          form.reset();
+        } else {
+          throw new Error(data.error || 'error');
+        }
+      } catch (err) {
+        console.error(err);
+      } finally {
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+      }
     }
 
     /* ==========================================================================
