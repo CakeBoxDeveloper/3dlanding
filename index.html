@@ -86,15 +86,15 @@
       --color-miltech-tag: #450a0a;
       --color-miltech-text: #fca5a5;
 
-      --color-parts-bg: #1d1208;
-      --color-parts-accent: #d97706;
-      --color-parts-tag: #452203;
-      --color-parts-text: #fbbf24;
+      --color-parts-bg: #0d0d0d;
+      --color-parts-accent: #6b7280;
+      --color-parts-tag: #1f2937;
+      --color-parts-text: #d1d5db;
 
-      --color-decor-bg: #0a1f14;
-      --color-decor-accent: #16a34a;
-      --color-decor-tag: #052e1c;
-      --color-decor-text: #4ade80;
+      --color-decor-bg: #1a1500;
+      --color-decor-accent: #ca8a04;
+      --color-decor-tag: #3d2e00;
+      --color-decor-text: #fde047;
 
       --color-branding-bg: #170d24;
       --color-branding-accent: #7e22ce;
@@ -109,8 +109,8 @@
       /* Border/accent colors used to keep button border, title and
          description in sync per segment */
       --color-miltech-border: #b91c1c;
-      --color-parts-border: #f59e0b;
-      --color-decor-border: #22c55e;
+      --color-parts-border: #9ca3af;
+      --color-decor-border: #eab308;
       --color-branding-border: #a855f7;
       --color-custom-border: #3b82f6;
 
@@ -307,6 +307,26 @@
       position: relative;
     }
 
+    /* Full-width backdrop blur that covers the hero title area and fades
+       out downward. Uses the same 100vw + translateX(-50%) trick as the
+       video background to escape the max-width container. */
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100vw;
+      /* tall enough to cover title + subtitle, fades away below */
+      height: 36%;
+      z-index: 1;   /* above video (z:0), below text (z:1 on .hero-header) */
+      pointer-events: none;
+      backdrop-filter: blur(20px) saturate(1.25);
+      -webkit-backdrop-filter: blur(20px) saturate(1.25);
+      -webkit-mask-image: linear-gradient(to bottom, black 0%, black 50%, transparent 100%);
+      mask-image:         linear-gradient(to bottom, black 0%, black 50%, transparent 100%);
+    }
+
     .hero-video-bg {
       position: absolute;
       top: 0;
@@ -328,7 +348,7 @@
     .hero-header,
     .dashboard-ticker {
       position: relative;
-      z-index: 1;
+      z-index: 2;
     }
 
     .hero-header {
@@ -340,22 +360,16 @@
       margin-bottom: 2.4rem;
       position: relative;
       transform: translateY(-70px);
-      z-index: 1;
+      z-index: 2;
     }
 
     /* Soft frosted patch behind the hero title + subtitle that fades
-       smoothly into the video instead of a hard-edged blur box */
-    .hero-header::before {
-      content: '';
-      position: absolute;
-      inset: -2.4rem -3rem;
-      z-index: -1;
-      pointer-events: none;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      -webkit-mask-image: radial-gradient(ellipse 70% 80% at center, black 35%, transparent 75%);
-      mask-image: radial-gradient(ellipse 70% 80% at center, black 35%, transparent 75%);
-    }
+       smoothly into the video instead of a hard-edged blur box.
+       Stretches full viewport width; the mask fades it out downward. */
+    /* Backdrop blur lives on .hero-section::before so it inherits the
+       section's full viewport width with zero horizontal gaps.
+       The mask fades it out downward so it only covers the title area. */
+    .hero-header::before { display: none; }
 
     .hero-title-full {
       font-family: var(--font-heading);
@@ -477,6 +491,11 @@
         100% 100%,
         0% 100%
       );
+      /* Very strong upward shadow — three layers */
+      filter: drop-shadow(0 -22px 40px rgba(0,0,0,1.00))
+              drop-shadow(0 -10px 18px rgba(0,0,0,1.00))
+              drop-shadow(0  -3px  4px rgba(0,0,0,1.00));
+      isolation: isolate;
     }
 
     /* Tab position mirrors the title alignment of each segment:
@@ -578,10 +597,10 @@
     .segment-miltech .segment-description { color: var(--color-miltech-border); border-color: var(--color-miltech-border); background: rgba(76, 17, 17, 0.65); }
 
     .segment-parts .segment-title { color: var(--color-parts-border); }
-    .segment-parts .segment-description { color: var(--color-parts-border); border-color: var(--color-parts-border); background: rgba(130, 71, 4, 0.55); }
+    .segment-parts .segment-description { color: var(--color-parts-border); border-color: var(--color-parts-border); background: rgba(31, 41, 55, 0.70); }
 
     .segment-decor .segment-title { color: var(--color-decor-border); }
-    .segment-decor .segment-description { color: var(--color-decor-border); border-color: var(--color-decor-border); background: rgba(13, 98, 44, 0.5); }
+    .segment-decor .segment-description { color: var(--color-decor-border); border-color: var(--color-decor-border); background: rgba(113, 63, 18, 0.55); }
 
     .segment-branding .segment-title { color: var(--color-branding-border); }
     .segment-branding .segment-description { color: var(--color-branding-border); border-color: var(--color-branding-border); background: rgba(76, 20, 124, 0.55); }
@@ -646,11 +665,11 @@
     .btn-miltech { background: #5f1616; color: var(--color-miltech-border); border-color: var(--color-miltech-border); }
     .btn-miltech:hover { background: #7a1c1c; }
 
-    .btn-parts { background: #a35905; color: var(--color-parts-border); border-color: var(--color-parts-border); }
-    .btn-parts:hover { background: #8a4b04; }
+    .btn-parts { background: #1f2937; color: var(--color-parts-border); border-color: var(--color-parts-border); }
+    .btn-parts:hover { background: #374151; }
 
-    .btn-decor { background: #117a38; color: var(--color-decor-border); border-color: var(--color-decor-border); }
-    .btn-decor:hover { background: #0d612c; }
+    .btn-decor { background: #713f12; color: var(--color-decor-border); border-color: var(--color-decor-border); }
+    .btn-decor:hover { background: #854d0e; }
 
     .btn-branding { background: #5f1a9b; color: var(--color-branding-border); border-color: var(--color-branding-border); }
     .btn-branding:hover { background: #4e1580; }
@@ -667,7 +686,7 @@
 
     .visual-preview-box {
       background: transparent;
-      border: 3px solid rgba(255, 255, 255, 0.12);
+      border: 3px solid rgba(255, 255, 255, 0.10);
       border-radius: var(--radius);
       padding: 1.6rem 1.8rem;
       height: 100%;
@@ -675,7 +694,7 @@
       flex-direction: column;
       justify-content: space-between;
       gap: 1.2rem;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.06);
       position: relative;
       z-index: 0;
       isolation: isolate;
@@ -688,7 +707,7 @@
       z-index: -1;
       border-radius: inherit;
       pointer-events: none;
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.04);
       backdrop-filter: blur(2px) saturate(35%);
       -webkit-backdrop-filter: blur(2px) saturate(35%);
     }
@@ -789,71 +808,209 @@
     }
 
     /* ==========================================================================
-       ОТТЕНОК СТЕКЛА ПОД ЦВЕТ КАЖДОГО СЕГМЕНТА
+       GLASS SHIMMER — static border only, no animation
+       ========================================================================== */
+
+    /* ── Visual-preview-box: static low-opacity border, no shimmer ── */
+    .visual-preview-box {
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+    }
+
+    /* Static dim border ring — replaces animated shimmer */
+    .visual-preview-box::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      z-index: 2;
+      border-radius: inherit;
+      pointer-events: none;
+      padding: 2px;
+      background: rgba(255,255,255,0.08);
+      -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+      mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+      mask-composite: exclude;
+    }
+
+    /* ── Dashboard rows: same static approach ── */
+    .dashboard-row {
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+    }
+
+    .dashboard-row::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      z-index: 2;
+      border-radius: inherit;
+      pointer-events: none;
+      padding: 2px;
+      background: rgba(255,255,255,0.10);
+      -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+      mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+      mask-composite: exclude;
+    }
+
+    /* Backdrop blur lives on ::after */
+    .dashboard-row::after {
+      background: rgba(255, 255, 255, 0.07);
+      backdrop-filter: blur(6px) saturate(80%);
+      -webkit-backdrop-filter: blur(6px) saturate(80%);
+    }
+
+    /* ==========================================================================
+       ОТТЕНОК СТЕКЛА ПОД ЦВЕТ КАЖДОГО СЕГМЕНТА — 10% opacity
        ========================================================================== */
     .segment-miltech .visual-preview-box::after,
     .segment-miltech .spec-badge::after {
-      background: rgba(239, 68, 68, 0.14);
+      background: rgba(239, 68, 68, 0.06);
     }
     .segment-miltech .visual-preview-box {
-      border-color: var(--color-miltech-border);
+      border-color: rgba(185, 28, 28, 0.30);
     }
     .segment-miltech .spec-badge {
-      border-color: rgba(252, 165, 165, 0.28);
+      border-color: rgba(252, 165, 165, 0.12);
     }
 
     .segment-parts .visual-preview-box::after,
     .segment-parts .spec-badge::after {
-      background: rgba(245, 158, 11, 0.13);
+      background: rgba(156, 163, 175, 0.06);
     }
     .segment-parts .visual-preview-box {
-      border-color: var(--color-parts-border);
+      border-color: rgba(156, 163, 175, 0.30);
     }
     .segment-parts .spec-badge {
-      border-color: rgba(251, 191, 36, 0.28);
+      border-color: rgba(209, 213, 219, 0.12);
     }
 
     .segment-decor .visual-preview-box::after,
     .segment-decor .spec-badge::after {
-      background: rgba(34, 197, 94, 0.13);
+      background: rgba(234, 179, 8, 0.06);
     }
     .segment-decor .visual-preview-box {
-      border-color: var(--color-decor-border);
+      border-color: rgba(234, 179, 8, 0.30);
     }
     .segment-decor .spec-badge {
-      border-color: rgba(74, 222, 128, 0.28);
+      border-color: rgba(253, 224, 71, 0.12);
     }
 
     .segment-branding .visual-preview-box::after,
     .segment-branding .spec-badge::after {
-      background: rgba(168, 85, 247, 0.14);
+      background: rgba(168, 85, 247, 0.06);
     }
     .segment-branding .visual-preview-box {
-      border-color: var(--color-branding-border);
+      border-color: rgba(168, 85, 247, 0.30);
     }
     .segment-branding .spec-badge {
-      border-color: rgba(192, 132, 252, 0.28);
+      border-color: rgba(192, 132, 252, 0.12);
     }
 
     .segment-custom .visual-preview-box::after,
     .segment-custom .spec-badge::after {
-      background: rgba(37, 99, 235, 0.13);
+      background: rgba(37, 99, 235, 0.06);
     }
     .segment-custom .visual-preview-box {
-      border-color: var(--color-custom-border);
+      border-color: rgba(37, 99, 235, 0.30);
     }
     .segment-custom .spec-badge {
-      border-color: rgba(96, 165, 250, 0.28);
+      border-color: rgba(96, 165, 250, 0.12);
     }
 
     /* ==========================================================================
-       FOOTER
+       FOOTER — file-folder tab, right side (checkerboard alternation)
        ========================================================================== */
     .footer {
       background: #06070a;
-      border-top: 1px solid var(--border-color);
-      padding: 60px 0 30px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin-top: -70px;
+      clip-path: polygon(
+        100% 70px, 99.4% 68px, 98.8% 63px, 98.2% 56px, 97.6% 46px, 97% 35px, 96.4% 24px, 95.8% 14px, 95.2% 7px, 94.6% 2px, 94% 0px,
+        58% 0px, 57.4% 2px, 56.8% 7px, 56.2% 14px, 55.6% 24px, 55% 35px, 54.4% 46px, 53.8% 56px, 53.2% 63px, 52.6% 68px, 52% 70px,
+        0% 70px,
+        0% 100%,
+        100% 100%
+      );
+      /* Very strong upward shadow */
+      filter: drop-shadow(0 -18px 36px rgba(0,0,0,1.00))
+              drop-shadow(0  -7px 14px rgba(0,0,0,0.90))
+              drop-shadow(0  -2px  3px rgba(0,0,0,1.00));
+      padding: calc(70px + 40px) 0 40px;
+      position: relative;
+      isolation: isolate;
     }
+
+    /* Embossed rim — drawn by SVG overlay (see script), ::before kept as
+       a faint ambient glow only */
+    .footer::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 10;
+      pointer-events: none;
+      background:
+        linear-gradient(to bottom,
+          rgba(255,255,255,0.10)  0px,
+          transparent            20px
+        );
+    }
+
+    /* Black notch cover */
+    .footer-notch-cover {
+      display: block;
+      position: relative;
+      z-index: 6;           /* above footer's drop-shadow filter */
+      height: 72px;
+      margin-top: -72px;
+      pointer-events: none;
+      background: #06070a;
+      clip-path: polygon(
+        100% 0px,
+        100% 70px,
+        52% 70px,  52.6% 68px, 53.2% 63px, 53.8% 56px, 54.4% 46px, 55% 35px,
+        55.6% 24px, 56.2% 14px, 56.8% 7px, 57.4% 2px, 58% 0px
+      );
+    }
+
+    /* КОНТАКТИ label — positioned in the tab notch of the footer */
+    .footer-contacts-label {
+      position: relative;
+      z-index: 6;
+      height: 70px;
+      margin-top: -70px;
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      /* Centre within the notch which spans x=58%→94% of viewport */
+      padding-left: 58%;
+      padding-right: 6%;
+    }
+
+    .footer-contacts-label span {
+      font-family: var(--font-heading);
+      font-size: 2.3rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: rgba(255,255,255,0.80);
+      white-space: nowrap;
+      width: 100%;
+      text-align: center;
+    }
+
+    .footer-top-border { display: none; }
 
     .footer-container {
       max-width: 1400px;
@@ -1455,9 +1612,9 @@
 
       <div class="segment-content-wrap">
         <div class="segment-header-block">
-          <h2 class="segment-title">Запчастини</h2>
+          <h2 class="segment-title">Деталі та запчастини</h2>
           <p class="segment-description">
-            Аналоги дефіцитних запчастин з точністю до 0.02 мм.
+            Аналоги дефіцитних запчастин з точністю до 0.02 мм. Шестерні, корпуси, втулки, муфти — друкуємо те, чого немає в наявності.
           </p>
         </div>
 
@@ -1521,7 +1678,7 @@
 
       <div class="segment-content-wrap">
         <div class="segment-header-block">
-          <h2 class="segment-title">Декор</h2>
+          <h2 class="segment-title">Декор та інтер'єр</h2>
           <p class="segment-description">
             Від параметричного декору до колекційних мініатюр.
           </p>
@@ -1706,6 +1863,9 @@
       </div>
     </section>
   </main>
+
+  <!-- Black cover for the footer tab notch -->
+  <div class="footer-notch-cover" aria-hidden="true"></div>
 
   <!-- ==========================================================================
        FOOTER
