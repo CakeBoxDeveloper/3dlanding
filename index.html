@@ -1190,21 +1190,23 @@
       padding: 1rem;
       --modal-accent: #3b82f6;
       --modal-accent-soft: rgba(37, 99, 235, 0.13);
+      --modal-bg: #0a1220;
+      --modal-btn-text: #fff;
     }
 
     /* Modal color scheme matches the section that opened it */
-    .lead-modal[data-theme="miltech"]  { --modal-accent: #b91c1c; --modal-accent-soft: rgba(239, 68, 68, 0.14); }
-    .lead-modal[data-theme="parts"]    { --modal-accent: #f59e0b; --modal-accent-soft: rgba(245, 158, 11, 0.13); }
-    .lead-modal[data-theme="decor"]    { --modal-accent: #22c55e; --modal-accent-soft: rgba(34, 197, 94, 0.13); }
-    .lead-modal[data-theme="branding"] { --modal-accent: #a855f7; --modal-accent-soft: rgba(168, 85, 247, 0.14); }
-    .lead-modal[data-theme="custom"]   { --modal-accent: #3b82f6; --modal-accent-soft: rgba(37, 99, 235, 0.13); }
+    .lead-modal[data-theme="miltech"]  { --modal-accent: #7a8c2e; --modal-accent-soft: rgba(122, 140, 46, 0.14);  --modal-bg: #0d1008; --modal-btn-text: #fff; }
+    .lead-modal[data-theme="parts"]    { --modal-accent: #9ca3af; --modal-accent-soft: rgba(156, 163, 175, 0.13); --modal-bg: #0d0d0d; --modal-btn-text: #111; }
+    .lead-modal[data-theme="decor"]    { --modal-accent: #eab308; --modal-accent-soft: rgba(234, 179, 8, 0.13);   --modal-bg: #1a1500; --modal-btn-text: #111; }
+    .lead-modal[data-theme="branding"] { --modal-accent: #b91c1c; --modal-accent-soft: rgba(185, 28, 28, 0.14);  --modal-bg: #1e0b0b; --modal-btn-text: #fff; }
+    .lead-modal[data-theme="custom"]   { --modal-accent: #3b82f6; --modal-accent-soft: rgba(37, 99, 235, 0.13);  --modal-bg: #0a1526; --modal-btn-text: #fff; }
 
     .lead-modal.active {
       display: flex;
     }
 
     .lead-modal-content {
-      background: #0e121a;
+      background: var(--modal-bg);
       border: 1px solid var(--modal-accent);
       border-radius: var(--radius);
       max-width: 780px;
@@ -1238,7 +1240,7 @@
     .lead-modal-visual {
       flex: 0 0 40%;
       position: relative;
-      background: linear-gradient(160deg, #141b2b 0%, #0a0e16 100%);
+      background: var(--modal-bg);
       border-right: 1px solid var(--border-color);
       display: flex;
       align-items: center;
@@ -1338,28 +1340,33 @@
 
     .form-group label {
       font-size: 0.85rem;
-      color: var(--text-muted);
+      color: var(--modal-accent);
       font-weight: 500;
     }
 
     .form-input, .form-select, .form-textarea {
-      background: #141924;
-      border: 1px solid var(--border-color);
+      background: rgba(0,0,0,0.35);
+      border: 1px solid var(--modal-accent);
       border-radius: var(--radius);
       padding: 10px 12px;
-      color: #fff;
+      color: var(--modal-accent);
       font-family: inherit;
       font-size: 0.92rem;
       outline: none;
     }
 
+    .form-input::placeholder, .form-textarea::placeholder {
+      color: rgba(255,255,255,0.25);
+    }
+
     .form-input:focus, .form-select:focus, .form-textarea:focus {
       border-color: var(--modal-accent);
+      box-shadow: 0 0 0 2px var(--modal-accent-soft);
     }
 
     .form-submit-btn {
       background: var(--modal-accent);
-      color: #fff;
+      color: var(--modal-btn-text);
       border: 1px solid var(--modal-accent);
       padding: 11px;
       border-radius: var(--radius);
@@ -2046,8 +2053,8 @@
       </div>
 
       <div class="lead-modal-form-col">
-        <h3 style="font-family: var(--font-heading); color: #fff; font-size: 1.25rem;" id="modalHeading">Розрахунок вартості друку</h3>
-        <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 4px;">Залиште контакти для швидкого прорахунку кошторису</p>
+        <h3 style="font-family: var(--font-heading); color: var(--modal-accent); font-size: 1.25rem;" id="modalHeading">Розрахунок вартості друку</h3>
+        <p style="font-size: 0.85rem; color: var(--modal-accent); opacity: 0.7; margin-top: 4px;">Залиште контакти для швидкого прорахунку кошторису</p>
 
         <form class="modal-form" onsubmit="handleFormSubmit(event)">
           <div class="form-group">
@@ -2106,11 +2113,24 @@
       });
     });
 
+    // Маппинг значений select на theme
+    const SELECT_THEME_MAP = {
+      'miltech':  'miltech',
+      'parts':    'parts',
+      'decor':    'decor',
+      'branding': 'branding',
+      'custom':   'custom',
+      'general':  'custom'
+    };
+
     function openLeadModal(title = 'Розрахунок вартості друку', theme = 'general') {
       const modal = document.getElementById('leadModal');
       const heading = document.getElementById('modalHeading');
+      const select = document.getElementById('orderTypeSelect');
       if (heading) heading.textContent = title;
-      modal.setAttribute('data-theme', theme);
+      // Синхронизируем select с темой
+      if (select && theme !== 'general') select.value = theme;
+      modal.setAttribute('data-theme', theme === 'general' ? 'custom' : theme);
       modal.classList.add('active');
     }
 
@@ -2123,6 +2143,18 @@
       const modal = document.getElementById('leadModal');
       if (e.target === modal) {
         closeLeadModal();
+      }
+    });
+
+    // Меняем тему при смене select
+    document.addEventListener('DOMContentLoaded', () => {
+      const select = document.getElementById('orderTypeSelect');
+      if (select) {
+        select.addEventListener('change', () => {
+          const modal = document.getElementById('leadModal');
+          const theme = SELECT_THEME_MAP[select.value] || 'custom';
+          modal.setAttribute('data-theme', theme);
+        });
       }
     });
 
