@@ -81,10 +81,10 @@
       --border-color: #262c3a;
 
       /* Segment Theme Colors */
-      --color-miltech-bg: #1e0b0b;
-      --color-miltech-accent: #7f1d1d;
-      --color-miltech-tag: #450a0a;
-      --color-miltech-text: #fca5a5;
+      --color-miltech-bg: #0d1008;
+      --color-miltech-accent: #4a5225;
+      --color-miltech-tag: #2a2e10;
+      --color-miltech-text: #c8d47a;
 
       --color-parts-bg: #0d0d0d;
       --color-parts-accent: #6b7280;
@@ -96,10 +96,10 @@
       --color-decor-tag: #3d2e00;
       --color-decor-text: #fde047;
 
-      --color-branding-bg: #170d24;
-      --color-branding-accent: #7e22ce;
-      --color-branding-tag: #3b1560;
-      --color-branding-text: #c084fc;
+      --color-branding-bg: #1e0b0b;
+      --color-branding-accent: #7f1d1d;
+      --color-branding-tag: #450a0a;
+      --color-branding-text: #fca5a5;
 
       --color-custom-bg: #0a1526;
       --color-custom-accent: #2563eb;
@@ -108,10 +108,10 @@
 
       /* Border/accent colors used to keep button border, title and
          description in sync per segment */
-      --color-miltech-border: #b91c1c;
+      --color-miltech-border: #7a8c2e;
       --color-parts-border: #9ca3af;
       --color-decor-border: #eab308;
-      --color-branding-border: #a855f7;
+      --color-branding-border: #b91c1c;
       --color-custom-border: #3b82f6;
 
       --radius: 4px;
@@ -255,10 +255,10 @@
     .nav-branding a { color: var(--color-branding-text); }
     .nav-custom a { color: var(--color-custom-text); }
 
-    .nav-miltech a:hover, .nav-miltech a.active { background: rgba(252, 165, 165, 0.12); }
+    .nav-miltech a:hover, .nav-miltech a.active { background: rgba(200, 212, 122, 0.12); }
     .nav-parts a:hover, .nav-parts a.active { background: rgba(251, 191, 36, 0.12); }
     .nav-decor a:hover, .nav-decor a.active { background: rgba(74, 222, 128, 0.12); }
-    .nav-branding a:hover, .nav-branding a.active { background: rgba(192, 132, 252, 0.12); }
+    .nav-branding a:hover, .nav-branding a.active { background: rgba(252, 165, 165, 0.12); }
     .nav-custom a:hover, .nav-custom a.active { background: rgba(96, 165, 250, 0.12); }
 
     .header-actions {
@@ -528,6 +528,11 @@
       object-fit: cover;
     }
 
+    /* ── Per-segment video position tweaks ── */
+    .segment-parts    .video-bg-container video { object-position: 25% center; }
+    .segment-decor    .video-bg-container video { object-position: center 10%; }
+    .segment-branding .video-bg-container video { object-position: center 22%; }
+
     .segment-miltech { background-color: var(--color-miltech-bg); }
     .segment-parts { background-color: var(--color-parts-bg); }
     .segment-decor { background-color: var(--color-decor-bg); }
@@ -594,7 +599,7 @@
     /* Title, description text and description's border/fill all match
        the segment's button color (solid translucent fill, no blur) */
     .segment-miltech .segment-title { color: var(--color-miltech-border); }
-    .segment-miltech .segment-description { color: var(--color-miltech-border); border-color: var(--color-miltech-border); background: rgba(76, 17, 17, 0.65); }
+    .segment-miltech .segment-description { color: var(--color-miltech-border); border-color: var(--color-miltech-border); background: rgba(58, 74, 18, 0.65); }
 
     .segment-parts .segment-title { color: var(--color-parts-border); }
     .segment-parts .segment-description { color: var(--color-parts-border); border-color: var(--color-parts-border); background: rgba(31, 41, 55, 0.70); }
@@ -603,7 +608,7 @@
     .segment-decor .segment-description { color: var(--color-decor-border); border-color: var(--color-decor-border); background: rgba(113, 63, 18, 0.55); }
 
     .segment-branding .segment-title { color: var(--color-branding-border); }
-    .segment-branding .segment-description { color: var(--color-branding-border); border-color: var(--color-branding-border); background: rgba(76, 20, 124, 0.55); }
+    .segment-branding .segment-description { color: var(--color-branding-border); border-color: var(--color-branding-border); background: rgba(76, 17, 17, 0.55); }
 
     .segment-custom .segment-title { color: var(--color-custom-border); }
     .segment-custom .segment-description { color: var(--color-custom-border); border-color: var(--color-custom-border); background: rgba(22, 59, 141, 0.55); }
@@ -662,8 +667,8 @@
       transition: background 0.2s ease;
     }
 
-    .btn-miltech { background: #5f1616; color: var(--color-miltech-border); border-color: var(--color-miltech-border); }
-    .btn-miltech:hover { background: #7a1c1c; }
+    .btn-miltech { background: #3a4a12; color: var(--color-miltech-border); border-color: var(--color-miltech-border); }
+    .btn-miltech:hover { background: #4a5c18; }
 
     .btn-parts { background: #1f2937; color: var(--color-parts-border); border-color: var(--color-parts-border); }
     .btn-parts:hover { background: #374151; }
@@ -671,8 +676,8 @@
     .btn-decor { background: #713f12; color: var(--color-decor-border); border-color: var(--color-decor-border); }
     .btn-decor:hover { background: #854d0e; }
 
-    .btn-branding { background: #5f1a9b; color: var(--color-branding-border); border-color: var(--color-branding-border); }
-    .btn-branding:hover { background: #4e1580; }
+    .btn-branding { background: #5f1616; color: var(--color-branding-border); border-color: var(--color-branding-border); }
+    .btn-branding:hover { background: #7a1c1c; }
 
     .btn-custom { background: #1c4ab0; color: var(--color-custom-border); border-color: var(--color-custom-border); }
     .btn-custom:hover { background: #163c8f; }
@@ -710,6 +715,18 @@
       background: rgba(255, 255, 255, 0.04);
       backdrop-filter: blur(2px) saturate(35%);
       -webkit-backdrop-filter: blur(2px) saturate(35%);
+    }
+
+    /* Miltech: double blur strength */
+    .segment-miltech .visual-preview-box::after {
+      backdrop-filter: blur(12px) saturate(35%);
+      -webkit-backdrop-filter: blur(12px) saturate(35%);
+    }
+
+    /* Branding: increased blur strength */
+    .segment-branding .visual-preview-box::after {
+      backdrop-filter: blur(8px) saturate(35%);
+      -webkit-backdrop-filter: blur(8px) saturate(35%);
     }
 
     .preview-header {
@@ -763,13 +780,13 @@
 
     /* ── Per-segment info-block text = button background colour ── */
 
-    /* Miltech button bg: #5f1616 — use readable red tones */
-    .segment-miltech .preview-header h3               { color: #b91c1c; }
-    .segment-miltech .preview-header                  { border-bottom-color: rgba(185,28,28,0.25); }
+    /* Miltech button bg: #3a4a12 — khaki/olive tones */
+    .segment-miltech .preview-header h3               { color: #7a8c2e; }
+    .segment-miltech .preview-header                  { border-bottom-color: rgba(122,140,46,0.25); }
     .segment-miltech .feature-item-list li,
-    .segment-miltech .feature-text-block              { color: #b91c1c; }
-    .segment-miltech .feature-item-list li svg        { stroke: #b91c1c; }
-    .segment-miltech .feature-text-block strong       { color: #b91c1c; }
+    .segment-miltech .feature-text-block              { color: #7a8c2e; }
+    .segment-miltech .feature-item-list li svg        { stroke: #7a8c2e; }
+    .segment-miltech .feature-text-block strong       { color: #7a8c2e; }
 
     /* Parts button bg: #1f2937 — grey tones */
     .segment-parts .segment-title                     { color: #9ca3af; }
@@ -788,7 +805,13 @@
     .segment-decor .feature-item-list li svg          { stroke: #ca8a04; }
     .segment-decor .feature-text-block strong         { color: #ca8a04; }
 
-    /* Branding — untouched, keep defaults */
+    /* Branding button bg: #5f1616 — red tones */
+    .segment-branding .preview-header h3              { color: #b91c1c; }
+    .segment-branding .preview-header                 { border-bottom-color: rgba(185,28,28,0.25); }
+    .segment-branding .feature-item-list li,
+    .segment-branding .feature-text-block            { color: #b91c1c; }
+    .segment-branding .feature-item-list li svg       { stroke: #b91c1c; }
+    .segment-branding .feature-text-block strong      { color: #ef4444; }
 
     /* Custom button bg: #1c4ab0 — blue tones */
     .segment-custom .preview-header h3                { color: #3b82f6; }
@@ -911,13 +934,13 @@
        ========================================================================== */
     .segment-miltech .visual-preview-box::after,
     .segment-miltech .spec-badge::after {
-      background: rgba(239, 68, 68, 0.06);
+      background: rgba(122, 140, 46, 0.06);
     }
     .segment-miltech .visual-preview-box {
-      border-color: rgba(185, 28, 28, 0.30);
+      border-color: rgba(122, 140, 46, 0.30);
     }
     .segment-miltech .spec-badge {
-      border-color: rgba(252, 165, 165, 0.12);
+      border-color: rgba(200, 212, 122, 0.12);
     }
 
     .segment-parts .visual-preview-box::after,
@@ -944,13 +967,13 @@
 
     .segment-branding .visual-preview-box::after,
     .segment-branding .spec-badge::after {
-      background: rgba(168, 85, 247, 0.06);
+      background: rgba(185, 28, 28, 0.06);
     }
     .segment-branding .visual-preview-box {
-      border-color: rgba(168, 85, 247, 0.30);
+      border-color: rgba(185, 28, 28, 0.30);
     }
     .segment-branding .spec-badge {
-      border-color: rgba(192, 132, 252, 0.12);
+      border-color: rgba(252, 165, 165, 0.12);
     }
 
     .segment-custom .visual-preview-box::after,
@@ -1027,15 +1050,51 @@
 
     .footer-top-border { display: none; }
 
+    /* ── Order disclaimer box ── */
+    .footer-disclaimer {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 6px;
+      background: rgba(255,255,255,0.04);
+      padding: 1.1rem 1.4rem;
+      margin: 2rem 0 1.4rem;
+      width: 100%;
+    }
+
+    .footer-disclaimer-icon {
+      flex-shrink: 0;
+      color: rgba(255,255,255,0.45);
+      margin-top: 1px;
+    }
+
+    .footer-disclaimer-text {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    .footer-disclaimer-text strong {
+      color: #fff;
+      font-weight: 600;
+    }
+
+    /* ── Main divider ── */
+    .footer-main-divider {
+      border: none;
+      border-top: 1px solid var(--border-color);
+      margin-bottom: 2rem;
+    }
+
     .footer-container {
-      max-width: 1400px;
-      margin: 0 auto;
+      width: 100%;
       padding: 0 2rem;
     }
 
     .footer-top-grid {
       display: grid;
-      grid-template-columns: 2fr 1fr 1fr 1fr 1.5fr;
+      grid-template-columns: 1fr 1fr 1fr 1.5fr;
       gap: 2.5rem;
       margin-bottom: 45px;
     }
@@ -1888,20 +1947,20 @@
       <h2>Інформація і контакти</h2>
     </div>
     <div class="footer-container">
-      <div class="footer-top-grid">
-        <div class="footer-brand-col">
-          <div class="brand-mark" style="font-family: var(--font-heading); font-weight: 700; font-size: 1.1rem;">
-            <svg viewBox="0 0 24 24">
-              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
-              <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
-              <line x1="12" y1="22.08" x2="12" y2="12"></line>
-            </svg>
-            СТУДІЯ 3D-ДРУКУ
-          </div>
-          <p>
-            Фабрика промислового та серійного 3D-виробництва в Україні. 220 принтерів у роботі, сучасні інженерні полімери та суворий контроль геометрії.
-          </p>
+      <!-- Disclaimer: how to order -->
+      <div class="footer-disclaimer">
+        <div class="footer-disclaimer-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
         </div>
+        <div class="footer-disclaimer-text">
+          <strong>Як зробити замовлення:</strong> надішліть STL / CAD-файл або ескіз деталі на пошту, вкажіть кількість і тип пластику — і ми одразу розрахуємо вартість. Якщо не знаєте, який матеріал обрати або як підготувати файл — <strong>менеджер підбере оптимальне рішення безкоштовно.</strong>
+          <br><br>
+          <strong>Швидкість та якість:</strong> стандартні замовлення готові за 2–5 днів. Екстрені — за добу. Всі деталі проходять контроль геометрії, і ми надаємо безкоштовний тестовий зразок перед запуском повної партії, якщо це потрібно.
+        </div>
+      </div>
+      <!-- Dividing line -->
+      <div class="footer-main-divider"></div>
+      <div class="footer-top-grid">
 
         <div class="footer-col">
           <h5>Напрямки</h5>
@@ -1918,10 +1977,10 @@
         <div class="footer-col">
           <h5>Клієнтам</h5>
           <ul class="footer-links">
-            <li><a href="#" onclick="alert('Вимоги до 3D-моделей: формати .STL, .STEP, .OBJ, .3MF. Товщина стінок від 1.0 мм.')">Вимоги до файлів</a></li>
-            <li><a href="#" onclick="alert('Оплата: Безготівковий розрахунок (ФОП / ТОВ з ПДВ), банківська картка, LiqPay.')">Способи оплати</a></li>
-            <li><a href="#" onclick="alert('Гарантія якості: 100% відповідність кресленням або безкоштовний передрук.')">Гарантії та повернення</a></li>
-            <li><a href="#" onclick="alert('Доставка: Нова Пошта по всій Україні, кур’єрська доставка, самовивіз.')">Доставка</a></li>
+            <li><a href="#" onclick="alert('Формати: .STL, .STEP, .OBJ, .3MF. Товщина стінок від 1.0 мм.')">Вимоги до файлів</a></li>
+            <li><a href="#" onclick="alert('Безготівковий розрахунок, банківська картка, LiqPay.')">Способи оплати</a></li>
+            <li><a href="#" onclick="alert('100% відповідність кресленням або безкоштовний передрук.')">Гарантії та повернення</a></li>
+            <li><a href="#" onclick="alert('Нова Пошта по всій Україні, кур\u2019єрська доставка, самовивіз.')">Доставка</a></li>
             <li><a href="#" onclick="openLeadModal('Безкоштовний тестовий зразок')">Безкоштовний тест</a></li>
           </ul>
         </div>
@@ -1929,9 +1988,9 @@
         <div class="footer-col">
           <h5>Юр. інформація</h5>
           <ul class="footer-links">
-            <li><a href="#" onclick="alert('Політика конфіденційності: Ваші файли та дані надійно захищені та не передаються третім особам.')">Політика конфіденційності</a></li>
-            <li><a href="#" onclick="alert('Договір публічної оферти регулює умови надання послуг 3D-виробництва.')">Публічна оферта</a></li>
-            <li><a href="#" onclick="alert('Підписання угоди про нерозголошення (NDA) для комерційних та оборонних розробок.')">Угода NDA</a></li>
+            <li><a href="#" onclick="alert('Ваші файли та дані надійно захищені та не передаються третім особам.')">Політика конфіденційності</a></li>
+            <li><a href="#" onclick="alert('Договір публічної оферти регулює умови надання послуг.')">Публічна оферта</a></li>
+            <li><a href="#" onclick="alert('Підписання NDA для комерційних та оборонних розробок.')">Угода NDA</a></li>
             <li><a href="#" onclick="alert('Сертифікати відповідності на використовувані полімери.')">Сертифікати матеріалів</a></li>
           </ul>
         </div>
@@ -1951,17 +2010,16 @@
               <svg class="icon-svg" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
               order@3dprint.ua
             </a>
-            <div style="font-size: 0.8rem; color: var(--text-dim); margin-top: 4px;">
+            <div style="font-size:0.8rem;color:var(--text-dim);margin-top:4px;">
               м. Київ, вул. Промислова, 12 (24/7)
             </div>
           </div>
         </div>
-      </div>
 
+      </div>
       <div class="footer-bottom">
         <div>© 2026 Студія 3D-друку. Всі права захищено.</div>
         <div class="footer-bottom-links">
-          <a href="#hero">Вгору ↑</a>
           <a href="#miltech">Miltech</a>
           <a href="#parts">Запчастини</a>
           <a href="#decor">Декор</a>
