@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+Disallow: /api/
+
+Sitemap: https://3dlanding-mauve.vercel.app/sitemap.xml
