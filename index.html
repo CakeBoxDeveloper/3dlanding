@@ -156,7 +156,7 @@
       --color-decor-tag: #3d2e00;
       --color-decor-text: #fde047;
 
-      --color-branding-bg: #1a0e05;
+      --color-branding-bg: #050200;
       --color-branding-accent: #92400e;
       --color-branding-tag: #451a03;
       --color-branding-text: #d97706;
@@ -493,6 +493,7 @@
       to { transform: translateY(-50%); }
     }
 
+    /* dashboard-row — одна рамка 1px, без ::before */
     .dashboard-row {
       display: flex;
       flex-direction: column;
@@ -501,10 +502,10 @@
       text-align: center;
       gap: 0.5rem;
       padding: 1rem 1.7rem;
-      border: 3px solid rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.10);
       border-radius: var(--radius);
       background: transparent;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
       position: relative;
       z-index: 0;
       isolation: isolate;
@@ -568,10 +569,9 @@
         100% 100%,
         0% 100%
       );
-      /* Very strong upward shadow — three layers */
-      filter: drop-shadow(0 -22px 40px rgba(0,0,0,1.00))
-              drop-shadow(0 -10px 18px rgba(0,0,0,1.00))
-              drop-shadow(0  -3px  4px rgba(0,0,0,1.00));
+      /* Тень только вниз — не светится сверху */
+      filter: drop-shadow(0 8px 16px rgba(0,0,0,0.90))
+              drop-shadow(0 3px  6px rgba(0,0,0,0.90));
       isolation: isolate;
     }
 
@@ -615,6 +615,7 @@
         rgba(255,255,255,0.06) 2px,
         rgba(255,255,255,0.06) 4px
       );
+      background-size: 5.657px 5.657px;
     }
 
     .video-bg-container video {
@@ -672,6 +673,27 @@
       transform: translateY(-18px);
     }
 
+    /* Строка заголовка с иконкой */
+    .segment-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.6rem;
+      width: 100%;
+    }
+    .segment-title-row .segment-title {
+      flex: 1;
+    }
+    .segment-title-icon {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+    .segment-title-icon svg {
+      width: 2rem;
+      height: 2rem;
+    }
+
     /* Soft frosted patch behind the title + descriptor that fades smoothly
        into the video instead of a hard-edged blur box */
     .segment-title {
@@ -702,19 +724,19 @@
     .segment-miltech .segment-title { color: var(--color-miltech-border); }
     .segment-miltech .segment-description { color: var(--color-miltech-border); border-color: var(--color-miltech-border); background: rgba(127, 29, 29, 0.55); }
 
-    .segment-parts .segment-title { color: var(--color-parts-border); }
+    .segment-parts .segment-title { color: #4b5563; opacity: 1; }
     .segment-parts .segment-description { color: var(--color-parts-border); border-color: var(--color-parts-border); background: rgba(31, 41, 55, 0.70); }
 
     .segment-decor .segment-title { color: var(--color-decor-border); }
     .segment-decor .segment-description { color: var(--color-decor-border); border-color: var(--color-decor-border); background: rgba(113, 63, 18, 0.55); }
 
     .segment-branding .segment-title { color: var(--color-branding-border); }
-    .segment-branding .segment-description { color: var(--color-branding-border); border-color: var(--color-branding-border); background: rgba(120, 53, 15, 0.55); }
+    .segment-branding .segment-description { color: var(--color-branding-border); border-color: var(--color-branding-border); background: rgba(60, 20, 5, 0.80); }
 
     .segment-custom .segment-title { color: var(--color-custom-border); }
     .segment-custom .segment-description { color: var(--color-custom-border); border-color: var(--color-custom-border); background: rgba(22, 59, 141, 0.55); }
 
-    /* Заголовки этих секций смещены к правому краю */
+    /* Заголовок Parts — вправо */
     .segment-parts .segment-header-block {
       align-self: flex-end;
       text-align: right;
@@ -851,6 +873,11 @@
       -webkit-backdrop-filter: blur(12px) saturate(35%);
     }
 
+    /* Branding — затемняющий оверлей поверх видео */
+    .segment-branding .segment-overlay {
+      background: rgba(3, 1, 0, 0.55);
+    }
+
     /* Branding: increased blur strength */
     .segment-branding .visual-preview-box::after {
       backdrop-filter: blur(8px) saturate(35%);
@@ -917,7 +944,7 @@
     .segment-miltech .feature-text-block strong       { color: #ef4444; }
 
     /* Parts button bg: #1f2937 — grey tones */
-    .segment-parts .segment-title                     { color: #9ca3af; }
+    .segment-parts .segment-title                     { color: #9ca3af; opacity: 1; }
     .segment-parts .preview-header h3                 { color: #6b7280; }
     .segment-parts .preview-header                    { border-bottom-color: rgba(107,114,128,0.20); }
     .segment-parts .feature-item-list li,
@@ -1016,24 +1043,7 @@
       -webkit-backdrop-filter: none !important;
     }
 
-    .dashboard-row::before {
-      content: '';
-      position: absolute;
-      inset: -2px;
-      z-index: 2;
-      border-radius: inherit;
-      pointer-events: none;
-      padding: 2px;
-      background: rgba(255,255,255,0.10);
-      -webkit-mask:
-        linear-gradient(#000 0 0) content-box,
-        linear-gradient(#000 0 0);
-      -webkit-mask-composite: xor;
-      mask:
-        linear-gradient(#000 0 0) content-box,
-        linear-gradient(#000 0 0);
-      mask-composite: exclude;
-    }
+    .dashboard-row::before { display: none; }
 
     /* Backdrop blur lives on ::after */
     .dashboard-row::after {
@@ -1080,7 +1090,7 @@
 
     .segment-branding .visual-preview-box::after,
     .segment-branding .spec-badge::after {
-      background: rgba(146, 64, 14, 0.06);
+      background: rgba(50, 18, 3, 0.75);
     }
     .segment-branding .visual-preview-box::after {
       border-color: rgba(180, 83, 9, 0.30);
@@ -1091,7 +1101,7 @@
 
     .segment-custom .visual-preview-box::after,
     .segment-custom .spec-badge::after {
-      background: rgba(37, 99, 235, 0.06);
+      background: rgba(22, 59, 141, 0.55);
     }
     .segment-custom .visual-preview-box::after {
       border-color: rgba(37, 99, 235, 0.30);
@@ -1119,6 +1129,14 @@
       top: 0;
       left: 0;
       width: 100%;
+      height: 72px;
+    }
+
+    /* Тень и блик — убираем, оставляем только основную линию */
+    .segment-rim svg polyline:first-child,
+    .segment-rim svg polyline:last-child {
+      display: none;
+    }
       height: 72px;
       overflow: visible;
     }
@@ -1843,7 +1861,7 @@
         right: auto !important;
       }
 
-      /* Задача 5: кнопка "Мы онлайн" — полная ширина снизу */
+      /* Кнопка "Мы онлайн" — полная ширина снизу */
       #ai-chat-btn {
         bottom: 0;
         right: 0;
@@ -1851,26 +1869,25 @@
         width: calc(100% - 2rem) !important;
         margin: 0 1rem;
         border-radius: 0;
-        border-top-left-radius: 14px;
-        border-top-right-radius: 14px;
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
         border-bottom: none;
-        height: 52px;
+        height: 56px;
         justify-content: center;
-        font-size: 0.9rem;
         z-index: 9100;
       }
 
       #ai-chat-tooltip { display: none; }
 
-      /* Задача 5: чат на весь экран на мобиле */
+      /* Чат на весь экран на мобиле */
       #ai-chat-modal {
-        bottom: 52px; /* высота кнопки */
+        bottom: 56px;
         right: 0;
         left: 0;
         width: 100% !important;
         max-width: 100% !important;
-        height: calc(100vh - 52px) !important;
-        max-height: calc(100vh - 52px) !important;
+        height: calc(100vh - 56px) !important;
+        max-height: calc(100vh - 56px) !important;
         border-radius: 0;
         transform-origin: bottom center;
       }
@@ -2137,7 +2154,12 @@
 
       <div class="segment-content-wrap">
         <div class="segment-header-block">
-          <h2 class="segment-title">Miltech та Deftech</h2>
+          <div class="segment-title-row">
+            <h2 class="segment-title">Miltech та Deftech</h2>
+            <!--<span class="segment-title-icon">
+              <svg viewBox="0 0 64 64" fill="#b91c1c" xmlns="http://www.w3.org/2000/svg"><path d="M54 8C48 2 40 4 36 8l-8 8-12-4-4 4 8 8-6 6-6-2-2 2 4 4-2 2 2 6 6-2 2 2 2-2 4 4 2-2-2-6 6-6 8 8 4-4-4-12 8-8c4-4 6-12 0-18z"/></svg>
+            </span>-->
+          </div>
           <p class="segment-description">
             Друк деталей, що витримують удари, вологу та екстремальні температури.
           </p>
@@ -2216,7 +2238,12 @@
 
       <div class="segment-content-wrap">
         <div class="segment-header-block">
-          <h2 class="segment-title">Деталі та запчастини</h2>
+          <div class="segment-title-row">
+            <h2 class="segment-title">Деталі та запчастини</h2>
+            <!--<span class="segment-title-icon">
+              <img src="https://www.svgrepo.com/show/509956/gear.svg" alt="" width="32" height="32">
+            </span>-->
+          </div>
           <p class="segment-description">
             Аналоги дефіцитних запчастин. Шестерні, корпуси, втулки — точність до 0.02 мм.
           </p>
@@ -2295,7 +2322,12 @@
 
       <div class="segment-content-wrap">
         <div class="segment-header-block">
-          <h2 class="segment-title">Декор та інтер'єр</h2>
+          <div class="segment-title-row">
+            <h2 class="segment-title">Декор та інтер'єр</h2>
+            <!--<span class="segment-title-icon">
+              <img src="https://www.svgrepo.com/show/491057/party.svg" alt="" width="32" height="32">
+            </span>-->
+          </div>
           <p class="segment-description">
             Від параметричного декору до колекційних мініатюр.
           </p>
@@ -2374,7 +2406,12 @@
 
       <div class="segment-content-wrap">
         <div class="segment-header-block">
-          <h2 class="segment-title">Фірмовий стиль</h2>
+          <div class="segment-title-row">
+            <h2 class="segment-title">Фірмовий стиль</h2>
+            <!--<span class="segment-title-icon">
+              <img src="https://www.svgrepo.com/show/381938/success-achievement-award-medal-winner.svg" alt="" width="32" height="32">
+            </span>-->
+          </div>
           <p class="segment-description">
             Брендовані аксесуари й вивіски для кафе та ресторанів.
           </p>
@@ -2453,7 +2490,12 @@
 
       <div class="segment-content-wrap">
         <div class="segment-header-block">
-          <h2 class="segment-title">На замовлення</h2>
+          <div class="segment-title-row">
+            <h2 class="segment-title">На замовлення</h2>
+            <!--<span class="segment-title-icon">
+              <img src="https://www.svgrepo.com/show/532255/crown.svg" alt="" width="32" height="32">
+            </span>-->
+          </div>
           <p class="segment-description">
             Втілимо вашу ідею — від одного виробу до дрібної серії.
           </p>
@@ -2511,6 +2553,20 @@
        FOOTER
        ========================================================================== -->
   <footer class="footer snap-section" id="contacts">
+    <!-- SVG rim — белая обводка по вырезу футера -->
+    <div class="segment-rim">
+      <svg viewBox="0 0 1000 72" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- тень -->
+        <polyline stroke="rgba(0,0,0,0.6)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"
+          points="0,72 520,72 526,70 532,65 538,58 544,48 550,37 556,26 562,16 568,9 574,4 580,2 940,2 946,4 952,9 958,16 964,26 970,37 976,48 982,58 988,65 994,70 1000,72"/>
+        <!-- основная линия — белая -->
+        <polyline stroke="rgba(255,255,255,0.70)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"
+          points="0,70 520,70 526,68 532,63 538,56 544,46 550,35 556,24 562,14 568,7 574,2 580,0 940,0 946,2 952,7 958,14 964,24 970,35 976,46 982,56 988,63 994,68 1000,70"/>
+        <!-- блик -->
+        <polyline stroke="rgba(255,255,255,0.25)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+          points="0,68.5 520,68.5 526,66.5 532,61.5 538,54.5 544,44.5 550,33.5 556,22.5 562,12.5 568,5.5 574,0.5 580,0 940,0 946,0.5 952,5.5 958,12.5 964,22.5 970,33.5 976,44.5 982,54.5 988,61.5 994,66.5 1000,68.5"/>
+      </svg>
+    </div>
     <!-- Heading in the tab notch — same pattern as all other segments -->
     <div class="footer-heading-row">
       <h2>Інформація і контакти</h2>
@@ -3052,86 +3108,43 @@
       bottom: 28px;
       right: 28px;
       z-index: 9000;
-      width: auto;
-      height: 44px;
-      border-radius: 22px;
-      padding: 0 18px 0 14px;
+      width: 360px;
+      max-width: calc(100vw - 40px);
+      height: 56px;
+      border-radius: 4px;
+      padding: 0 32px;
       background: rgba(255, 255, 255, 0.08);
-      backdrop-filter: blur(14px) saturate(160%);
-      -webkit-backdrop-filter: blur(14px) saturate(160%);
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      box-shadow: 0 4px 20px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.15);
+      backdrop-filter: blur(16px) saturate(140%);
+      -webkit-backdrop-filter: blur(16px) saturate(140%);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.12);
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
-      animation: chatPulse 4s ease-in-out infinite;
+      gap: 0;
+      transition: background 0.2s ease, box-shadow 0.2s ease;
     }
     #ai-chat-btn:hover {
-      transform: translateY(-2px);
-      background: rgba(255, 255, 255, 0.14);
-      box-shadow: 0 8px 28px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.2);
-      animation: none;
+      background: rgba(255, 255, 255, 0.13);
+      box-shadow: 0 6px 28px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.18);
     }
-    #ai-chat-btn svg {
-      width: 18px;
-      height: 18px;
-      fill: #22c55e;
-      flex-shrink: 0;
-    }
+    #ai-chat-btn svg { display: none; }
     #ai-chat-btn-label {
       font-family: var(--font-body, sans-serif);
-      font-size: 0.82rem;
+      font-size: 1.1rem;
       font-weight: 600;
       color: #f1f5f9;
       white-space: nowrap;
-      letter-spacing: 0.02em;
+      letter-spacing: 0.03em;
     }
 
-    @keyframes chatPulse {
-      0%, 100% { box-shadow: 0 4px 20px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.15), 0 0 0 0 rgba(34,197,94,0.3); }
-      50%       { box-shadow: 0 4px 20px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.15), 0 0 0 8px rgba(34,197,94,0); }
-    }
+    @keyframes chatPulse {}
 
-    /* Зелёная точка онлайн — теперь внутри кнопки через SVG, убираем ::after */
-    #ai-chat-btn::after {
-      display: none;
-    }
+    #ai-chat-btn::after { display: none; }
 
-    /* Тултип */
-    #ai-chat-tooltip {
-      position: fixed;
-      bottom: 98px;
-      right: 28px;
-      z-index: 9000;
-      background: #1e293b;
-      color: #f1f5f9;
-      font-family: var(--font-body, sans-serif);
-      font-size: 0.82rem;
-      padding: 8px 14px;
-      border-radius: 10px;
-      white-space: nowrap;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.4);
-      pointer-events: none;
-      opacity: 0;
-      transform: translateY(6px);
-      transition: opacity 0.25s ease, transform 0.25s ease;
-    }
-    #ai-chat-tooltip::after {
-      content: '';
-      position: absolute;
-      bottom: -6px; right: 22px;
-      border: 6px solid transparent;
-      border-bottom: none;
-      border-top-color: #1e293b;
-    }
-    #ai-chat-btn:hover + #ai-chat-tooltip,
-    #ai-chat-tooltip.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    /* Тултип — скрыт */
+    #ai-chat-tooltip { display: none !important; }
 
     /* === Chat modal === */
     #ai-chat-modal {
@@ -3143,10 +3156,10 @@
       max-width: calc(100vw - 40px);
       height: 520px;
       max-height: calc(100vh - 140px);
-      background: #0f172a;
-      border: 1px solid rgba(59,130,246,0.25);
-      border-radius: 18px;
-      box-shadow: 0 16px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.04);
+      background: #1c1c1c;
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 4px;
+      box-shadow: 0 16px 60px rgba(0,0,0,0.7);
       display: flex;
       flex-direction: column;
       overflow: hidden;
@@ -3168,24 +3181,24 @@
       align-items: center;
       gap: 10px;
       padding: 14px 16px;
-      background: linear-gradient(90deg, #1e3a5f 0%, #1e293b 100%);
-      border-bottom: 1px solid rgba(255,255,255,0.06);
+      background: #2d2d2d;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
       flex-shrink: 0;
     }
     #ai-chat-avatar {
       width: 36px; height: 36px;
-      background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-      border-radius: 50%;
+      background: #3a3a3a;
+      border-radius: 4px;
       display: flex; align-items: center; justify-content: center;
       flex-shrink: 0;
     }
-    #ai-chat-avatar svg { width: 20px; height: 20px; fill: #fff; }
+    #ai-chat-avatar svg { width: 20px; height: 20px; fill: #9ca3af; }
     .ai-chat-header-info { flex: 1; }
     .ai-chat-header-name {
       font-family: var(--font-heading, sans-serif);
       font-size: 0.9rem;
       font-weight: 700;
-      color: #f1f5f9;
+      color: #e5e7eb;
     }
     .ai-chat-header-status {
       font-size: 0.72rem;
@@ -3195,6 +3208,16 @@
     .ai-chat-header-status::before {
       content: '';
       width: 7px; height: 7px;
+      background: #22c55e;
+      border-radius: 50%;
+    }
+    #ai-chat-close {
+      background: none; border: none; cursor: pointer;
+      color: rgba(255,255,255,0.3); font-size: 1.3rem;
+      line-height: 1; padding: 4px;
+      transition: color 0.15s;
+    }
+    #ai-chat-close:hover { color: #fff; }
       background: #22c55e;
       border-radius: 50%;
     }
@@ -3229,22 +3252,22 @@
       word-break: break-word;
     }
     .chat-msg.bot {
-      background: rgba(255,255,255,0.06);
+      background: #2a2a2a;
       border: 1px solid rgba(255,255,255,0.08);
-      color: #e2e8f0;
+      color: #d1d5db;
       align-self: flex-start;
       border-bottom-left-radius: 4px;
     }
     .chat-msg.user {
-      background: linear-gradient(135deg, #3b82f6, #2563eb);
-      color: #fff;
+      background: #3d3d3d;
+      color: #f3f4f6;
       align-self: flex-end;
       border-bottom-right-radius: 4px;
     }
     .chat-msg.typing {
-      background: rgba(255,255,255,0.06);
+      background: #2a2a2a;
       border: 1px solid rgba(255,255,255,0.08);
-      color: #94a3b8;
+      color: #6b7280;
       align-self: flex-start;
       font-style: italic;
     }
@@ -3272,19 +3295,19 @@
       flex-shrink: 0;
     }
     .quick-reply-btn {
-      background: rgba(59,130,246,0.12);
-      border: 1px solid rgba(59,130,246,0.3);
-      color: #93c5fd;
+      background: #2d2d2d;
+      border: 1px solid rgba(255,255,255,0.12);
+      color: #9ca3af;
       font-size: 0.76rem;
       padding: 5px 10px;
-      border-radius: 20px;
+      border-radius: 4px;
       cursor: pointer;
       transition: background 0.15s, color 0.15s;
       white-space: nowrap;
     }
     .quick-reply-btn:hover {
-      background: rgba(59,130,246,0.25);
-      color: #fff;
+      background: #3a3a3a;
+      color: #e5e7eb;
     }
 
     /* Input */
@@ -3293,16 +3316,16 @@
       gap: 8px;
       padding: 12px 14px;
       border-top: 1px solid rgba(255,255,255,0.06);
-      background: rgba(0,0,0,0.2);
+      background: #222222;
       flex-shrink: 0;
     }
     #ai-chat-input {
       flex: 1;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 10px;
+      background: #2d2d2d;
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 4px;
       padding: 9px 12px;
-      color: #f1f5f9;
+      color: #e5e7eb;
       font-family: var(--font-body, sans-serif);
       font-size: 0.84rem;
       outline: none;
@@ -3311,19 +3334,19 @@
       max-height: 90px;
       transition: border-color 0.15s;
     }
-    #ai-chat-input:focus { border-color: rgba(59,130,246,0.5); }
-    #ai-chat-input::placeholder { color: rgba(255,255,255,0.25); }
+    #ai-chat-input:focus { border-color: rgba(255,255,255,0.25); }
+    #ai-chat-input::placeholder { color: rgba(255,255,255,0.2); }
     #ai-chat-send {
       width: 38px; height: 38px;
-      background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-      border: none; border-radius: 10px;
+      background: #3d3d3d;
+      border: 1px solid rgba(255,255,255,0.12); border-radius: 4px;
       cursor: pointer; flex-shrink: 0;
       display: flex; align-items: center; justify-content: center;
-      transition: opacity 0.15s, transform 0.15s;
+      transition: background 0.15s;
     }
-    #ai-chat-send:hover { opacity: 0.9; transform: scale(1.05); }
-    #ai-chat-send:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
-    #ai-chat-send svg { width: 18px; height: 18px; fill: #fff; }
+    #ai-chat-send:hover { background: #4a4a4a; }
+    #ai-chat-send:disabled { opacity: 0.4; cursor: not-allowed; }
+    #ai-chat-send svg { width: 18px; height: 18px; fill: #9ca3af; }
   </style>
 
   <!-- Floating button -->
@@ -3530,6 +3553,165 @@
         sendBtn.disabled = false;
         input.focus();
       }
+    })();
+  </script>
+
+  <!-- ================================================================
+       COOKIE CONSENT BANNER (Закон України про захист персональних даних)
+       ================================================================ -->
+  <style>
+    #cookie-banner {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 9999;
+      background: rgba(15, 15, 20, 0.97);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-top: 1px solid rgba(255,255,255,0.10);
+      padding: 20px 24px 32px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      font-family: var(--font-body, sans-serif);
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    #cookie-banner.hidden {
+      transform: translateY(100%);
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* Кнопка чата скрыта пока баннер не принят */
+    body.cookie-pending #ai-chat-btn,
+    body.cookie-pending #ai-chat-tooltip {
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(20px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+    #cookie-banner-text {
+      flex: 1;
+      min-width: 220px;
+      font-size: 0.82rem;
+      color: #9ca3af;
+      line-height: 1.5;
+    }
+    #cookie-banner-text a {
+      color: #d1d5db;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    #cookie-banner-text a:hover { color: #fff; }
+    .cookie-btn-group {
+      display: flex;
+      gap: 10px;
+      flex-shrink: 0;
+      flex-wrap: wrap;
+    }
+    .cookie-btn {
+      font-family: var(--font-body, sans-serif);
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 9px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: background 0.15s, color 0.15s;
+      white-space: nowrap;
+    }
+    .cookie-btn-accept {
+      background: #f3f4f6;
+      color: #111;
+      border-color: #f3f4f6;
+    }
+    .cookie-btn-accept:hover { background: #fff; }
+    .cookie-btn-decline {
+      background: transparent;
+      color: #6b7280;
+      border-color: rgba(255,255,255,0.15);
+    }
+    .cookie-btn-decline:hover { color: #d1d5db; border-color: rgba(255,255,255,0.3); }
+    .cookie-btn-settings {
+      background: transparent;
+      color: #6b7280;
+      border-color: rgba(255,255,255,0.15);
+    }
+    .cookie-btn-settings:hover { color: #d1d5db; border-color: rgba(255,255,255,0.3); }
+
+    @media (max-width: 768px) {
+      #cookie-banner {
+        padding: 14px 16px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+        /* На мобиле кнопка чата уже внизу — баннер идёт над ней */
+        bottom: 56px;
+      }
+      .cookie-btn-group { width: 100%; }
+      .cookie-btn { flex: 1; text-align: center; }
+    }
+  </style>
+
+  <div id="cookie-banner" role="dialog" aria-label="Повідомлення про файли cookie">
+    <div id="cookie-banner-text">
+      🍪 Ми використовуємо файли cookie відповідно до
+      <a href="privacy.html" target="_blank">Політики конфіденційності</a>
+      та Закону України «Про захист персональних даних». Cookie допомагають нам
+      покращувати сайт та аналізувати відвідуваність. Ви можете прийняти всі cookie
+      або налаштувати їх самостійно.
+    </div>
+    <div class="cookie-btn-group">
+      <button class="cookie-btn cookie-btn-accept" id="cookie-accept">Прийняти всі</button>
+      <button class="cookie-btn cookie-btn-settings" id="cookie-settings">Налаштування</button>
+      <button class="cookie-btn cookie-btn-decline" id="cookie-decline">Відхилити</button>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      var banner = document.getElementById('cookie-banner');
+      var COOKIE_KEY = 'tp_cookie_consent';
+
+      function setCookie(name, value, days) {
+        var d = new Date();
+        d.setTime(d.getTime() + days * 24 * 60 * 60 * 1000);
+        document.cookie = name + '=' + value + ';expires=' + d.toUTCString() + ';path=/;SameSite=Lax';
+      }
+
+      function getCookie(name) {
+        var v = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+        return v ? v[2] : null;
+      }
+
+      // Показываем только если ещё не выбирали
+      if (!getCookie(COOKIE_KEY)) {
+        banner.classList.remove('hidden');
+        document.body.classList.add('cookie-pending');
+      } else {
+        banner.classList.add('hidden');
+      }
+
+      function acceptCookie() {
+        document.body.classList.remove('cookie-pending');
+        banner.classList.add('hidden');
+      }
+
+      document.getElementById('cookie-accept').addEventListener('click', function() {
+        setCookie(COOKIE_KEY, 'accepted', 365);
+        acceptCookie();
+      });
+
+      document.getElementById('cookie-decline').addEventListener('click', function() {
+        setCookie(COOKIE_KEY, 'declined', 30);
+        acceptCookie();
+      });
+
+      document.getElementById('cookie-settings').addEventListener('click', function() {
+        window.open('privacy.html', '_blank');
+      });
     })();
   </script>
 
