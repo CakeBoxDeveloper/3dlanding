@@ -140,10 +140,10 @@
       --border-color: #262c3a;
 
       /* Segment Theme Colors */
-      --color-miltech-bg: #0d1008;
-      --color-miltech-accent: #4a5225;
-      --color-miltech-tag: #2a2e10;
-      --color-miltech-text: #c8d47a;
+      --color-miltech-bg: #1a0505;
+      --color-miltech-accent: #7f1d1d;
+      --color-miltech-tag: #450a0a;
+      --color-miltech-text: #fca5a5;
 
       --color-parts-bg: #0d0d0d;
       --color-parts-accent: #6b7280;
@@ -155,10 +155,10 @@
       --color-decor-tag: #3d2e00;
       --color-decor-text: #fde047;
 
-      --color-branding-bg: #1e0b0b;
-      --color-branding-accent: #7f1d1d;
-      --color-branding-tag: #450a0a;
-      --color-branding-text: #fca5a5;
+      --color-branding-bg: #1a0e05;
+      --color-branding-accent: #92400e;
+      --color-branding-tag: #451a03;
+      --color-branding-text: #d97706;
 
       --color-custom-bg: #0a1526;
       --color-custom-accent: #2563eb;
@@ -167,10 +167,10 @@
 
       /* Border/accent colors used to keep button border, title and
          description in sync per segment */
-      --color-miltech-border: #7a8c2e;
+      --color-miltech-border: #b91c1c;
       --color-parts-border: #9ca3af;
       --color-decor-border: #eab308;
-      --color-branding-border: #b91c1c;
+      --color-branding-border: #b45309;
       --color-custom-border: #3b82f6;
 
       --radius: 4px;
@@ -402,6 +402,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: center center;
     }
 
     .hero-header,
@@ -582,6 +583,24 @@
       pointer-events: none;
     }
 
+    /* Паттерн поверх видео, под контентом секции */
+    .video-bg-container::after,
+    .hero-video-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      opacity: 1;
+      background-image: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 2px,
+        rgba(255,255,255,0.06) 2px,
+        rgba(255,255,255,0.06) 4px
+      );
+    }
+
     .video-bg-container video {
       width: 100%;
       height: 100%;
@@ -590,15 +609,15 @@
 
     /* ── Per-segment video position tweaks ── */
     .segment-parts    .video-bg-container video { object-position: 25% center; }
-    .segment-decor    .video-bg-container video { object-position: center 10%; }
-    .segment-branding .video-bg-container video { object-position: center 22%; }
+    .segment-decor    .video-bg-container video { object-position: center 1%; }
+    .segment-branding .video-bg-container video { object-position: center 12%; }
 
     .segment-miltech { background-color: var(--color-miltech-bg); }
     .segment-parts { background-color: var(--color-parts-bg); }
     .segment-decor { background-color: var(--color-decor-bg); }
     .segment-branding { background-color: var(--color-branding-bg); }
     .segment-custom { background-color: var(--color-custom-bg); }
-    .segment-custom .video-bg-container video { filter: saturate(20%); }
+    .segment-custom .video-bg-container video { filter: none; }
 
     .segment-overlay {
       position: absolute;
@@ -659,7 +678,7 @@
     /* Title, description text and description's border/fill all match
        the segment's button color (solid translucent fill, no blur) */
     .segment-miltech .segment-title { color: var(--color-miltech-border); }
-    .segment-miltech .segment-description { color: var(--color-miltech-border); border-color: var(--color-miltech-border); background: rgba(58, 74, 18, 0.65); }
+    .segment-miltech .segment-description { color: var(--color-miltech-border); border-color: var(--color-miltech-border); background: rgba(127, 29, 29, 0.55); }
 
     .segment-parts .segment-title { color: var(--color-parts-border); }
     .segment-parts .segment-description { color: var(--color-parts-border); border-color: var(--color-parts-border); background: rgba(31, 41, 55, 0.70); }
@@ -668,7 +687,7 @@
     .segment-decor .segment-description { color: var(--color-decor-border); border-color: var(--color-decor-border); background: rgba(113, 63, 18, 0.55); }
 
     .segment-branding .segment-title { color: var(--color-branding-border); }
-    .segment-branding .segment-description { color: var(--color-branding-border); border-color: var(--color-branding-border); background: rgba(76, 17, 17, 0.55); }
+    .segment-branding .segment-description { color: var(--color-branding-border); border-color: var(--color-branding-border); background: rgba(120, 53, 15, 0.55); }
 
     .segment-custom .segment-title { color: var(--color-custom-border); }
     .segment-custom .segment-description { color: var(--color-custom-border); border-color: var(--color-custom-border); background: rgba(22, 59, 141, 0.55); }
@@ -727,8 +746,8 @@
       transition: background 0.2s ease;
     }
 
-    .btn-miltech { background: #3a4a12; color: var(--color-miltech-border); border-color: var(--color-miltech-border); }
-    .btn-miltech:hover { background: #4a5c18; }
+    .btn-miltech { background: #7a1d1d; color: #fca5a5; border-color: #b91c1c; }
+    .btn-miltech:hover { background: #991b1b; }
 
     .btn-parts { background: #1f2937; color: var(--color-parts-border); border-color: var(--color-parts-border); }
     .btn-parts:hover { background: #374151; }
@@ -736,13 +755,39 @@
     .btn-decor { background: #713f12; color: var(--color-decor-border); border-color: var(--color-decor-border); }
     .btn-decor:hover { background: #854d0e; }
 
-    .btn-branding { background: #5f1616; color: var(--color-branding-border); border-color: var(--color-branding-border); }
-    .btn-branding:hover { background: #7a1c1c; }
+    .btn-branding { background: #78350f; color: #d97706; border-color: #b45309; }
+    .btn-branding:hover { background: #92400e; }
 
     .btn-custom { background: #1c4ab0; color: var(--color-custom-border); border-color: var(--color-custom-border); }
     .btn-custom:hover { background: #163c8f; }
 
-    .segment-right-col {
+    /* ── Shimmer на кнопках действия ── */
+    .btn-segment {
+      overflow: hidden;
+      position: relative;
+    }
+    .btn-segment::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 60%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255,255,255,0.18) 50%,
+        transparent 100%
+      );
+      animation: btn-shimmer 3s ease-in-out infinite;
+      pointer-events: none;
+      z-index: 1;
+    }
+    @keyframes btn-shimmer {
+      0%   { left: -60%; }
+      60%  { left: 120%; }
+      100% { left: 120%; }
+    }    .segment-right-col {
       display: flex;
       flex-direction: column;
       height: 100%;
@@ -840,13 +885,13 @@
 
     /* ── Per-segment info-block text = button background colour ── */
 
-    /* Miltech button bg: #3a4a12 — khaki/olive tones */
-    .segment-miltech .preview-header h3               { color: #7a8c2e; }
-    .segment-miltech .preview-header                  { border-bottom-color: rgba(122,140,46,0.25); }
+    /* Miltech button bg: #7a1d1d — red tones */
+    .segment-miltech .preview-header h3               { color: #ef4444; }
+    .segment-miltech .preview-header                  { border-bottom-color: rgba(239,68,68,0.25); }
     .segment-miltech .feature-item-list li,
-    .segment-miltech .feature-text-block              { color: #7a8c2e; }
-    .segment-miltech .feature-item-list li svg        { stroke: #7a8c2e; }
-    .segment-miltech .feature-text-block strong       { color: #7a8c2e; }
+    .segment-miltech .feature-text-block              { color: #ef4444; }
+    .segment-miltech .feature-item-list li svg        { stroke: #ef4444; }
+    .segment-miltech .feature-text-block strong       { color: #ef4444; }
 
     /* Parts button bg: #1f2937 — grey tones */
     .segment-parts .segment-title                     { color: #9ca3af; }
@@ -865,13 +910,13 @@
     .segment-decor .feature-item-list li svg          { stroke: #ca8a04; }
     .segment-decor .feature-text-block strong         { color: #ca8a04; }
 
-    /* Branding button bg: #5f1616 — red tones */
-    .segment-branding .preview-header h3              { color: #b91c1c; }
-    .segment-branding .preview-header                 { border-bottom-color: rgba(185,28,28,0.25); }
+    /* Branding button bg: #92400e — coffee/brown tones */
+    .segment-branding .preview-header h3              { color: #d97706; }
+    .segment-branding .preview-header                 { border-bottom-color: rgba(217,119,6,0.25); }
     .segment-branding .feature-item-list li,
-    .segment-branding .feature-text-block            { color: #b91c1c; }
-    .segment-branding .feature-item-list li svg       { stroke: #b91c1c; }
-    .segment-branding .feature-text-block strong      { color: #ef4444; }
+    .segment-branding .feature-text-block            { color: #d97706; }
+    .segment-branding .feature-item-list li svg       { stroke: #d97706; }
+    .segment-branding .feature-text-block strong      { color: #f59e0b; }
 
     /* Custom button bg: #1c4ab0 — blue tones */
     .segment-custom .preview-header h3                { color: #3b82f6; }
@@ -939,22 +984,7 @@
 
     /* Static dim border ring — replaces animated shimmer */
     .visual-preview-box::before {
-      content: '';
-      position: absolute;
-      inset: -2px;
-      z-index: 2;
-      border-radius: inherit;
-      pointer-events: none;
-      padding: 2px;
-      background: rgba(255,255,255,0.08);
-      -webkit-mask:
-        linear-gradient(#000 0 0) content-box,
-        linear-gradient(#000 0 0);
-      -webkit-mask-composite: xor;
-      mask:
-        linear-gradient(#000 0 0) content-box,
-        linear-gradient(#000 0 0);
-      mask-composite: exclude;
+      display: none;
     }
 
     /* ── Dashboard rows: same static approach ── */
@@ -994,10 +1024,14 @@
        ========================================================================== */
     .segment-miltech .visual-preview-box::after,
     .segment-miltech .spec-badge::after {
-      background: rgba(122, 140, 46, 0.06);
+      background: rgba(185, 28, 28, 0.06);
     }
     .segment-miltech .visual-preview-box {
-      border-color: rgba(122, 140, 46, 0.30);
+      border-color: rgba(185, 28, 28, 0.30);
+    }
+    .segment-miltech .spec-badge {
+      border-color: rgba(252, 165, 165, 0.12);
+    }6, 0.30);
     }
     .segment-miltech .spec-badge {
       border-color: rgba(200, 212, 122, 0.12);
@@ -1027,13 +1061,13 @@
 
     .segment-branding .visual-preview-box::after,
     .segment-branding .spec-badge::after {
-      background: rgba(185, 28, 28, 0.06);
+      background: rgba(146, 64, 14, 0.06);
     }
     .segment-branding .visual-preview-box {
-      border-color: rgba(185, 28, 28, 0.30);
+      border-color: rgba(180, 83, 9, 0.30);
     }
     .segment-branding .spec-badge {
-      border-color: rgba(252, 165, 165, 0.12);
+      border-color: rgba(217, 119, 6, 0.12);
     }
 
     .segment-custom .visual-preview-box::after,
@@ -1046,6 +1080,50 @@
     .segment-custom .spec-badge {
       border-color: rgba(96, 165, 250, 0.12);
     }
+
+    /* ==========================================================================
+       INNER RIM — линия только по верхней грани выреза через SVG
+       ========================================================================== */
+    .segment-rim {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 72px;
+      z-index: 100;
+      pointer-events: none;
+      overflow: visible;
+    }
+
+    .segment-rim svg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 72px;
+      overflow: visible;
+    }
+
+    .segment-miltech  .segment-rim svg polyline,
+    .segment-miltech  .segment-rim svg path { stroke: rgba(185, 28,  28,  0.85); }
+    /* Parts: цвет = фон кнопки #1f2937 → светло-серый акцент */
+    .segment-parts    .segment-rim svg polyline,
+    .segment-parts    .segment-rim svg path { stroke: rgba(31, 41, 55, 0.95); }
+    .segment-decor    .segment-rim svg polyline,
+    .segment-decor    .segment-rim svg path { stroke: rgba(234, 179, 8,   0.85); }
+    .segment-branding .segment-rim svg polyline,
+    .segment-branding .segment-rim svg path { stroke: rgba(217, 119, 6, 0.90); }
+    .segment-custom   .segment-rim svg polyline,
+    .segment-custom   .segment-rim svg path { stroke: rgba(37,  99,  235, 0.85); }
+
+    /* Убираем ::after псевдоэлемент */
+    .segment-section::after { display: none; }
+
+    .segment-miltech,
+    .segment-parts,
+    .segment-decor,
+    .segment-branding,
+    .segment-custom { box-shadow: none; }
 
     /* ==========================================================================
        FOOTER — identical tab behaviour to right-side segments
@@ -1255,10 +1333,10 @@
     }
 
     /* Modal color scheme matches the section that opened it */
-    .lead-modal[data-theme="miltech"]  { --modal-accent: #7a8c2e; --modal-accent-soft: rgba(122, 140, 46, 0.14);  --modal-bg: #0d1008; --modal-btn-text: #fff; }
+    .lead-modal[data-theme="miltech"]  { --modal-accent: #ef4444; --modal-accent-soft: rgba(185, 28, 28, 0.14);  --modal-bg: #1a0505; --modal-btn-text: #fff; }
     .lead-modal[data-theme="parts"]    { --modal-accent: #9ca3af; --modal-accent-soft: rgba(156, 163, 175, 0.13); --modal-bg: #0d0d0d; --modal-btn-text: #111; }
     .lead-modal[data-theme="decor"]    { --modal-accent: #eab308; --modal-accent-soft: rgba(234, 179, 8, 0.13);   --modal-bg: #1a1500; --modal-btn-text: #111; }
-    .lead-modal[data-theme="branding"] { --modal-accent: #b91c1c; --modal-accent-soft: rgba(185, 28, 28, 0.14);  --modal-bg: #1e0b0b; --modal-btn-text: #fff; }
+    .lead-modal[data-theme="branding"] { --modal-accent: #d97706; --modal-accent-soft: rgba(146, 64, 14, 0.14);  --modal-bg: #1a0e05; --modal-btn-text: #fff; }
     .lead-modal[data-theme="custom"]   { --modal-accent: #3b82f6; --modal-accent-soft: rgba(37, 99, 235, 0.13);  --modal-bg: #0a1526; --modal-btn-text: #fff; }
 
     .lead-modal.active {
@@ -1882,6 +1960,19 @@
          SEGMENT 1: MILTECH
          ========================================================================== -->
     <section class="segment-section segment-miltech snap-section" id="miltech">
+      <div class="segment-rim">
+        <svg viewBox="0 0 1000 72" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- тень (смещение вниз +2) -->
+          <polyline stroke="rgba(0,0,0,0.6)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"
+            points="0,72 6,70 12,65 18,58 24,48 30,37 36,26 42,16 48,9 54,4 60,2 420,2 426,4 432,9 438,16 444,26 450,37 456,48 462,58 468,65 474,70 480,72 1000,72"/>
+          <!-- основная линия -->
+          <polyline stroke="rgba(185,28,28,0.85)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"
+            points="0,70 6,68 12,63 18,56 24,46 30,35 36,24 42,14 48,7 54,2 60,0 420,0 426,2 432,7 438,14 444,24 450,35 456,46 462,56 468,63 474,68 480,70 1000,70"/>
+          <!-- блик сверху (-1.5) -->
+          <polyline stroke="rgba(255,120,120,0.35)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            points="0,68.5 6,66.5 12,61.5 18,54.5 24,44.5 30,33.5 36,22.5 42,12.5 48,5.5 54,0.5 60,0 420,0 426,0.5 432,5.5 438,12.5 444,22.5 450,33.5 456,44.5 462,54.5 468,61.5 474,66.5 480,68.5 1000,68.5"/>
+        </svg>
+      </div>
       <div class="video-bg-container">
         <video autoplay loop muted playsinline crossorigin="anonymous">
           <source src="https://raw.githubusercontent.com/CakeBoxDeveloper/3dlanding/main/VP8Miltech.webm" type="video/webm">
@@ -1948,6 +2039,19 @@
          SEGMENT 2: ЗАПЧАСТИНИ ТА МЕХАНІЗМИ
          ========================================================================== -->
     <section class="segment-section segment-parts snap-section" id="parts">
+      <div class="segment-rim">
+        <svg viewBox="0 0 1000 72" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- тень -->
+          <polyline stroke="rgba(0,0,0,0.6)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"
+            points="0,72 520,72 526,70 532,65 538,58 544,48 550,37 556,26 562,16 568,9 574,4 580,2 940,2 946,4 952,9 958,16 964,26 970,37 976,48 982,58 988,65 994,70 1000,72"/>
+          <!-- основная линия -->
+          <polyline stroke="rgba(31,41,55,0.95)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"
+            points="0,70 520,70 526,68 532,63 538,56 544,46 550,35 556,24 562,14 568,7 574,2 580,0 940,0 946,2 952,7 958,14 964,24 970,35 976,46 982,56 988,63 994,68 1000,70"/>
+          <!-- блик -->
+          <polyline stroke="rgba(200,210,220,0.25)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            points="0,68.5 520,68.5 526,66.5 532,61.5 538,54.5 544,44.5 550,33.5 556,22.5 562,12.5 568,5.5 574,0.5 580,0 940,0 946,0.5 952,5.5 958,12.5 964,22.5 970,33.5 976,44.5 982,54.5 988,61.5 994,66.5 1000,68.5"/>
+        </svg>
+      </div>
       <div class="video-bg-container">
         <video autoplay loop muted playsinline crossorigin="anonymous">
           <source src="https://raw.githubusercontent.com/CakeBoxDeveloper/3dlanding/main/VP8Details.webm" type="video/webm">
@@ -2014,6 +2118,19 @@
          SEGMENT 3: ДЕКОР ТА ФІГУРКИ
          ========================================================================== -->
     <section class="segment-section segment-decor snap-section" id="decor">
+      <div class="segment-rim">
+        <svg viewBox="0 0 1000 72" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- тень -->
+          <polyline stroke="rgba(0,0,0,0.6)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"
+            points="0,72 6,70 12,65 18,58 24,48 30,37 36,26 42,16 48,9 54,4 60,2 420,2 426,4 432,9 438,16 444,26 450,37 456,48 462,58 468,65 474,70 480,72 1000,72"/>
+          <!-- основная линия -->
+          <polyline stroke="rgba(234,179,8,0.85)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"
+            points="0,70 6,68 12,63 18,56 24,46 30,35 36,24 42,14 48,7 54,2 60,0 420,0 426,2 432,7 438,14 444,24 450,35 456,46 462,56 468,63 474,68 480,70 1000,70"/>
+          <!-- блик -->
+          <polyline stroke="rgba(255,240,120,0.35)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            points="0,68.5 6,66.5 12,61.5 18,54.5 24,44.5 30,33.5 36,22.5 42,12.5 48,5.5 54,0.5 60,0 420,0 426,0.5 432,5.5 438,12.5 444,22.5 450,33.5 456,44.5 462,54.5 468,61.5 474,66.5 480,68.5 1000,68.5"/>
+        </svg>
+      </div>
       <div class="video-bg-container">
         <video autoplay loop muted playsinline crossorigin="anonymous">
           <source src="https://raw.githubusercontent.com/CakeBoxDeveloper/3dlanding/main/VP8Decor.webm" type="video/webm">
@@ -2080,6 +2197,19 @@
          SEGMENT 4: БРЕНДИНГ ТА АЙДЕНТИКА ДЛЯ HORECA
          ========================================================================== -->
     <section class="segment-section segment-branding snap-section" id="branding">
+      <div class="segment-rim">
+        <svg viewBox="0 0 1000 72" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- тень -->
+          <polyline stroke="rgba(0,0,0,0.6)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"
+            points="0,72 520,72 526,70 532,65 538,58 544,48 550,37 556,26 562,16 568,9 574,4 580,2 940,2 946,4 952,9 958,16 964,26 970,37 976,48 982,58 988,65 994,70 1000,72"/>
+          <!-- основная линия -->
+          <polyline stroke="rgba(217,119,6,0.90)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"
+            points="0,70 520,70 526,68 532,63 538,56 544,46 550,35 556,24 562,14 568,7 574,2 580,0 940,0 946,2 952,7 958,14 964,24 970,35 976,46 982,56 988,63 994,68 1000,70"/>
+          <!-- блик -->
+          <polyline stroke="rgba(255,200,100,0.35)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            points="0,68.5 520,68.5 526,66.5 532,61.5 538,54.5 544,44.5 550,33.5 556,22.5 562,12.5 568,5.5 574,0.5 580,0 940,0 946,0.5 952,5.5 958,12.5 964,22.5 970,33.5 976,44.5 982,54.5 988,61.5 994,66.5 1000,68.5"/>
+        </svg>
+      </div>
       <div class="video-bg-container">
         <video autoplay loop muted playsinline crossorigin="anonymous">
           <source src="https://raw.githubusercontent.com/CakeBoxDeveloper/3dlanding/main/VP8Individual.webm" type="video/webm">
@@ -2146,6 +2276,19 @@
          SEGMENT 5: ІНДИВІДУАЛЬНИЙ ДРУК
          ========================================================================== -->
     <section class="segment-section segment-custom snap-section" id="custom">
+      <div class="segment-rim">
+        <svg viewBox="0 0 1000 72" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- тень -->
+          <polyline stroke="rgba(0,0,0,0.6)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"
+            points="0,72 6,70 12,65 18,58 24,48 30,37 36,26 42,16 48,9 54,4 60,2 420,2 426,4 432,9 438,16 444,26 450,37 456,48 462,58 468,65 474,70 480,72 1000,72"/>
+          <!-- основная линия -->
+          <polyline stroke="rgba(37,99,235,0.85)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"
+            points="0,70 6,68 12,63 18,56 24,46 30,35 36,24 42,14 48,7 54,2 60,0 420,0 426,2 432,7 438,14 444,24 450,35 456,46 462,56 468,63 474,68 480,70 1000,70"/>
+          <!-- блик -->
+          <polyline stroke="rgba(147,197,253,0.35)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            points="0,68.5 6,66.5 12,61.5 18,54.5 24,44.5 30,33.5 36,22.5 42,12.5 48,5.5 54,0.5 60,0 420,0 426,0.5 432,5.5 438,12.5 444,22.5 450,33.5 456,44.5 462,54.5 468,61.5 474,66.5 480,68.5 1000,68.5"/>
+        </svg>
+      </div>
       <div class="video-bg-container">
         <video autoplay loop muted playsinline crossorigin="anonymous">
           <source src="https://raw.githubusercontent.com/CakeBoxDeveloper/3dlanding/main/VP8Bulb.webm" type="video/webm">
