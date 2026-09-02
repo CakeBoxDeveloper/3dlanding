@@ -356,14 +356,22 @@
       min-height: 100vh;
       padding-top: 105px;
       padding-bottom: 70px;
-      max-width: 1400px;
-      margin: 0 auto;
-      padding-left: 2rem;
-      padding-right: 2rem;
+      width: 100%;
       display: flex;
       flex-direction: column;
       justify-content: center;
       position: relative;
+    }
+
+    .hero-section-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding-left: 2rem;
+      padding-right: 2rem;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
     /* Full-width backdrop blur that covers the hero title area and fades
@@ -389,9 +397,8 @@
     .hero-video-bg {
       position: absolute;
       top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100vw;
+      left: 0;
+      width: 100%;
       height: 100%;
       z-index: 0;
       overflow: hidden;
@@ -640,12 +647,14 @@
     }
 
     .segment-content-wrap {
-      position: relative;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       z-index: 3;
       max-width: 1400px;
-      margin: 0 auto;
+      width: calc(100% - 4rem);
       padding: 0 2rem;
-      width: 100%;
       display: flex;
       flex-direction: column;
       gap: 1.8rem;
@@ -1783,6 +1792,7 @@
         </video>
       </div>
 
+      <div class="hero-section-inner">
       <div class="hero-header">
         <h1 class="hero-title-full">ПРОМИСЛОВИЙ ТА СЕРІЙНИЙ 3D-ДРУК В УКРАЇНІ</h1>
         <p class="hero-subtitle-full">Високоточне виробництво повного циклу: від швидкого прототипування до масштабних серій за 24 години.</p>
@@ -1966,6 +1976,7 @@
 
         </div>
       </div>
+      </div><!-- end hero-section-inner -->
     </section>
 
     <!-- ==========================================================================
@@ -2871,3 +2882,4 @@
   </script>
 </body>
 </html>
+
