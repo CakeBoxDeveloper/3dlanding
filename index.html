@@ -399,10 +399,18 @@
     }
 
     .hero-video-bg video {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
       object-position: center center;
+    }
+
+    /* Убираем паттерн с hero (принтеры) */
+    .hero-video-bg::after {
+      display: none;
     }
 
     .hero-header,
@@ -607,7 +615,11 @@
       object-fit: cover;
     }
 
-    /* ── Per-segment video position tweaks ── */
+    /* Убираем паттерн с Parts и Custom */
+    .segment-parts .video-bg-container::after,
+    .segment-custom .video-bg-container::after {
+      display: none;
+    }
     .segment-parts    .video-bg-container video { object-position: 25% center; }
     .segment-decor    .video-bg-container video { object-position: center 1%; }
     .segment-branding .video-bg-container video { object-position: center 12%; }
@@ -1963,13 +1975,13 @@
       <div class="segment-rim">
         <svg viewBox="0 0 1000 72" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
           <!-- тень (смещение вниз +2) -->
-          <polyline stroke="rgba(0,0,0,0.6)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"
+          <polyline stroke="rgba(0,0,0,0.6)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"
             points="0,72 6,70 12,65 18,58 24,48 30,37 36,26 42,16 48,9 54,4 60,2 420,2 426,4 432,9 438,16 444,26 450,37 456,48 462,58 468,65 474,70 480,72 1000,72"/>
           <!-- основная линия -->
-          <polyline stroke="rgba(185,28,28,0.85)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"
+          <polyline stroke="rgba(185,28,28,0.85)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"
             points="0,70 6,68 12,63 18,56 24,46 30,35 36,24 42,14 48,7 54,2 60,0 420,0 426,2 432,7 438,14 444,24 450,35 456,46 462,56 468,63 474,68 480,70 1000,70"/>
           <!-- блик сверху (-1.5) -->
-          <polyline stroke="rgba(255,120,120,0.35)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+          <polyline stroke="rgba(255,120,120,0.35)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
             points="0,68.5 6,66.5 12,61.5 18,54.5 24,44.5 30,33.5 36,22.5 42,12.5 48,5.5 54,0.5 60,0 420,0 426,0.5 432,5.5 438,12.5 444,22.5 450,33.5 456,44.5 462,54.5 468,61.5 474,66.5 480,68.5 1000,68.5"/>
         </svg>
       </div>
@@ -2042,13 +2054,13 @@
       <div class="segment-rim">
         <svg viewBox="0 0 1000 72" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
           <!-- тень -->
-          <polyline stroke="rgba(0,0,0,0.6)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"
+          <polyline stroke="rgba(0,0,0,0.6)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"
             points="0,72 520,72 526,70 532,65 538,58 544,48 550,37 556,26 562,16 568,9 574,4 580,2 940,2 946,4 952,9 958,16 964,26 970,37 976,48 982,58 988,65 994,70 1000,72"/>
           <!-- основная линия -->
-          <polyline stroke="rgba(31,41,55,0.95)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"
+          <polyline stroke="rgba(31,41,55,0.95)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"
             points="0,70 520,70 526,68 532,63 538,56 544,46 550,35 556,24 562,14 568,7 574,2 580,0 940,0 946,2 952,7 958,14 964,24 970,35 976,46 982,56 988,63 994,68 1000,70"/>
           <!-- блик -->
-          <polyline stroke="rgba(200,210,220,0.25)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+          <polyline stroke="rgba(200,210,220,0.25)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
             points="0,68.5 520,68.5 526,66.5 532,61.5 538,54.5 544,44.5 550,33.5 556,22.5 562,12.5 568,5.5 574,0.5 580,0 940,0 946,0.5 952,5.5 958,12.5 964,22.5 970,33.5 976,44.5 982,54.5 988,61.5 994,66.5 1000,68.5"/>
         </svg>
       </div>
@@ -2121,13 +2133,13 @@
       <div class="segment-rim">
         <svg viewBox="0 0 1000 72" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
           <!-- тень -->
-          <polyline stroke="rgba(0,0,0,0.6)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"
+          <polyline stroke="rgba(0,0,0,0.6)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"
             points="0,72 6,70 12,65 18,58 24,48 30,37 36,26 42,16 48,9 54,4 60,2 420,2 426,4 432,9 438,16 444,26 450,37 456,48 462,58 468,65 474,70 480,72 1000,72"/>
           <!-- основная линия -->
-          <polyline stroke="rgba(234,179,8,0.85)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"
+          <polyline stroke="rgba(234,179,8,0.85)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"
             points="0,70 6,68 12,63 18,56 24,46 30,35 36,24 42,14 48,7 54,2 60,0 420,0 426,2 432,7 438,14 444,24 450,35 456,46 462,56 468,63 474,68 480,70 1000,70"/>
           <!-- блик -->
-          <polyline stroke="rgba(255,240,120,0.35)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+          <polyline stroke="rgba(255,240,120,0.35)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
             points="0,68.5 6,66.5 12,61.5 18,54.5 24,44.5 30,33.5 36,22.5 42,12.5 48,5.5 54,0.5 60,0 420,0 426,0.5 432,5.5 438,12.5 444,22.5 450,33.5 456,44.5 462,54.5 468,61.5 474,66.5 480,68.5 1000,68.5"/>
         </svg>
       </div>
@@ -2200,13 +2212,13 @@
       <div class="segment-rim">
         <svg viewBox="0 0 1000 72" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
           <!-- тень -->
-          <polyline stroke="rgba(0,0,0,0.6)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"
+          <polyline stroke="rgba(0,0,0,0.6)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"
             points="0,72 520,72 526,70 532,65 538,58 544,48 550,37 556,26 562,16 568,9 574,4 580,2 940,2 946,4 952,9 958,16 964,26 970,37 976,48 982,58 988,65 994,70 1000,72"/>
           <!-- основная линия -->
-          <polyline stroke="rgba(217,119,6,0.90)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"
+          <polyline stroke="rgba(217,119,6,0.90)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"
             points="0,70 520,70 526,68 532,63 538,56 544,46 550,35 556,24 562,14 568,7 574,2 580,0 940,0 946,2 952,7 958,14 964,24 970,35 976,46 982,56 988,63 994,68 1000,70"/>
           <!-- блик -->
-          <polyline stroke="rgba(255,200,100,0.35)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+          <polyline stroke="rgba(255,200,100,0.35)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
             points="0,68.5 520,68.5 526,66.5 532,61.5 538,54.5 544,44.5 550,33.5 556,22.5 562,12.5 568,5.5 574,0.5 580,0 940,0 946,0.5 952,5.5 958,12.5 964,22.5 970,33.5 976,44.5 982,54.5 988,61.5 994,66.5 1000,68.5"/>
         </svg>
       </div>
@@ -2279,13 +2291,13 @@
       <div class="segment-rim">
         <svg viewBox="0 0 1000 72" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
           <!-- тень -->
-          <polyline stroke="rgba(0,0,0,0.6)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"
+          <polyline stroke="rgba(0,0,0,0.6)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"
             points="0,72 6,70 12,65 18,58 24,48 30,37 36,26 42,16 48,9 54,4 60,2 420,2 426,4 432,9 438,16 444,26 450,37 456,48 462,58 468,65 474,70 480,72 1000,72"/>
           <!-- основная линия -->
-          <polyline stroke="rgba(37,99,235,0.85)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"
+          <polyline stroke="rgba(37,99,235,0.85)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"
             points="0,70 6,68 12,63 18,56 24,46 30,35 36,24 42,14 48,7 54,2 60,0 420,0 426,2 432,7 438,14 444,24 450,35 456,46 462,56 468,63 474,68 480,70 1000,70"/>
           <!-- блик -->
-          <polyline stroke="rgba(147,197,253,0.35)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+          <polyline stroke="rgba(147,197,253,0.35)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
             points="0,68.5 6,66.5 12,61.5 18,54.5 24,44.5 30,33.5 36,22.5 42,12.5 48,5.5 54,0.5 60,0 420,0 426,0.5 432,5.5 438,12.5 444,22.5 450,33.5 456,44.5 462,54.5 468,61.5 474,66.5 480,68.5 1000,68.5"/>
         </svg>
       </div>
