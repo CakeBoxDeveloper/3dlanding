@@ -2,7 +2,7 @@
 <html lang="uk">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>3D-друк в Україні — Промислове та серійне виробництво | TechPlast</title>
   <meta name="description" content="Студія промислового 3D-друку в Миколаєві. Miltech деталі, запчастини, декор, брендинг для HoReCa та індивідуальний друк. 220 принтерів, точність ±0.02 мм, запуск за 15 хвилин.">
   <meta name="robots" content="index, follow">
@@ -436,7 +436,7 @@
       letter-spacing: -0.02em;
       color: #ffffff;
       width: 100%;
-      white-space: nowrap;
+      white-space: normal;
       font-size: clamp(1.1rem, 3.3vw, 2.7rem);
       line-height: 1.15;
     }
@@ -451,7 +451,8 @@
     /* Dashboard as an infinite vertical "drum" ticker, centered, wide + slim cards */
     .dashboard-ticker {
       width: 60%;
-      min-width: 420px;
+      min-width: 300px;
+      max-width: 100%;
       margin: 0 auto;
       height: 420px;
       overflow: hidden;
@@ -1092,7 +1093,7 @@
       font-weight: 800;
       letter-spacing: -0.02em;
       color: rgba(255,255,255,0.85);
-      white-space: nowrap;
+      white-space: normal;
       text-align: center;
       width: 100%;
     }
@@ -1443,6 +1444,205 @@
 
     .form-submit-btn:hover {
       filter: brightness(0.85);
+    }
+
+    /* ==========================================================================
+       MOBILE ADAPTATION — prevent zoom & horizontal scroll
+       ========================================================================== */
+
+    /* Глобальный запрет переполнения */
+    html, body {
+      overflow-x: hidden;
+      max-width: 100vw;
+    }
+
+    /* Все элементы не шире экрана */
+    *, *::before, *::after {
+      max-width: 100%;
+    }
+
+    @media (max-width: 768px) {
+
+      /* Hero */
+      .hero-section {
+        padding-top: 80px;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        padding-bottom: 2rem;
+      }
+
+      .hero-header {
+        transform: none;
+        gap: 0.8rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .hero-title-full {
+        font-size: clamp(1rem, 6vw, 1.8rem);
+        white-space: normal;
+        word-break: break-word;
+      }
+
+      .hero-subtitle-full {
+        font-size: 0.88rem;
+      }
+
+      /* Dashboard ticker — не шире экрана */
+      .dashboard-ticker {
+        width: 92%;
+        min-width: 0;
+        max-width: 100%;
+        height: 320px;
+      }
+
+      .row-title { font-size: 0.85rem; }
+      .row-desc  { font-size: 0.78rem; }
+
+      /* Сегменты */
+      .segment-content-wrap {
+        padding: 0 1rem;
+        gap: 1rem;
+      }
+
+      .segment-title {
+        font-size: 1.5rem;
+        word-break: break-word;
+      }
+
+      .segment-description {
+        white-space: normal;
+        font-size: 0.7rem;
+      }
+
+      .visual-preview-box {
+        padding: 1rem;
+        gap: 0.8rem;
+      }
+
+      .preview-header h3 {
+        font-size: 0.9rem;
+      }
+
+      .feature-item-list li {
+        font-size: 0.82rem;
+      }
+
+      .spec-badges {
+        gap: 4px;
+      }
+
+      .spec-badge {
+        font-size: 0.68rem;
+        padding: 4px 7px;
+      }
+
+      /* Кнопки сегментов */
+      .btn-segment {
+        font-size: 0.78rem;
+        padding: 12px 14px;
+        white-space: normal;
+        text-align: center;
+      }
+
+      /* Header nav */
+      .header {
+        padding: 0.5rem 0.75rem 0;
+      }
+
+      .header-container {
+        padding: 0.4rem 0.5rem;
+        gap: 0.5rem;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .btn-cta {
+        font-size: 0.7rem;
+        padding: 8px 12px;
+      }
+
+      /* Footer */
+      .footer-heading-row {
+        height: auto;
+        padding: 1.5rem 1rem;
+        padding-left: 1rem;
+        justify-content: center;
+      }
+
+      .footer-heading-row h2 {
+        font-size: 1.4rem;
+        text-align: center;
+      }
+
+      .footer-container {
+        padding: 0 1rem;
+      }
+
+      .footer-top-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+      }
+
+      .footer-bottom-links {
+        flex-wrap: wrap;
+        gap: 0.75rem 1rem;
+      }
+
+      .footer-disclaimer {
+        padding: 0.9rem 1rem;
+      }
+
+      .footer-disclaimer-text {
+        font-size: 0.82rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      /* Hero title ещё меньше */
+      .hero-title-full {
+        font-size: clamp(0.95rem, 5.5vw, 1.4rem);
+      }
+
+      /* Сегменты — заголовок */
+      .segment-title {
+        font-size: 1.25rem;
+      }
+
+      /* Dashboard */
+      .dashboard-ticker {
+        height: 260px;
+      }
+
+      /* Footer grid в одну колонку */
+      .footer-top-grid {
+        grid-template-columns: 1fr;
+      }
+
+      /* Кнопки заказа */
+      .btn-segment {
+        font-size: 0.72rem;
+        padding: 10px 10px;
+        letter-spacing: 0.02em;
+      }
+
+      /* Бейджи */
+      .spec-badge {
+        font-size: 0.62rem;
+        padding: 3px 6px;
+      }
+
+      /* Footer heading */
+      .footer-heading-row h2 {
+        font-size: 1.1rem;
+      }
     }
   </style>
 </head>
