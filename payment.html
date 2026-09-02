@@ -1,71 +1,135 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="uk" data-accent="neutral">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Способи оплати 3D-друку — TechPlast</title>
-  <meta name="description" content="Способи оплати замовлень 3D-друку в TechPlast. Банківська картка, безготівковий розрахунок для юросіб, LiqPay, Mono, PrivatBank. Передоплата та оплата після отримання.">
+  <meta name="description" content="Способи оплати замовлень 3D-друку в TechPlast. Банківська картка, безготівковий розрахунок для юросіб, LiqPay, Monobank. Передоплата та оплата після отримання.">
   <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://3dlanding-mauve.vercel.app/payment">
-  <style>
-    body { font-family: Arial, sans-serif; max-width: 900px; margin: 0 auto; padding: 2rem; background: #09090b; color: #e5e7eb; line-height: 1.7; }
-    h1, h2, h3 { color: #f3f4f6; }
-    a { color: #60a5fa; }
-    .back { display: inline-block; margin-bottom: 2rem; color: #9ca3af; }
-    section { margin-bottom: 2.5rem; border-bottom: 1px solid #1f2937; padding-bottom: 2rem; }
-    ul { padding-left: 1.5rem; }
-    li { margin-bottom: 0.5rem; }
-    .tip { background: #1f2937; border-left: 3px solid #3b82f6; padding: 0.8rem 1rem; border-radius: 0 4px 4px 0; margin: 1rem 0; }
-  </style>
+  <link rel="canonical" href="https://cakeboxdeveloper.github.io/3dlanding/payment.html">
+  <link rel="stylesheet" href="page.css">
 </head>
 <body>
-  <nav><a href="/" class="back">← На головну</a></nav>
 
-  <h1>Способи оплати замовлень 3D-друку</h1>
-  <p>TechPlast пропонує зручні способи оплати як для фізичних осіб, так і для підприємств та організацій.</p>
-
-  <section>
-    <h2>Для фізичних осіб</h2>
-    <ul>
-      <li><strong>Банківська картка (Visa / Mastercard)</strong> — онлайн-оплата через захищену форму</li>
-      <li><strong>LiqPay</strong> — зручна оплата через застосунок Приватбанку</li>
-      <li><strong>Monobank</strong> — переказ на картку або через QR-код</li>
-      <li><strong>Переказ на картку ПриватБанку</strong> — реквізити надаються менеджером</li>
-      <li><strong>Накладений платіж Нової Пошти</strong> — оплата при отриманні (доступно для замовлень до 5 000 грн)</li>
-    </ul>
-  </section>
-
-  <section>
-    <h2>Для юридичних осіб та ФОП</h2>
-    <ul>
-      <li><strong>Безготівковий розрахунок</strong> — виставляємо рахунок-фактуру з ПДВ або без</li>
-      <li><strong>Оплата за договором</strong> — для регулярних замовників та підприємств</li>
-      <li><strong>Тендерні закупівлі</strong> — працюємо з ProZorro та державними підприємствами</li>
-    </ul>
-    <div class="tip">
-      Для безготівкового розрахунку надайте реквізити вашої компанії при оформленні замовлення. Документи (рахунок, акт виконаних робіт) надаємо в електронному та паперовому вигляді.
+  <nav class="page-nav">
+    <div class="page-nav-left">
+      <a href="index.html" class="page-nav-back">
+        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+        На головну
+      </a>
+      <span class="page-nav-title">Способи оплати</span>
     </div>
-  </section>
-
-  <section>
-    <h2>Умови оплати</h2>
-    <ul>
-      <li><strong>Стандартне замовлення:</strong> 50% передоплата, 50% після готовності</li>
-      <li><strong>Термінове замовлення:</strong> 100% передоплата</li>
-      <li><strong>Постійні клієнти:</strong> можлива оплата після отримання за домовленістю</li>
-      <li><strong>Перше замовлення від юрособи:</strong> 100% передоплата</li>
-    </ul>
-  </section>
-
-  <section>
-    <h2>Контакти для оплати</h2>
-    <p>Телефон: <a href="tel:+380000000000">+38 (000) 000-00-00</a></p>
-    <p>Email: <a href="mailto:email@techplast.ua">email@techplast.ua</a></p>
-    <p>Telegram: <a href="https://t.me/tech_plast">@tech_plast</a></p>
-  </section>
-
-  <nav>
-    <p><a href="/files">Вимоги до файлів</a> · <a href="/guarantee">Гарантії</a> · <a href="/delivery">Доставка</a> · <a href="/contacts">Контакти</a></p>
+    <a href="contacts.html" class="page-nav-cta">Зробити замовлення</a>
   </nav>
+
+  <div class="page-breadcrumb">
+    <a href="index.html">Головна</a> › <a href="contacts.html">Клієнтам</a> › <span>Оплата</span>
+  </div>
+
+  <div class="page-hero">
+    <div class="page-hero-tag">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+      Оплата
+    </div>
+    <h1>Способи оплати</h1>
+    <p class="page-hero-desc">Зручні варіанти оплати для фізичних осіб та підприємств. Безготівковий розрахунок, картка, LiqPay та Monobank.</p>
+  </div>
+
+  <div class="page-content" style="padding-top:0">
+
+    <!-- ФІЗИЧНІ ОСОБИ -->
+    <div class="page-card">
+      <h2>Для фізичних осіб</h2>
+      <div class="page-feature-list">
+        <div class="page-feature-item">
+          <div class="page-feature-icon"><svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
+          <div class="page-feature-text">
+            <strong>Банківська картка (Visa / Mastercard)</strong>
+            <span>Онлайн-оплата через захищену платіжну форму.</span>
+          </div>
+        </div>
+        <div class="page-feature-item">
+          <div class="page-feature-icon"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><path d="M12 6v6l4 2"/></svg></div>
+          <div class="page-feature-text">
+            <strong>LiqPay</strong>
+            <span>Зручна оплата через застосунок Приватбанку.</span>
+          </div>
+        </div>
+        <div class="page-feature-item">
+          <div class="page-feature-icon"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div>
+          <div class="page-feature-text">
+            <strong>Monobank</strong>
+            <span>Переказ на картку або через QR-код.</span>
+          </div>
+        </div>
+        <div class="page-feature-item">
+          <div class="page-feature-icon"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+          <div class="page-feature-text">
+            <strong>Накладений платіж Нової Пошти</strong>
+            <span>Оплата при отриманні — для замовлень до 5 000 грн.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ЮР. ОСОБИ -->
+    <div class="page-card">
+      <h2>Для юридичних осіб та ФОП</h2>
+      <div class="page-feature-list">
+        <div class="page-feature-item">
+          <div class="page-feature-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></div>
+          <div class="page-feature-text">
+            <strong>Безготівковий розрахунок</strong>
+            <span>Виставляємо рахунок-фактуру з ПДВ або без. Акт виконаних робіт в електронному та паперовому вигляді.</span>
+          </div>
+        </div>
+        <div class="page-feature-item">
+          <div class="page-feature-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <div class="page-feature-text">
+            <strong>Оплата за договором</strong>
+            <span>Для регулярних замовників та підприємств — індивідуальні умови.</span>
+          </div>
+        </div>
+        <div class="page-feature-item">
+          <div class="page-feature-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+          <div class="page-feature-text">
+            <strong>Тендерні закупівлі</strong>
+            <span>Працюємо з ProZorro та державними підприємствами.</span>
+          </div>
+        </div>
+      </div>
+      <div class="page-callout" style="margin-top:1rem">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <div>Для безготівкового розрахунку — надайте реквізити компанії при оформленні замовлення.</div>
+      </div>
+    </div>
+
+    <!-- УМОВИ -->
+    <div class="page-card">
+      <h2>Умови оплати</h2>
+      <div class="page-table-wrap">
+        <table class="page-table">
+          <tr><th>Тип замовлення</th><th>Умови</th></tr>
+          <tr><td>Стандартне</td><td>50% передоплата + 50% після готовності</td></tr>
+          <tr><td>Термінове</td><td>100% передоплата</td></tr>
+          <tr><td>Постійні клієнти</td><td>Оплата після отримання — за домовленістю</td></tr>
+          <tr><td>Перше від юрособи</td><td>100% передоплата</td></tr>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <footer class="page-footer">
+    <div class="page-footer-links">
+      <a href="files.html">Вимоги до файлів</a>
+      <a href="guarantee.html">Гарантії</a>
+      <a href="delivery.html">Доставка</a>
+      <a href="offer.html">Публічна оферта</a>
+      <a href="contacts.html">Контакти</a>
+    </div>
+    <div class="page-footer-copy">© 2026 TechPlast. м. Миколаїв</div>
+  </footer>
+
 </body>
 </html>

@@ -1,103 +1,148 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="uk" data-accent="neutral">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Вимоги до файлів для 3D-друку — TechPlast</title>
-  <meta name="description" content="Які файли потрібні для 3D-друку. Формати STL, STEP, OBJ, 3MF. Як правильно підготувати модель, товщина стінок, допуски. Часті помилки та як їх уникнути.">
+  <meta name="description" content="Які файли потрібні для 3D-друку. Формати STL, STEP, OBJ, 3MF. Як підготувати модель, товщина стінок, допуски. Часті помилки та як їх уникнути.">
   <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://3dlanding-mauve.vercel.app/files">
-  <style>
-    body { font-family: Arial, sans-serif; max-width: 900px; margin: 0 auto; padding: 2rem; background: #09090b; color: #e5e7eb; line-height: 1.7; }
-    h1, h2, h3 { color: #f3f4f6; }
-    a { color: #60a5fa; }
-    .back { display: inline-block; margin-bottom: 2rem; color: #9ca3af; }
-    section { margin-bottom: 2.5rem; border-bottom: 1px solid #1f2937; padding-bottom: 2rem; }
-    ul, ol { padding-left: 1.5rem; }
-    li { margin-bottom: 0.5rem; }
-    .tip { background: #1f2937; border-left: 3px solid #3b82f6; padding: 0.8rem 1rem; border-radius: 0 4px 4px 0; margin: 1rem 0; }
-    .warn { background: #1c1400; border-left: 3px solid #eab308; padding: 0.8rem 1rem; border-radius: 0 4px 4px 0; margin: 1rem 0; }
-    table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
-    th, td { text-align: left; padding: 0.6rem 0.8rem; border: 1px solid #374151; }
-    th { background: #1f2937; color: #f3f4f6; }
-  </style>
+  <link rel="canonical" href="https://cakeboxdeveloper.github.io/3dlanding/files.html">
+  <link rel="stylesheet" href="page.css">
 </head>
 <body>
-  <nav><a href="/" class="back">← На головну</a></nav>
 
-  <h1>Вимоги до файлів для 3D-друку</h1>
-  <p>Ця сторінка пояснює, які файли потрібні для замовлення 3D-друку, як їх правильно підготувати та яких помилок уникати. Якщо у вас виникли питання — менеджер допоможе безкоштовно.</p>
-
-  <section>
-    <h2>Підтримувані формати файлів</h2>
-    <table>
-      <tr><th>Формат</th><th>Опис</th><th>Рекомендовано</th></tr>
-      <tr><td><strong>STL</strong></td><td>Найпоширеніший формат для 3D-друку. Містить лише геометрію поверхні.</td><td>✅ Так</td></tr>
-      <tr><td><strong>STEP / STP</strong></td><td>Інженерний формат з точною геометрією. Краще підходить для механічних деталей.</td><td>✅ Так</td></tr>
-      <tr><td><strong>3MF</strong></td><td>Сучасний формат, містить матеріали та кольори. Підтримується більшістю програм.</td><td>✅ Так</td></tr>
-      <tr><td><strong>OBJ</strong></td><td>Поширений формат, підтримує текстури. Для декору та фігурок.</td><td>✅ Так</td></tr>
-      <tr><td><strong>F3D / SLDPRT</strong></td><td>Нативні формати Fusion 360 та SolidWorks.</td><td>⚠️ За запитом</td></tr>
-      <tr><td><strong>DXF / DWG</strong></td><td>2D-креслення. Можливо конвертувати у 3D вручну.</td><td>⚠️ За запитом</td></tr>
-    </table>
-
-    <div class="warn">
-      <strong>Не надсилайте:</strong> запаролені архіви, пошкоджені файли, файли з вірусами. Усі файли перевіряються перед запуском.
+  <nav class="page-nav">
+    <div class="page-nav-left">
+      <a href="index.html" class="page-nav-back">
+        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+        На головну
+      </a>
+      <span class="page-nav-title">Вимоги до файлів</span>
     </div>
-  </section>
-
-  <section>
-    <h2>Вимоги до моделі</h2>
-    <ul>
-      <li><strong>Мінімальна товщина стінки:</strong> від 1.0 мм для FDM, від 0.5 мм для SLA</li>
-      <li><strong>Водонепроникна сітка (Watertight mesh):</strong> модель не повинна мати отворів у поверхні</li>
-      <li><strong>Одиниці вимірювання:</strong> міліметри (мм). Якщо модель у дюймах — вкажіть це при замовленні</li>
-      <li><strong>Масштаб:</strong> переконайтесь що розміри моделі відповідають реальним</li>
-      <li><strong>Кількість трикутників (STL):</strong> оптимально 100к–2М. Надто висока деталізація уповільнює обробку</li>
-    </ul>
-
-    <div class="tip">
-      <strong>Порада:</strong> Перевірте модель у безкоштовному сервісі <a href="https://www.netfabb.com/" target="_blank">Netfabb Online</a> або <a href="https://www.meshmixer.com/" target="_blank">Meshmixer</a> перед відправкою.
-    </div>
-  </section>
-
-  <section>
-    <h2>Як правильно відправити файли</h2>
-    <ol>
-      <li>Стисніть файли у ZIP-архів <strong>без паролю</strong></li>
-      <li>Надішліть на <a href="mailto:email@techplast.ua">email@techplast.ua</a></li>
-      <li>У листі вкажіть: кількість виробів, бажаний матеріал, колір, термін</li>
-      <li>Для великих файлів (понад 25 МБ) використовуйте <a href="https://wetransfer.com/" target="_blank">WeTransfer</a> або Google Drive</li>
-    </ol>
-
-    <div class="warn">
-      <strong>Telegram:</strong> можна надіслати файл напряму в <a href="https://t.me/tech_plast">@tech_plast</a>, але для файлів понад 50 МБ — використовуйте посилання на хмарне сховище.
-    </div>
-  </section>
-
-  <section>
-    <h2>Якщо у вас немає файлу</h2>
-    <p>Не хвилюйтесь — ми допоможемо. Наш інженер виконає:</p>
-    <ul>
-      <li>Моделювання за вашим ескізом або кресленням</li>
-      <li>3D-сканування оригінальної деталі</li>
-      <li>Реверс-інжиніринг за зламаним зразком або фото</li>
-      <li>Адаптацію готової моделі під технологію друку</li>
-    </ul>
-    <p>Вартість моделювання узгоджується окремо залежно від складності.</p>
-  </section>
-
-  <section>
-    <h2>Часті питання</h2>
-    <h3>Чи можу я надіслати фото деталі замість файлу?</h3>
-    <p>Так, ми виконаємо реверс-інжиніринг за фото. Результат залежить від якості фото та складності деталі.</p>
-    <h3>Який формат краще — STL чи STEP?</h3>
-    <p>Для механічних деталей — STEP (точніша геометрія). Для декору та фігурок — STL або OBJ.</p>
-    <h3>Чи потрібно вказувати орієнтацію деталі при друку?</h3>
-    <p>Якщо є критичні вимоги до напрямку шарів або розташування опор — вкажіть їх у листі. Інакше технолог обере оптимальну орієнтацію самостійно.</p>
-  </section>
-
-  <nav>
-    <p><a href="/payment">Способи оплати</a> · <a href="/guarantee">Гарантії</a> · <a href="/delivery">Доставка</a> · <a href="/contacts">Контакти</a></p>
+    <a href="contacts.html" class="page-nav-cta">Надіслати файл</a>
   </nav>
+
+  <div class="page-breadcrumb">
+    <a href="index.html">Головна</a> › <a href="contacts.html">Клієнтам</a> › <span>Вимоги до файлів</span>
+  </div>
+
+  <div class="page-hero">
+    <div class="page-hero-tag">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      Файли та моделі
+    </div>
+    <h1>Вимоги до файлів для 3D-друку</h1>
+    <p class="page-hero-desc">Які формати приймаємо, як підготувати модель та як правильно надіслати файл. Якщо є питання — менеджер допоможе безкоштовно.</p>
+  </div>
+
+  <div class="page-content" style="padding-top:0">
+
+    <!-- ФОРМАТИ -->
+    <div class="page-card">
+      <h2>Підтримувані формати файлів</h2>
+      <div class="page-table-wrap">
+        <table class="page-table">
+          <tr><th>Формат</th><th>Опис</th><th>Рекомендовано</th></tr>
+          <tr><td><strong>STL</strong></td><td>Найпоширеніший формат для 3D-друку. Містить лише геометрію поверхні.</td><td>✅ Так</td></tr>
+          <tr><td><strong>STEP / STP</strong></td><td>Інженерний формат з точною геометрією. Краще для механічних деталей.</td><td>✅ Так</td></tr>
+          <tr><td><strong>3MF</strong></td><td>Сучасний формат, містить матеріали та кольори.</td><td>✅ Так</td></tr>
+          <tr><td><strong>OBJ</strong></td><td>Підтримує текстури. Для декору та фігурок.</td><td>✅ Так</td></tr>
+          <tr><td><strong>F3D / SLDPRT</strong></td><td>Нативні формати Fusion 360 та SolidWorks.</td><td>⚠️ За запитом</td></tr>
+          <tr><td><strong>DXF / DWG</strong></td><td>2D-креслення. Конвертуємо в 3D вручну.</td><td>⚠️ За запитом</td></tr>
+        </table>
+      </div>
+      <div class="page-callout page-callout--warn" style="margin-top:1rem">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        <div><strong>Не надсилайте</strong> запаролені архіви, пошкоджені файли та файли у форматах Word/Excel/PowerPoint.</div>
+      </div>
+    </div>
+
+    <!-- ВИМОГИ ДО МОДЕЛІ -->
+    <div class="page-card">
+      <h2>Вимоги до 3D-моделі</h2>
+      <div class="page-feature-list">
+        <div class="page-feature-item">
+          <div class="page-feature-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+          <div class="page-feature-text">
+            <strong>Мінімальна товщина стінки</strong>
+            <span>Від 1.0 мм для FDM-друку, від 0.5 мм для SLA-смоли.</span>
+          </div>
+        </div>
+        <div class="page-feature-item">
+          <div class="page-feature-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+          <div class="page-feature-text">
+            <strong>Водонепроникна сітка (Watertight mesh)</strong>
+            <span>Модель не повинна мати отворів у поверхні. Перевірте у Meshmixer або Netfabb.</span>
+          </div>
+        </div>
+        <div class="page-feature-item">
+          <div class="page-feature-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+          <div class="page-feature-text">
+            <strong>Одиниці вимірювання — міліметри</strong>
+            <span>Якщо модель у дюймах або сантиметрах — обов'язково вкажіть це у повідомленні.</span>
+          </div>
+        </div>
+        <div class="page-feature-item">
+          <div class="page-feature-icon"><svg viewBox="0 0 24 24"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/><line x1="10" y1="12" x2="14" y2="12"/></svg></div>
+          <div class="page-feature-text">
+            <strong>Кількість трикутників (STL)</strong>
+            <span>Оптимально 100к–2М полігонів. Надто висока деталізація уповільнює обробку.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ЯК НАДІСЛАТИ -->
+    <div class="page-card">
+      <h2>Як правильно надіслати файли</h2>
+      <ol>
+        <li>Стисніть файли у ZIP-архів <strong>без паролю</strong></li>
+        <li>Надішліть на <a href="mailto:email@techplast.ua">email@techplast.ua</a> або в <a href="https://t.me/tech_plast" target="_blank">Telegram @tech_plast</a></li>
+        <li>Вкажіть: кількість виробів, бажаний матеріал, колір та термін</li>
+        <li>Для файлів понад 25 МБ використовуйте Google Drive або WeTransfer</li>
+      </ol>
+      <div class="page-callout" style="margin-top:1rem">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <div>Файл у Telegram — зручно для файлів до 50 МБ. Для більших — надсилайте посилання на хмарне сховище.</div>
+      </div>
+    </div>
+
+    <!-- НЕМАЄ ФАЙЛУ -->
+    <div class="page-card">
+      <h2>Немає файлу — не проблема</h2>
+      <p>Наш інженер виконає моделювання або реверс-інжиніринг:</p>
+      <ul>
+        <li>Моделювання за вашим ескізом або кресленням</li>
+        <li>3D-сканування оригінальної деталі</li>
+        <li>Реверс-інжиніринг за зламаним зразком або фото</li>
+        <li>Адаптацію готової моделі під технологію друку</li>
+      </ul>
+      <a href="contacts.html" class="page-cta">Надіслати запит →</a>
+    </div>
+
+    <!-- FAQ -->
+    <div class="page-card">
+      <h2>Часті питання</h2>
+      <h3>Який формат краще — STL чи STEP?</h3>
+      <p>Для механічних деталей — STEP (точніша геометрія). Для декору та фігурок — STL або OBJ.</p>
+      <h3>Чи можна надіслати фото деталі замість файлу?</h3>
+      <p>Так, виконаємо реверс-інжиніринг. Результат залежить від якості фото та складності деталі.</p>
+      <h3>Чи потрібно вказувати орієнтацію при друку?</h3>
+      <p>Якщо є критичні вимоги — вкажіть у повідомленні. Інакше технолог обере оптимальну орієнтацію самостійно.</p>
+    </div>
+
+  </div>
+
+  <footer class="page-footer">
+    <div class="page-footer-links">
+      <a href="payment.html">Оплата</a>
+      <a href="guarantee.html">Гарантії</a>
+      <a href="delivery.html">Доставка</a>
+      <a href="about.html">Про нас</a>
+      <a href="contacts.html">Контакти</a>
+    </div>
+    <div class="page-footer-copy">© 2026 TechPlast. м. Миколаїв</div>
+  </footer>
+
 </body>
 </html>
