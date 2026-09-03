@@ -5,7 +5,7 @@
  */
 
 const GROQ_URL = 'https://api.groq.com/openai/v1/chat/completions';
-const MODEL    = 'llama-3.3-70b-versatile'; // актуальна модель Groq (вересень 2026)
+const MODEL    = 'openai/gpt-oss-20b'; // GPT OSS 20B — доступна на Developer плані Groq
 
 const SYSTEM = `Ти — асистент компанії TechPlast, студії 3D-друку в Києві (Україна).
 Відповідай коротко, дружньо, завжди українською.
