@@ -3567,7 +3567,7 @@
       // Groq API key — заменить на реальный ключ после деплоя на Vercel
       // На GitHub Pages вызов идёт напрямую из браузера
       const GROQ_KEY = window.GROQ_KEY || '';
-      const GROQ_MODEL = 'llama3-8b-8192';
+      const GROQ_MODEL = 'llama-3.3-70b-versatile';
       const SYSTEM_PROMPT = `Ти — онлайн-асистент компанії ТехПласт, студії промислового 3D-друку в Миколаєві, Україна.
 Відповідай лаконічно, привітно і по суті. Завжди пиши українською мовою.
 Якщо питання не стосується 3D-друку або компанії — ввічливо переведи тему.
@@ -3868,6 +3868,28 @@
       document.getElementById('cookie-settings').addEventListener('click', function() {
         window.open('privacy.html', '_blank');
       });
+
+      // Скрываем баннер при прокрутке вниз
+      if (!getCookie(COOKIE_KEY)) {
+        var lastScrollY = window.scrollY;
+        var scrollThreshold = 80; // пикселей вниз — тогда скрываем
+        var hiddenByScroll = false;
+
+        window.addEventListener('scroll', function() {
+          if (banner.classList.contains('hidden')) return;
+          var currentY = window.scrollY;
+          if (currentY > lastScrollY && currentY > scrollThreshold) {
+            // Прокрутка вниз и уже проскролили достаточно
+            banner.classList.add('hidden');
+            hiddenByScroll = true;
+          } else if (hiddenByScroll && currentY < lastScrollY && currentY < scrollThreshold / 2) {
+            // Прокрутили обратно почти в самый верх — показываем снова
+            banner.classList.remove('hidden');
+            hiddenByScroll = false;
+          }
+          lastScrollY = currentY;
+        }, { passive: true });
+      }
     })();
   </script>
 
