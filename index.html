@@ -1504,16 +1504,40 @@
     }
 
     @media (max-width: 640px) {
+      .lead-modal {
+        padding: 0.5rem;
+        align-items: flex-end;   /* снизу экрана, не по центру */
+      }
       .lead-modal-content {
         flex-direction: column;
-        max-height: 92vh;
+        max-height: 88vh;
         overflow-y: auto;
+        border-radius: 12px 12px 0 0;
+        width: 100%;
+        max-width: 100%;
       }
+      /* Скрываем промо-блок на маленьких экранах — больше места форме */
       .lead-modal-visual {
-        flex: 0 0 auto;
-        border-right: none;
-        border-bottom: 1px solid var(--border-color);
-        padding: 1.5rem;
+        display: none;
+      }
+      .lead-modal-form-col {
+        padding: 1.5rem 1.2rem;
+      }
+      .form-input, .form-select, .form-textarea {
+        font-size: 1.05rem;
+        padding: 13px 14px;
+      }
+      .form-group label {
+        font-size: 1rem;
+      }
+      .form-submit-btn {
+        font-size: 1.1rem;
+        padding: 15px;
+      }
+      .modal-close-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 1.4rem;
       }
     }
 
@@ -1588,18 +1612,19 @@
 
     @media (max-width: 768px) {
 
-      /* Hero */
+      /* Hero — вдвое меньше по высоте на мобиле */
       .hero-section {
-        padding-top: 80px;
+        min-height: 50vh;
+        padding-top: 60px;
         padding-left: 1rem;
         padding-right: 1rem;
-        padding-bottom: 2rem;
+        padding-bottom: 1rem;
       }
 
       .hero-header {
         transform: none;
-        gap: 0.8rem;
-        margin-bottom: 1.5rem;
+        gap: 0.6rem;
+        margin-bottom: 1rem;
       }
 
       .hero-title-full {
@@ -1617,7 +1642,7 @@
         width: 92%;
         min-width: 0;
         max-width: 100%;
-        height: 320px;
+        height: 220px;
       }
 
       .row-title { font-size: 0.85rem; }
@@ -1652,18 +1677,24 @@
         transform: none !important;
         width: 100% !important;
         max-width: 100% !important;
-        padding: 1.5rem 1rem 1.5rem;
+        padding: 0 1rem 1.5rem;   /* нет padding-top — заголовок входит в вырез */
         gap: 0.8rem;
         box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
       }
 
-      /* Заголовок — в зону выреза (верх блока) */
+      /* Заголовок — в первые 70px (зона выреза) */
       .segment-header-block {
         position: static !important;
         transform: none !important;
         max-width: 100% !important;
         width: 100% !important;
-        text-align: right; /* нечётные — вправо по дефолту */
+        text-align: right;
+        margin-top: 0;       /* вплотную к верху — внутри выреза */
+        margin-bottom: 0.4rem;
+        padding-top: 10px;   /* небольшой отступ от края clip-path */
       }
 
       /* Нечётные (miltech, decor, custom) — заголовок влево */
@@ -1687,7 +1718,7 @@
 
       .segment-description {
         white-space: normal;
-        font-size: 0.72rem;
+        font-size: 0.94rem;   /* 0.72 * 1.3 ≈ 0.94 */
         max-width: 100% !important;
         width: 100% !important;
       }
@@ -1727,10 +1758,10 @@
         padding: 4px 7px;
       }
 
-      /* Кнопки сегментов */
+      /* Кнопки сегментов — +30% шрифт */
       .btn-segment {
-        font-size: 0.78rem;
-        padding: 12px 14px;
+        font-size: 1.01rem;   /* 0.78 * 1.3 */
+        padding: 14px 16px;
         white-space: normal;
         text-align: center;
       }
@@ -1838,32 +1869,17 @@
 
     /* Аварийная лента — управляется через JS */
 
-    /* === Мобильные стили чата и кнопки "Мы онлайн" === */
+    /* === Мобильные стили чата и кнопки "Оператор" === */
     @media (max-width: 768px) {
 
-      /* Задача 4: первый сегмент не шире экрана */
+      /* Не шире экрана */
       .hero-section,
       .segment-section {
         max-width: 100vw;
         overflow-x: hidden;
       }
 
-      /* Задача 3: заголовок в зону выреза SVG (верхняя часть блока) */
-      .segment-content-wrap {
-        position: relative !important;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        padding-top: 1rem !important;
-      }
-
-      /* Заголовок — прижат к вырезу */
-      .segment-header-block {
-        margin-top: 0.5rem;
-        margin-bottom: 0.5rem;
-      }
-
-      /* Задача 6: заголовок нижнего блока (custom) не съезжает */
+      /* Заголовок custom не съезжает */
       .segment-custom .segment-header-block {
         position: static !important;
         transform: none !important;
@@ -1873,43 +1889,76 @@
         right: auto !important;
       }
 
-      /* Кнопка "Мы онлайн" — полная ширина снизу */
-      /* Кнопка — вертикальная полоска справа на мобиле тоже */
+      /* ── Кнопка "Оператор" — горизонтальная полоска снизу, на всю ширину ── */
       #ai-chat-btn {
-        top: 50% !important;
-        bottom: auto !important;
-        left: auto !important;
+        position: fixed !important;
+        bottom: 0 !important;
+        left: 0 !important;
         right: 0 !important;
-        transform: translateY(-50%) !important;
-        width: 48px !important;
-        height: 180px !important;
-        margin: 0 !important;
-        border-radius: 10px 0 0 10px !important;
-        border-right: none !important;
+        top: auto !important;
+        transform: none !important;
+        width: 100% !important;
+        height: 52px !important;
+        border-radius: 12px 12px 0 0 !important;
+        border-right: 1px solid rgba(99, 179, 255, 0.28) !important;
+        border-bottom: none !important;
+        writing-mode: horizontal-tb !important;
+        flex-direction: row !important;
         justify-content: center !important;
-        z-index: 9100;
+        align-items: center !important;
+        z-index: 9100 !important;
+        padding: 0 1rem !important;
+      }
+
+      /* Текст кнопки — горизонтальный */
+      #ai-chat-btn-label {
+        writing-mode: horizontal-tb !important;
+        transform: none !important;
+        letter-spacing: 0.12em !important;
+        font-size: 1rem !important;
+      }
+
+      /* На мобиле кнопка остаётся видимой и закрывает чат */
+      body.chat-open #ai-chat-btn {
+        opacity: 1 !important;
+        pointer-events: all !important;
+        background: rgba(30, 30, 50, 0.90) !important;
+        border-color: rgba(99, 179, 255, 0.45) !important;
       }
 
       #ai-chat-tooltip { display: none; }
 
-      /* Чат на весь экран на мобиле */
+      /* Прячем кнопку когда чат открыт — на мобиле НЕ прячем, она закрывает чат */
+
+      /* ── Чат: открывается снизу вверх, над кнопкой ── */
       #ai-chat-modal {
-        top: 0 !important;
-        bottom: 0 !important;
-        right: 0 !important;
+        top: auto !important;
+        bottom: 52px !important;   /* высота кнопки */
         left: 0 !important;
+        right: 0 !important;
         width: 100% !important;
         max-width: 100% !important;
-        height: 100vh !important;
-        max-height: 100vh !important;
+        height: calc(100vh - 52px) !important;
+        max-height: calc(100vh - 52px) !important;
         border-radius: 0 !important;
-        transform: translateX(100%) !important;
-        background: rgba(10, 10, 15, 0.85) !important;
-        backdrop-filter: blur(24px) saturate(160%) !important;
-        -webkit-backdrop-filter: blur(24px) saturate(160%) !important;
+        /* Анимация снизу вверх */
+        transform: translateY(100%) !important;
+        background: rgba(10, 30, 60, 0.95) !important;
+        backdrop-filter: blur(24px) saturate(180%) !important;
+        -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
       }
       #ai-chat-modal.open {
-        transform: translateX(0) !important;
+        transform: translateY(0) !important;
+      }
+
+      /* Куки баннер — над кнопкой Оператор */
+      #cookie-banner {
+        bottom: 52px !important;
+      }
+
+      /* Отступ снизу у страницы — чтобы контент не прятался за кнопкой */
+      body {
+        padding-bottom: 52px;
       }
     }
   </style>
@@ -3312,16 +3361,15 @@
       max-width: calc(100vw - 36px);
       height: 100vh;
       max-height: 100vh;
-      background: rgba(0, 0, 0, 0.45);
-      backdrop-filter: blur(20px) saturate(180%) brightness(0.75);
-      -webkit-backdrop-filter: blur(20px) saturate(180%) brightness(0.75);
+      background: rgba(10, 30, 60, 0.72);
+      backdrop-filter: blur(24px) saturate(200%) brightness(0.85);
+      -webkit-backdrop-filter: blur(24px) saturate(200%) brightness(0.85);
       border: none;
       border-radius: 20px 0 0 20px;
-      /* Стеклянный ободок */
       box-shadow:
-        -12px 0 60px rgba(0,0,0,0.6),
-        inset 2px 2px 0px -2px rgba(255,255,255,0.5),
-        inset 0 0 3px 1px rgba(255,255,255,0.2);
+        -12px 0 60px rgba(0, 80, 160, 0.35),
+        inset 2px 2px 0px -2px rgba(147, 210, 255, 0.4),
+        inset 0 0 3px 1px rgba(99, 179, 255, 0.15);
       display: flex;
       flex-direction: column;
       overflow: hidden;
@@ -3339,6 +3387,7 @@
       opacity: 1;
       pointer-events: all;
     }
+    /* На десктопе — скрываем кнопку когда чат открыт */
     body.chat-open #ai-chat-btn {
       opacity: 0;
       pointer-events: none;
@@ -3350,8 +3399,8 @@
       align-items: center;
       gap: 10px;
       padding: 16px 20px;
-      background: rgba(255,255,255,0.06);
-      border-bottom: 1px solid rgba(255,255,255,0.10);
+      background: rgba(30, 80, 150, 0.30);
+      border-bottom: 1px solid rgba(99, 179, 255, 0.18);
       flex-shrink: 0;
     }
     #ai-chat-avatar { display: none; }
@@ -3401,7 +3450,7 @@
     }
     #ai-chat-messages::-webkit-scrollbar { width: 4px; }
     #ai-chat-messages::-webkit-scrollbar-track { background: transparent; }
-    #ai-chat-messages::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 2px; }
+    #ai-chat-messages::-webkit-scrollbar-thumb { background: rgba(99,179,255,0.18); border-radius: 2px; }
 
     .chat-msg {
       max-width: 82%;
@@ -3412,22 +3461,23 @@
       word-break: break-word;
     }
     .chat-msg.bot {
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.08);
-      color: #d1d5db;
+      background: rgba(30, 90, 180, 0.22);
+      border: 1px solid rgba(99, 179, 255, 0.18);
+      color: #bfdbfe;
       align-self: flex-start;
       border-bottom-left-radius: 4px;
     }
     .chat-msg.user {
-      background: rgba(255,255,255,0.12);
-      color: #f3f4f6;
+      background: rgba(59, 130, 246, 0.28);
+      border: 1px solid rgba(147, 197, 253, 0.20);
+      color: #e0f2fe;
       align-self: flex-end;
       border-bottom-right-radius: 4px;
     }
     .chat-msg.typing {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.07);
-      color: #6b7280;
+      background: rgba(30, 80, 150, 0.18);
+      border: 1px solid rgba(99, 179, 255, 0.12);
+      color: #93c5fd;
       align-self: flex-start;
       font-style: italic;
     }
@@ -3543,17 +3593,17 @@
       display: flex;
       gap: 8px;
       padding: 14px 20px;
-      border-top: 1px solid rgba(255,255,255,0.08);
-      background: rgba(255,255,255,0.04);
+      border-top: 1px solid rgba(99, 179, 255, 0.15);
+      background: rgba(10, 30, 70, 0.40);
       flex-shrink: 0;
     }
     #ai-chat-input {
       flex: 1;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(10, 40, 90, 0.55);
+      border: 1px solid rgba(99, 179, 255, 0.18);
       border-radius: 4px;
       padding: 9px 12px;
-      color: #e5e7eb;
+      color: #e0f2fe;
       font-family: var(--font-body, sans-serif);
       font-size: 0.84rem;
       outline: none;
@@ -3562,19 +3612,19 @@
       max-height: 90px;
       transition: border-color 0.15s;
     }
-    #ai-chat-input:focus { border-color: rgba(255,255,255,0.25); }
-    #ai-chat-input::placeholder { color: rgba(255,255,255,0.2); }
+    #ai-chat-input:focus { border-color: rgba(99, 179, 255, 0.45); }
+    #ai-chat-input::placeholder { color: rgba(147, 197, 253, 0.35); }
     #ai-chat-send {
       width: 38px; height: 38px;
-      background: rgba(255,255,255,0.10);
-      border: 1px solid rgba(255,255,255,0.12); border-radius: 4px;
+      background: rgba(59, 130, 246, 0.22);
+      border: 1px solid rgba(99, 179, 255, 0.28); border-radius: 4px;
       cursor: pointer; flex-shrink: 0;
       display: flex; align-items: center; justify-content: center;
       transition: background 0.15s;
     }
-    #ai-chat-send:hover { background: rgba(255,255,255,0.16); }
+    #ai-chat-send:hover { background: rgba(59, 130, 246, 0.40); }
     #ai-chat-send:disabled { opacity: 0.4; cursor: not-allowed; }
-    #ai-chat-send svg { width: 18px; height: 18px; fill: #9ca3af; }
+    #ai-chat-send svg { width: 18px; height: 18px; fill: #93c5fd; }
   </style>
 
   <!-- Floating button -->
@@ -3667,18 +3717,26 @@
       }, 3000);
 
       // Открыть/закрыть
+      const btnLabel = document.getElementById('ai-chat-btn-label');
       btn.addEventListener('click', () => {
         isOpen = !isOpen;
         modal.classList.toggle('open', isOpen);
         document.body.classList.toggle('chat-open', isOpen);
         tooltip.classList.remove('visible');
         if (isOpen) input.focus();
+        // На мобиле меняем надпись кнопки
+        if (btnLabel && window.innerWidth <= 768) {
+          btnLabel.textContent = isOpen ? '✕ Закрити' : 'Оператор';
+        }
       });
 
       closeBtn.addEventListener('click', () => {
         isOpen = false;
         modal.classList.remove('open');
         document.body.classList.remove('chat-open');
+        if (btnLabel && window.innerWidth <= 768) {
+          btnLabel.textContent = 'Оператор';
+        }
       });
 
       // Quick replies
@@ -4024,8 +4082,8 @@
         flex-direction: column;
         align-items: flex-start;
         gap: 12px;
-        /* На мобиле кнопка чата уже внизу — баннер идёт над ней */
-        bottom: 56px;
+        /* На мобиле баннер над кнопкой Оператор (52px) */
+        bottom: 52px;
       }
       .cookie-btn-group { width: 100%; }
       .cookie-btn { flex: 1; text-align: center; }
